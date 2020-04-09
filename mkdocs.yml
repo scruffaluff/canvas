@@ -1,0 +1,53 @@
+copyright: Copyright &copy; 2019 Macklan Weinstein
+extra:
+  social:
+    - type: home
+      link: https://wolfgangwazzlestrauss.com
+    - type: github
+      link: https://github.com/wolfgangwazzlestrauss
+    - type: inbox
+      link: mailto://wolfgangwazzlestrauss@gmail.com
+extra_javascript:
+  - https://unpkg.com/mermaid@8.4.8/dist/mermaid.min.js
+  - js/index.js
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+      linenums: true
+  - footnotes
+  - meta
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+  - toc:
+      permalink: true
+nav:
+  - Home: index.md
+  - User Guide: src/user/index.md
+  - API Reference: src/reference/index.md
+  - Developer Guide: src/developer/index.md
+plugins:
+  - search
+repo_name: canvas
+repo_url: https://github.com/wolfgangwazzlestrauss/canvas
+site_author: Macklan Weinstein
+site_description: Docker image designed for containerized development.
+site_name: Canvas
+site_url: https://wolfgangwazzlestrauss.github.io/canvas/
+theme:
+  name: material
+  palette:
+    accent: cyan
+    primary: teal

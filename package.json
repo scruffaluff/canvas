@@ -1,0 +1,27 @@
+{
+  "name": "canvas",
+  "version": "0.0.1",
+  "description": "Docker image designed for containerized development.",
+  "scripts": {
+    "format": "prettier --write **/*.{css,html,js,json,md,yaml,yml}",
+    "test": "prettier --check **/*.{css,html,js,json,md,yaml,yml}"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wolfgangwazzlestrauss/canvas.git"
+  },
+  "author": "Macklan Weinstein",
+  "license": "MIT",
+  "homepage": "https://github.com/wolfgangwazzlestrauss/canvas",
+  "devDependencies": {
+    "prettier": "^1.19.1"
+  },
+  "prettier": {
+    "arrowParens": "always",
+    "printWidth": 80,
+    "proseWrap": "always",
+    "semi": true,
+    "tabWidth": 2,
+    "trailingComma": "es5"
+  }
+}
