@@ -1,3 +1,6 @@
+"""Library types for Canvas."""
+
+
 import enum
 
 

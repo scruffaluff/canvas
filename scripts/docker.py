@@ -1,12 +1,12 @@
 """Script for building images and running containers with Docker."""
 
 
-import pathlib
 import subprocess
+from typing import List, Tuple
 
-import toml
 import typer
 
+import canvas
 from canvas.typing import Tag
 
 
@@ -17,7 +17,7 @@ app = typer.Typer(
 
 @app.command()
 def build(tag: Tag) -> None:
-    """Build image from project Dockerfile."""
+    """Build image TAG from project Dockerfile."""
     fmt_str = '--build-arg {}_BUILD="TRUE"'
 
     if tag == Tag.ALL:
@@ -26,34 +26,37 @@ def build(tag: Tag) -> None:
             for tag in Tag
             if tag not in [Tag.ALL, Tag.SLIM]
         ]
-    elif tag == Tag.SLIM:
-        args = []
     else:
         args = [fmt_str.format(tag.value.upper())]
 
     build_args = " ".join(args)
-    command = f"docker build -t {image_name(tag)} . {build_args}"
-    error_msg = f"Failed to build Docker image."
+    image, latest = image_name(tag)
 
-    run_command(command, error_msg)
+    img_cmd = f"docker build -t {image} . {build_args}"
+    img_msg = f"Failed to build Docker image."
+    run_command(img_cmd, img_msg)
+
+    tag_cmd = f"docker tag {image} {latest}"
+    tag_msg = f"Failed to tag Docker image."
+    run_command(tag_cmd, tag_msg)
 
 
-def image_name(tag: Tag):
+def image_name(tag: Tag) -> Tuple[str, str]:
     """Create Docker image name with tag.
 
     Args:
-        tag: Canvas tag name.
+        tag: Canvas image tag name.
 
     Returns:
-        Full image name for DockerHub.
+        Full image name for DockerHub and latest tag name.
     """
-    pyproject_path = pathlib.Path(__file__).parents[1] / "pyproject.toml"
-    version = toml.load(pyproject_path)["tool"]["poetry"]["version"]
+    version = canvas.__version__
 
+    prefix = "wolfgangwazzlestrauss/canvas:{}"
     if tag == Tag.ALL:
-        return f"wolfgangwazzlestrauss/canvas:{version}"
+        return prefix.format(version), prefix.format("latest")
     else:
-        return f"wolfgangwazzlestrauss/canvas:{version}-{tag.value}"
+        return prefix.format(f"{version}-{tag.value}"), prefix.format(tag.value)
 
 
 @app.command()
@@ -81,17 +84,27 @@ def run_command(command: str, error_msg: str) -> None:
 
 @app.command()
 def push(tag: Tag) -> None:
-    """Run project Docker image."""
-    command = f"docker push {image_name(tag)}"
+    """Push Docker image TAG to DockerHub."""
+    image, latest = image_name(tag)
 
-    error_msg = "Faicled to push Docker image."
-    run_command(command, error_msg)
+    img_cmd = f"docker push {image}"
+    img_msg = "Failed to push Docker image."
+    run_command(img_cmd, img_msg)
+
+    tag_cmd = f"docker push {latest}"
+    tag_msg = "Failed to push Docker image tag."
+    run_command(tag_cmd, tag_msg)
 
 
 @app.command()
-def run(tag: Tag, ports) -> None:
-    """Run project Docker image."""
-    command = f"docker run -dit --rm --name  {image_name(tag)} bash"
+def run(
+    tag: Tag, ports: List[int] = typer.Option([], help="Ports to expose.")
+) -> None:
+    """Run project Docker image TAG."""
+    image, _ = image_name(tag)
+    name = image.replace("wolfgangwazzlestrauss/", "")
+
+    command = f"docker run -dit --rm --name {name} {image} bash"
     error_msg = "Failed to run Docker container."
     run_command(command, error_msg)
 

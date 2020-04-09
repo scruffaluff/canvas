@@ -1,3 +1,6 @@
+FROM ubuntu:19.10
+
+
 ### Build Arguments ###
 
 ARG CPP_BUILD
@@ -5,12 +8,8 @@ ARG GO_BUILD
 ARG HASKELL_BUILD
 ARG PYTHON_BUILD
 ARG RUST_BUILD
+ARG SLIM_BUILD
 ARG TYPESCRIPT_BUILD
-
-
-### Image ###
-
-FROM ubuntu:19.10
 
 
 ENV \

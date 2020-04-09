@@ -31,6 +31,9 @@ printf "%%sudo ALL=(ALL) NOPASSWD:ALL\n" >> /etc/sudoers
 # Disable sudo login welcome message.
 touch $HOME/.sudo_as_admin_successful
 
+# Change owner of sudo login disable file.
+chown canvas:canvas $HOME/.sudo_as_admin_successful
+
 
 # Create directory for host home directory volume mounts.
 #

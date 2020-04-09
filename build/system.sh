@@ -38,12 +38,12 @@ apt-get install -qy --no-install-recommends \
     vim
 
 
-# Install Fixuid
+# Install Fixuid for dynamically editing file permissions.
 curl -SsL https://github.com/boxboat/fixuid/releases/download/v0.4/fixuid-0.4-linux-amd64.tar.gz | tar -C /usr/local/bin -xzf -
 chown root:root /usr/local/bin/fixuid
 chmod 4755 /usr/local/bin/fixuid
 mkdir -p /etc/fixuid &&
-printf "user: canvas\ngroup: canvas\n" > /etc/fixuid/config.yml
+printf "user: canvas\ngroup: canvas\npaths:\n  - /home/canvas" > /etc/fixuid/config.yml
 
 
 # Install Python utilities if requested.
