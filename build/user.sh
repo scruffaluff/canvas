@@ -62,8 +62,10 @@ chown -h canvas:canvas \
     $HOME/.ssh
 
 
-# Create directory for temporary installation files.
-mkdir -p $HOME/tmp
+# Install Oh My Zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# Change owner of temporary directory.
-chown canvas:canvas $HOME/tmp
+# Install Powerlevel10k
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+
+POWERLEVEL9K_MODE="awesome-patched"

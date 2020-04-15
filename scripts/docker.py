@@ -1,6 +1,8 @@
 """Script for building images and running containers with Docker."""
 
 
+import pathlib
+import re
 import subprocess
 from typing import List, Tuple
 
@@ -101,10 +103,17 @@ def run(
     tag: Tag, ports: List[int] = typer.Option([], help="Ports to expose.")
 ) -> None:
     """Run project Docker image TAG."""
-    image, _ = image_name(tag)
-    name = image.replace("wolfgangwazzlestrauss/", "")
+    image, full_tag = image_name(tag)
 
-    command = f"docker run -dit --rm --name {name} {image} bash"
+    match = re.match(r"^.*:(\w+)$", full_tag)
+    if match is None:
+        typer.secho("Error: Invalid full tag name.")
+        raise typer.Exit(1)
+    else:
+        name = f"canvas-{match.group(1)}"
+
+    volume = f"{pathlib.Path.home()}:/home/canvas/host"
+    command = f"docker run -dit -v {volume} --rm --name {name} {image} bash"
     error_msg = "Failed to run Docker container."
     run_command(command, error_msg)
 
