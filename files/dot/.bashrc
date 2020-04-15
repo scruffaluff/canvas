@@ -20,7 +20,7 @@ export PATH="$HOME/.npm-global/bin:$PATH"
 
 # Python settings.
 # Add pyenv executables and shims to PATH environment variable.
-export PATH="$HOME/.pyenv/bin:$HOME/.pyenv/shims:$PATH"
+export PATH="/usr/local/pyenv/bin:$PATH"
 # Make Poetry create virutal environments inside projects.
 export POETRY_VIRTUALENVS_IN_PROJECT=1
 # Initialize pyenv if installed.
@@ -29,6 +29,7 @@ export POETRY_VIRTUALENVS_IN_PROJECT=1
 #     -x: Check if execute permission is granted.
 if [ -x "$(command -v pyenv)" ]; then
     eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
 fi
 
 

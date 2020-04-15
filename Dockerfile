@@ -65,9 +65,10 @@ RUN chmod 755 /tmp/haskell.sh \
 
 ENV \
     # Add Python binaries to PATH.
-    PATH=/usr/local/bin:$PATH \
+    PATH=/usr/local/pyenv/bin:$PATH \
     # Make Poetry create virutal environments inside projects.
-    POETRY_VIRTUALENVS_IN_PROJECT=1
+    POETRY_VIRTUALENVS_IN_PROJECT=1 \
+    PYENV_ROOT=/usr/local/pyenv
 
 # Copy Python build script and execute.
 COPY ./build/python.sh /tmp/python.sh 

@@ -31,6 +31,7 @@ apt-get install -qy --no-install-recommends \
     fonts-powerline \
     git \
     git-lfs \
+    iputils-ping \
     lldb \
     llvm \
     make \

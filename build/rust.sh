@@ -27,10 +27,10 @@ else
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
 
     # Bash completion.
-    rustup completions bash > ~/.local/share/bash-completion/completions/rustup
+    # rustup completions bash > ~/.local/share/bash-completion/completions/rustup
 
     # Zsh completion.
-    rustup completions zsh > ~/.zfunc/_rustup
+    # rustup completions zsh > ~/.zfunc/_rustup
 
     # Chheck that cargo, rustc, and rustup were installed correctly.
     cargo --version
