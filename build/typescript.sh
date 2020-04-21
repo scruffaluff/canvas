@@ -10,6 +10,9 @@ if [ -z "$TYPESCRIPT_BUILD" ]; then
 else
     printf "+++++ TypeScript build starting. +++++\n"
 
+    mkdir $NVM_DIR
+    chmod a+rw $NVM_DIR
+
     # Install Node Version Manager and multiple Node versions.
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
     . $NVM_DIR/nvm.sh
@@ -19,4 +22,6 @@ else
 
     # Install Node packages.
     npm install -g gitmoji-cli
+
+    chmod -R a+rw $NVM_DIR
 fi

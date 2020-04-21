@@ -54,7 +54,12 @@ else
 
     /usr/local/pyenv/shims/python3.6 -m pip install poetry typer
     /usr/local/pyenv/shims/python3.7 -m pip install poetry typer
-    /usr/local/pyenv/shims/python3.8 -m pip install cookiecutter poetry typer
+    /usr/local/pyenv/shims/python3.8 -m pip install \
+        cookiecutter \
+        gdbgui \
+        poetry \
+        pre-commit \
+        typer
 
     chmod -R a+rw $PYENV_ROOT
 fi

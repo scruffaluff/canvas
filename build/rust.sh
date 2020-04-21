@@ -56,4 +56,13 @@ else
     #     -R: Apply modifications recursivley to a directory.
     #     a+rw: Give read and write permissions to all users.
     chmod -R a+rw $RUSTUP_HOME $CARGO_HOME;
+
+
+    # Install Wasmtime
+    mkdir $WASMTIME_HOME
+    chmod a+rw $WASMTIME_HOME
+    curl https://wasmtime.dev/install.sh -sSf | bash
+
+    # Add WASM target.
+    rustup target add wasm32-wasi
 fi

@@ -31,6 +31,7 @@ apt-get install -qy --no-install-recommends \
     fonts-powerline \
     git \
     git-lfs \
+    hub \
     iputils-ping \
     lldb \
     llvm \
@@ -39,6 +40,7 @@ apt-get install -qy --no-install-recommends \
     openssh-server \
     openssl \
     powerline \
+    tmux \
     vim \
     zsh \
     zsh-syntax-highlighting \

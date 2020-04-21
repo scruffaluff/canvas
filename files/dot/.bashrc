@@ -8,7 +8,7 @@ export PATH="$HOME/.local/bin:$PATH"
 #
 # Flags:
 #     -s: Check if file exists and has size greater than zero.
-export NVM_DIR="$HOME/.nvm"
+export NVM_DIR="/usr/local/nvm"
 if [ -s "$NVM_DIR/nvm.sh" ]; then
     source "$NVM_DIR/nvm.sh" 
 fi
@@ -35,4 +35,7 @@ fi
 
 # Rust settings.
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/.wasmtime/bin:$PATH"
+
+# Wasmtime settings.
+export WASMTIME_HOME="$/usr/local/.wasmtime"
+export PATH="$WASMTIME_HOME/bin:$PATH"

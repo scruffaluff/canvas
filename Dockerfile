@@ -83,6 +83,7 @@ RUN chmod 755 /tmp/python.sh \
 ENV \
     RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
+    WASMTIME_HOME=/usr/local/wasmtime \
     PATH=/usr/local/cargo/bin:$PATH
 
 # Copy Rust build script and execute.
@@ -96,7 +97,7 @@ RUN chmod 755 /tmp/rust.sh \
 
 ENV \
     # Set Node version manager location.
-    NVM_DIR=$HOME/.nvm \
+    NVM_DIR=/usr/local/nvm \
     # Add NPM binaries to PATH.
     PATH=$HOME/.npm-global/bin:$PATH
 
