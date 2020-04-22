@@ -11,9 +11,6 @@ prompt adam1
 
 setopt histignorealldups sharehistory
 
-# Use emacs keybindings even if our EDITOR is set to vi
-bindkey -e
-
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=1000
 SAVEHIST=1000
@@ -41,7 +38,50 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
-#ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 source /usr/share/powerlevel9k/powerlevel9k.zsh-theme
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+
+# User settings.
+# Add scripts directory to PATH environment variable.
+export PATH="$HOME/.local/bin:$PATH"
+
+
+# Node settings.
+# Load Node version manager and its bash completion.
+#
+# Flags:
+#     -s: Check if file exists and has size greater than zero.
+export NVM_DIR="/usr/local/nvm"
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+    source "$NVM_DIR/nvm.sh" 
+fi
+if [ -s "$NVM_DIR/bash_completion" ]; then
+    source "$NVM_DIR/bash_completion"
+fi
+export PATH="$HOME/.npm-global/bin:$PATH"
+
+
+# Python settings.
+# Add pyenv executables and shims to PATH environment variable.
+export PATH="/usr/local/pyenv/bin:$PATH"
+# Make Poetry create virutal environments inside projects.
+export POETRY_VIRTUALENVS_IN_PROJECT=1
+# Initialize pyenv if installed.
+#
+# Flags:
+#     -x: Check if execute permission is granted.
+if [ -x "$(command -v pyenv)" ]; then
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
+
+
+# Rust settings.
+export PATH="$HOME/.cargo/bin:$PATH"
+
+# Wasmtime settings.
+export WASMTIME_HOME="$/usr/local/.wasmtime"
+export PATH="$WASMTIME_HOME/bin:$PATH"

@@ -8,9 +8,9 @@ set -e
 # Flags:
 #     -l: Do not add user to lastlog database.
 #     -m: Create user home directory if it does not exist.
-#     -s /bin/bash: Set user login shell to Bash.
+#     -s /bin/zsh: Set user login shell to Bash.
 #     -u 1000: Give new user UID value 1000.
-useradd -lm -s /bin/bash -u 1000 canvas
+useradd -lm -s /bin/zsh -u 1000 canvas
 
 
 ### Sudo ###
@@ -66,8 +66,8 @@ chown -h canvas:canvas \
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Install Powerlevel10k
-mkdir -p $HOME/.local/share/fonts
-https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
+# mkdir -p $HOME/.local/share/fonts
+# https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
 
 POWERLEVEL9K_MODE="awesome-patched"
