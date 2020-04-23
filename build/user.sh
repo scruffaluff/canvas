@@ -1,5 +1,5 @@
-
 #!/bin/bash
+# Exit immediately if a command exists with a non-zero status.
 set -e
 
 
@@ -8,9 +8,9 @@ set -e
 # Flags:
 #     -l: Do not add user to lastlog database.
 #     -m: Create user home directory if it does not exist.
-#     -s /bin/bash: Set user login shell to Bash.
+#     -s /bin/zsh: Set user login shell to Bash.
 #     -u 1000: Give new user UID value 1000.
-useradd -lm -s /bin/bash -u 1000 canvas
+useradd -lm -s /bin/zsh -u 1000 canvas
 
 
 ### Sudo ###
@@ -62,8 +62,28 @@ chown -h canvas:canvas \
     $HOME/.ssh
 
 
-# Create directory for temporary installation files.
-mkdir -p $HOME/tmp
+# Install Oh My Zsh
+#
+# Flags:
+#     -c: Read commands from the command string operand.
+#     -L: Follow redirect request.
+#     -S: Show errors.
+#     -f: Fail silently on server errors.
+#     -s: (curl) Disable progress bars.
+sh -c "$(curl -LSfs https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# Change owner of temporary directory.
-chown canvas:canvas $HOME/tmp
+
+# Install Powerlevel10k
+#
+# Flags:
+#     --depth=1: Create shallow clone with history truncated to 1 commit.
+git clone --depth=1 https://github.com/romkatv/powerlevel10k $ZSH_CUSTOM/themes/powerlevel10k
+
+
+
+# Bash completion.
+# Rustup Completetions.
+# rustup completions bash > ~/.local/share/bash-completion/completions/rustup
+
+# Zsh completion.
+# rustup completions zsh > ~/.zfunc/_rustup

@@ -1,4 +1,5 @@
 #!/bin/bash
+# Exit immediately if a command exists with a non-zero status.
 set -e
 
 
@@ -9,46 +10,72 @@ if [ -z "$PYTHON_BUILD" ]; then
     printf "^^^^^ Python build skipped. ^^^^^\n"
 else
     printf "##### Python build starting. #####\n"
+
+    # Install Python recommend dependencies
+    #
+    # Flags:
+    #     -m: Ignore missing packages and handle result.
+    #     -q: Produce log suitable output by omitting progress indicators.
+    #     -y: Assume "yes" as answer to all prompts and run non-interactively.
+    #     --no-install-recommends: Do not install recommended packages.
+    apt-get update -m && apt-get install -y --no-install-recommends \
+		libbluetooth-dev \
+		tk-dev \
+		uuid-dev
     
+    # Install ONNX required utilites.
+    # https://github.com/pyenv/pyenv/wiki/Common-build-problems#prerequisites
+    #
+    # Flags:
+    #     -q: Produce log suitable output by omitting progress indicators.
+    #     -y: Assume "yes" as answer to all prompts and run non-interactively.
+    #     --no-install-recommends: Do not install recommended packages.
+    apt-get install -qy --no-install-recommends \
+        cmake \
+        libprotoc-dev \
+        protobuf-compiler
+
+
     # Install Pyenv.
-    #
-    # Flags:
-    #     -L: Follow redirect if requested from endpoint.
-    #     -S: Show error message if curl request fails.
-    #     -s: Silent mode, i.e. do not show progress bar.
-    curl -LSs https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
+    curl https://pyenv.run | bash
 
-    # Initialize Pyenv.
-    #
-    # Flags:
-    #     -e: Enable interpretation of backslash escapes.
-    #     -n: Do not output the trailing newline.
-    echo -en "\n$(pyenv init -)\n$(pyenv virtualenv-init -)\n" >> $HOME/.bashrc
-
-    # Install multiple Python versions.
-    pyenv install 3.6.10
-    pyenv install 3.7.7
+    # Install multiple Python versions using Pyenv.
     pyenv install 3.8.2
+    pyenv install 3.7.7
+    pyenv install 3.6.10
 
-    # Set globally available Python versions.
-    # First version is the default.
+    # Set globally accessible Python versions.
+    # First version is the global default.
     pyenv global 3.8.2 3.7.7 3.6.10
 
+    # No checks for successful Python installations since Pyenv needs to
+    # source shell profiles beforehand.
+
     # Upgrade pip for each Python version.
-    python3.6 -m pip install --upgrade pip
-    python3.7 -m pip install --upgrade pip
-    python3.8 -m pip install --upgrade pip
+    #
+    # Flags:
+    #     -m: Run library module as a script.
+    /usr/local/pyenv/shims/python3.8 -m pip install --upgrade pip
+    /usr/local/pyenv/shims/python3.7 -m pip install --upgrade pip
+    /usr/local/pyenv/shims/python3.6 -m pip install --upgrade pip
 
-    # Install Poetry for multiple Python versions.
-    python3.6 -m pip install --user poetry
-    python3.7 -m pip install --user poetry
-
-    # Install user wide packages for default Python version.
-    python3.8 -m pip install --user \
-        pipx \
+    # Install globally accessible packages for each Python version.
+    #
+    # Flags:
+    #     -m: Run library module as a script.
+    /usr/local/pyenv/shims/python3.6 -m pip install poetry typer
+    /usr/local/pyenv/shims/python3.7 -m pip install poetry typer
+    /usr/local/pyenv/shims/python3.8 -m pip install \
+        cookiecutter \
+        gdbgui \
+        poetry \
+        pre-commit \
         typer
 
-    # Install CLI Pipx packages.
-    pipx install cookiecutter
-    pipx install poetry
+    # Esnure that all users can read and write to Pyenv Python files.
+    #
+    # Flags:
+    #     -R: Apply modifications recursivley to a directory.
+    #     a+rw: Give read and write permissions to all users.
+    chmod -R a+rw $PYENV_ROOT
 fi
