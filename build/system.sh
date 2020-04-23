@@ -1,4 +1,5 @@
 #!/bin/bash
+# Exit immediately if a command exists with a non-zero status.
 set -e
 
 
@@ -40,19 +41,36 @@ apt-get install -qy --no-install-recommends \
     openssh-server \
     openssl \
     powerline \
+    texlive \
     tmux \
     vim \
     zsh \
-    zsh-syntax-highlighting \
-    zsh-theme-powerlevel9k
+    zsh-syntax-highlighting
+
 
 # Install Fixuid for dynamically editing file permissions.
-curl -SsL https://github.com/boxboat/fixuid/releases/download/v0.4/fixuid-0.4-linux-amd64.tar.gz | tar -C /usr/local/bin -xzf -
+#
+# Flags:
+#     -C:
+#     -L: 
+#     -S:
+#     -f:
+#     -s:
+#     -x:
+#     -z:
+curl -LSs https://github.com/boxboat/fixuid/releases/download/v0.4/fixuid-0.4-linux-amd64.tar.gz | tar -C /usr/local/bin -fxz -
+# Make root user ownder of Fixuid.
 chown root:root /usr/local/bin/fixuid
+#
 chmod 4755 /usr/local/bin/fixuid
+#
 mkdir -p /etc/fixuid &&
 printf "user: canvas\ngroup: canvas\npaths:\n  - /home/canvas" > /etc/fixuid/config.yml
 
 
 # Install Oh My Zsh
+#
+# Flags:
+#     -c:
+#
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

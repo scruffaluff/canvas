@@ -113,7 +113,7 @@ def run(
         name = f"canvas-{match.group(1)}"
 
     volume = f"{pathlib.Path.home()}:/home/canvas/host"
-    command = f"docker run -dit -v {volume} --rm --name {name} {image} bash"
+    command = f"docker run -dit -v {volume} --rm --name {name} {image} zsh"
     error_msg = "Failed to run Docker container."
     run_command(command, error_msg)
 

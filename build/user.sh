@@ -1,5 +1,5 @@
-
 #!/bin/bash
+# Exit immediately if a command exists with a non-zero status.
 set -e
 
 
@@ -65,9 +65,9 @@ chown -h canvas:canvas \
 # Install Oh My Zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# Install Powerlevel10k
-# mkdir -p $HOME/.local/share/fonts
-# https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
 
-POWERLEVEL9K_MODE="awesome-patched"
+# Install Powerlevel10k
+#
+# Flags:
+#     --depth=1: Create shallow clone with history truncated to 1 commit.
+git clone --depth=1 https://github.com/romkatv/powerlevel10k $ZSH_CUSTOM/themes/powerlevel10k

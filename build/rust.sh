@@ -1,4 +1,5 @@
 #!/bin/bash
+# Exit immediately if a command exists with a non-zero status.
 set -e
 
 
@@ -60,8 +61,23 @@ else
 
     # Install Wasmtime
     mkdir $WASMTIME_HOME
-    chmod a+rw $WASMTIME_HOME
-    curl https://wasmtime.dev/install.sh -sSf | bash
+
+    # Esnure that all users can read and write to cargo files.
+    #
+    # Flags:
+    #     -R: Apply modifications recursivley to a directory.
+    #     a+rw: Give read and write permissions to all users.
+    chmod -R a+rw $WASMTIME_HOME
+
+
+    curl -sSf https://wasmtime.dev/install.sh | bash
+
+    # Esnure that all users can read and write to car
+    #
+    # Flags:
+    #     -R: Apply modifications recursivley to a directory.
+    #     a+rw: Give read and write permissions to all users.
+    chmod -R a+rw $WASMTIME_HOME
 
     # Add WASM target.
     rustup target add wasm32-wasi
