@@ -50,12 +50,12 @@ apt-get update -m && apt-get install -qy --no-install-recommends \
 #     -C: Change to given directory before performing any operation.
 #     -L: Follow redirect request.
 #     -S: Show errors.
-#     -f: Use archive file.
+#     -f: Use archive file. Must be third flag.
 #     -s: (curl) Disable progress bars.
-#     -x: Extract files from an archive.
-#     -z: Filter the archive through gzip.
-curl -LSs https://github.com/boxboat/fixuid/releases/download/v0.4/fixuid-0.4-linux-amd64.tar.gz | tar -C /usr/local/bin -fxz -
-# Make root user ownder of Fixuid.
+#     -x: Extract files from an archive. Must be first flag.
+#     -z: Filter the archive through gzip. Must be second flag.
+curl -LSs https://github.com/boxboat/fixuid/releases/download/v0.4/fixuid-0.4-linux-amd64.tar.gz | tar -C /usr/local/bin -xzf -
+# Make root user owner of Fixuid.
 chown root:root /usr/local/bin/fixuid
 # Change Fixuid executable permissions.
 # The starting 4 attribute sets the file to run as owner regardless of which 
@@ -65,14 +65,3 @@ chmod 4755 /usr/local/bin/fixuid
 mkdir -p /etc/fixuid
 # Write settings to configuration file.
 printf "user: canvas\ngroup: canvas\npaths:\n  - /home/canvas" > /etc/fixuid/config.yml
-
-
-# Install Oh My Zsh
-#
-# Flags:
-#     -c: Read commands from the command string operand.
-#     -L: Follow redirect request.
-#     -S: Show errors.
-#     -f: Fail silently on server errors.
-#     -s: (curl) Disable progress bars.
-sh -c "$(curl -LSfs https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

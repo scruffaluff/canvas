@@ -62,6 +62,17 @@ chown -h canvas:canvas \
     $HOME/.ssh
 
 
+# Install Oh My Zsh
+#
+# Flags:
+#     -c: Read commands from the command string operand.
+#     -L: Follow redirect request.
+#     -S: Show errors.
+#     -f: Fail silently on server errors.
+#     -s: (curl) Disable progress bars.
+sh -c "$(curl -LSfs https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+
 # Install Powerlevel10k
 #
 # Flags:

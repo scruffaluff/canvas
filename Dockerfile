@@ -25,12 +25,6 @@ ENV \
 COPY ./build/system.sh /tmp/system.sh
 RUN chmod 755 /tmp/system.sh \
     && /tmp/system.sh \
-        $CPP_BUILD \
-        $GO_BUILD \
-        $HASKELL_BUILD \
-        $PYTHON_BUILD \
-        $RUST_BUILD \
-        $TYPESCRIPT_BUILD \
     && rm -rf /tmp/*
 
 
