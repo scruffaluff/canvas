@@ -58,11 +58,11 @@ RUN chmod 755 /tmp/haskell.sh \
 ### Python ###
 
 ENV \
-    # Add Python binaries to PATH.
-    PATH=/usr/local/pyenv/bin:$PATH \
     # Make Poetry create virutal environments inside projects.
     POETRY_VIRTUALENVS_IN_PROJECT=1 \
-    PYENV_ROOT=/usr/local/pyenv
+    PYENV_ROOT=/usr/local/pyenv \
+    # Add Pyenv and Python binaries to PATH.
+    PATH=$PYENV_ROOT/bin:$PATH
 
 # Copy Python build script and execute.
 COPY ./build/python.sh /tmp/python.sh 
@@ -73,12 +73,12 @@ RUN chmod 755 /tmp/python.sh \
 
 ### Rust ###
 
-# Add Cargo binaries to PATH.
 ENV \
     RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
     WASMTIME_HOME=/usr/local/wasmtime \
-    PATH=/usr/local/cargo/bin:$PATH
+    # Add Cargo and Wastime binaries to PATH.
+    PATH=$CARGO_HOME/bin:$WASMTIME_HOME/bin:$PATH
 
 # Copy Rust build script and execute.
 COPY ./build/rust.sh /tmp/rust.sh 
@@ -106,7 +106,8 @@ RUN chmod 755 /tmp/typescript.sh \
 
 ENV \
     HOME=/home/canvas \
-    STD_USER=canvas
+    STD_USER=canvas \
+    ZSH_CUSTOM=/home/canvas/.oh-my-zsh/custom
 
 COPY ./build/user.sh /tmp/user.sh
 RUN chmod 755 /tmp/user.sh \

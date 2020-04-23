@@ -37,7 +37,12 @@ else
 
 
     # Install Pyenv.
-    curl https://pyenv.run | bash
+    #
+    # Flags:
+    #     -S: Show errors.
+    #     -f: Fail silently on server errors.
+    #     -s: Disable progress bars.
+    curl -Sfs https://pyenv.run | bash
 
     # Install multiple Python versions using Pyenv.
     pyenv install 3.8.2
