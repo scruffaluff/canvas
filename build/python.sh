@@ -14,10 +14,11 @@ else
     # Install Python recommend dependencies
     #
     # Flags:
+    #     -m: Ignore missing packages and handle result.
     #     -q: Produce log suitable output by omitting progress indicators.
     #     -y: Assume "yes" as answer to all prompts and run non-interactively.
     #     --no-install-recommends: Do not install recommended packages.
-    apt-get update && apt-get install -y --no-install-recommends \
+    apt-get update -m && apt-get install -y --no-install-recommends \
 		libbluetooth-dev \
 		tk-dev \
 		uuid-dev
@@ -34,25 +35,34 @@ else
         libprotoc-dev \
         protobuf-compiler
 
-    # git clone git://github.com/pyenv/pyenv.git
-    # cd pyenv/plugins/python-build
-    # ./install.sh
-    # python-build 3.8.2 /usr/local/lib/python3.8
-    # ln -s /usr/local/lib/python3.8/bin/python3.8 /usr/local/bin/python3.8
-    # python3.8 -m pip install --upgrade pip
 
+    # Install Pyenv.
     curl https://pyenv.run | bash
 
+    # Install multiple Python versions using Pyenv.
     pyenv install 3.8.2
     pyenv install 3.7.7
     pyenv install 3.6.10
 
+    # Set globally accessible Python versions.
+    # First version is the global default.
     pyenv global 3.8.2 3.7.7 3.6.10
 
+    # No checks for successful Python installations since Pyenv needs to
+    # source shell profiles beforehand.
+
+    # Upgrade pip for each Python version.
+    #
+    # Flags:
+    #     -m: Run library module as a script.
     /usr/local/pyenv/shims/python3.8 -m pip install --upgrade pip
     /usr/local/pyenv/shims/python3.7 -m pip install --upgrade pip
     /usr/local/pyenv/shims/python3.6 -m pip install --upgrade pip
 
+    # Install globally accessible packages for each Python version.
+    #
+    # Flags:
+    #     -m: Run library module as a script.
     /usr/local/pyenv/shims/python3.6 -m pip install poetry typer
     /usr/local/pyenv/shims/python3.7 -m pip install poetry typer
     /usr/local/pyenv/shims/python3.8 -m pip install \
@@ -62,5 +72,10 @@ else
         pre-commit \
         typer
 
+    # Esnure that all users can read and write to Pyenv Python files.
+    #
+    # Flags:
+    #     -R: Apply modifications recursivley to a directory.
+    #     a+rw: Give read and write permissions to all users.
     chmod -R a+rw $PYENV_ROOT
 fi

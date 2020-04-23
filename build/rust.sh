@@ -14,26 +14,26 @@ else
     # Install buildpack-deps image dependencies.
     #
     # Flags:
+    #     -m: Ignore missing packages and handle result.
     #     -q: Produce log suitable output by omitting progress indicators.
     #     -y: Assume "yes" as answer to all prompts and run non-interactively.
     #     --no-install-recommends: Do not install recommended packages.
-    apt-get install -qy --no-install-recommends \
+    apt-get update -m && apt-get install -qy --no-install-recommends \
         lldb \
         llvm
-
-    # Install GdbGui
-    # pipx install gdbgui
     
     # Install Rust.
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
+    #
+    # Flags:
+    #     -S: Show errors.
+    #     -f: Fail silently on server errors.
+    #     -s: (curl) Disable progress bars.
+    #     -s: (sh) Read commands from standard input.
+    #     -y: Disable confirmation prompt.
+    #     --no-modify-path: Do not configure the PATH environment variable.
+    curl -Sfs https://sh.rustup.rs | sh -s -- -y --no-modify-path
 
-    # Bash completion.
-    # rustup completions bash > ~/.local/share/bash-completion/completions/rustup
-
-    # Zsh completion.
-    # rustup completions zsh > ~/.zfunc/_rustup
-
-    # Chheck that cargo, rustc, and rustup were installed correctly.
+    # Check that cargo, rustc, and rustup were installed successfully.
     cargo --version
     rustc --version 
     rustup --version
@@ -51,6 +51,12 @@ else
         nu \
         pyoxidizer
 
+    # Add additional Rust toolchain targets.
+    # Install Rust nightly toolchain.
+    rustup toolchain install nightly
+    # Install WASM toolchain target.
+    rustup target add wasm32-wasi
+
     # Esnure that all users can read and write to cargo files.
     #
     # Flags:
@@ -59,26 +65,21 @@ else
     chmod -R a+rw $RUSTUP_HOME $CARGO_HOME;
 
 
-    # Install Wasmtime
+    # Create Wasmtime parent directory.
     mkdir $WASMTIME_HOME
 
-    # Esnure that all users can read and write to cargo files.
+    # Install Wasmtime.
+    #
+    # Flags:
+    #     -S: Show errors.
+    #     -f: Fail silently on server errors.
+    #     -s: (curl) Disable progress bars.
+    curl -Sfs https://wasmtime.dev/install.sh | bash
+
+    # Esnure that all users can read and write to Wasmtime files.
     #
     # Flags:
     #     -R: Apply modifications recursivley to a directory.
     #     a+rw: Give read and write permissions to all users.
     chmod -R a+rw $WASMTIME_HOME
-
-
-    curl -sSf https://wasmtime.dev/install.sh | bash
-
-    # Esnure that all users can read and write to car
-    #
-    # Flags:
-    #     -R: Apply modifications recursivley to a directory.
-    #     a+rw: Give read and write permissions to all users.
-    chmod -R a+rw $WASMTIME_HOME
-
-    # Add WASM target.
-    rustup target add wasm32-wasi
 fi

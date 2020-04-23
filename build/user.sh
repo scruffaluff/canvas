@@ -62,12 +62,17 @@ chown -h canvas:canvas \
     $HOME/.ssh
 
 
-# Install Oh My Zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-
 # Install Powerlevel10k
 #
 # Flags:
 #     --depth=1: Create shallow clone with history truncated to 1 commit.
 git clone --depth=1 https://github.com/romkatv/powerlevel10k $ZSH_CUSTOM/themes/powerlevel10k
+
+
+
+# Bash completion.
+# Rustup Completetions.
+# rustup completions bash > ~/.local/share/bash-completion/completions/rustup
+
+# Zsh completion.
+# rustup completions zsh > ~/.zfunc/_rustup

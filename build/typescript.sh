@@ -11,12 +11,16 @@ if [ -z "$TYPESCRIPT_BUILD" ]; then
 else
     printf "+++++ TypeScript build starting. +++++\n"
 
+    # Create NVM root directory.
     mkdir $NVM_DIR
-    chmod a+rw $NVM_DIR
 
     # Install Node Version Manager and multiple Node versions.
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+    curl https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+
+    # Source NVM configuration.
     . $NVM_DIR/nvm.sh
+
+    # Install multiple Node versions using NVM.
     nvm install 13.12.0
     nvm install 12.16.1
     nvm install 10.19.0
@@ -24,5 +28,10 @@ else
     # Install Node packages.
     npm install -g gitmoji-cli
 
+    # Esnure that all users can read and write to NVM files.
+    #
+    # Flags:
+    #     -R: Apply modifications recursivley to a directory.
+    #     a+rw: Give read and write permissions to all users.
     chmod -R a+rw $NVM_DIR
 fi

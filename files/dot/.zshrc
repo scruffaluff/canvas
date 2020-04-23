@@ -64,8 +64,10 @@ export PATH="$HOME/.npm-global/bin:$PATH"
 
 
 # Python settings.
+# Set Pyenv root location.
+export PYENV_ROOT=/usr/local/pyenv
 # Add pyenv executables and shims to PATH environment variable.
-export PATH="/usr/local/pyenv/bin:$PATH"
+export PATH="$PYENV_ROOT/bin:$PATH"
 # Make Poetry create virutal environments inside projects.
 export POETRY_VIRTUALENVS_IN_PROJECT=1
 # Initialize pyenv if installed.
@@ -76,6 +78,8 @@ if [ -x "$(command -v pyenv)" ]; then
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
 fi
+# Load Pyenv completions.
+source $(pyenv root)/completions/pyenv.zsh
 
 
 # Rust settings.
