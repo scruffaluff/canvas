@@ -15,7 +15,12 @@ else
     mkdir $NVM_DIR
 
     # Install Node Version Manager and multiple Node versions.
-    curl https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+    #
+    # Flags:
+    #     -S: Show errors.
+    #     -f: Fail silently on server errors.
+    #     -s: Disable progress bars.
+    curl -Sfs https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
 
     # Source NVM configuration.
     . $NVM_DIR/nvm.sh
@@ -26,7 +31,7 @@ else
     nvm install 10.19.0
 
     # Install Node packages.
-    npm install -g gitmoji-cli
+    nvm use 13.12.0 && npm install -g gitmoji-cli
 
     # Esnure that all users can read and write to NVM files.
     #

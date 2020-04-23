@@ -60,9 +60,10 @@ RUN chmod 755 /tmp/haskell.sh \
 ENV \
     # Make Poetry create virutal environments inside projects.
     POETRY_VIRTUALENVS_IN_PROJECT=1 \
-    PYENV_ROOT=/usr/local/pyenv \
-    # Add Pyenv and Python binaries to PATH.
-    PATH=$PYENV_ROOT/bin:$PATH
+    PYENV_ROOT=/usr/local/pyenv
+# Require separate ENV statement to use defined environment variables.
+# Add Pyenv and Python binaries to PATH.
+ENV PATH=$PYENV_ROOT/bin:$PATH
 
 # Copy Python build script and execute.
 COPY ./build/python.sh /tmp/python.sh 
@@ -76,9 +77,9 @@ RUN chmod 755 /tmp/python.sh \
 ENV \
     RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
-    WASMTIME_HOME=/usr/local/wasmtime \
-    # Add Cargo and Wastime binaries to PATH.
-    PATH=$CARGO_HOME/bin:$WASMTIME_HOME/bin:$PATH
+    WASMTIME_HOME=/usr/local/wasmtime
+# Add Cargo and Wastime binaries to PATH.
+ENV PATH=$CARGO_HOME/bin:$WASMTIME_HOME/bin:$PATH
 
 # Copy Rust build script and execute.
 COPY ./build/rust.sh /tmp/rust.sh 
@@ -91,9 +92,7 @@ RUN chmod 755 /tmp/rust.sh \
 
 ENV \
     # Set Node version manager location.
-    NVM_DIR=/usr/local/nvm \
-    # Add NPM binaries to PATH.
-    PATH=$HOME/.npm-global/bin:$PATH
+    NVM_DIR=/usr/local/nvm
 
 # Copy TypeScript build script and execute.
 COPY ./build/typescript.sh /tmp/typescript.sh 
