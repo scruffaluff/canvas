@@ -104,9 +104,11 @@ RUN chmod 755 /tmp/typescript.sh \
 ### User ###
 
 ENV \
-    HOME=/home/canvas \
-    STD_USER=canvas \
-    ZSH_CUSTOM=/home/canvas/.oh-my-zsh/custom
+    HOME=/home/canvas
+# Configure ZSH environment variables.
+ENV ZSH=$HOME/.oh-my-zsh \
+    ZSH_CUSTOM=$HOME/.oh-my-zsh/custom \
+    ZSH_THEME=powerlevel10k/powerlevel10k
 
 COPY ./build/user.sh /tmp/user.sh
 RUN chmod 755 /tmp/user.sh \
