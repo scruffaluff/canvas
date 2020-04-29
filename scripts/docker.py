@@ -64,10 +64,8 @@ def image_name(tag: Tag) -> Tuple[str, str]:
 @app.command()
 def prune() -> None:
     """Prune all containers and images on system."""
-    error_msg = "Failed to prune system {}."
-
-    run_command("docker container prune -f", error_msg.format("containers"))
-    run_command("docker image prune -f", error_msg.format("images"))
+    error_msg = "Failed to prune system."
+    run_command("docker system prune -f", error_msg)
 
 
 def run_command(command: str, error_msg: str) -> None:

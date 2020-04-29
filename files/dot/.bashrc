@@ -36,5 +36,17 @@ fi
 # Rust settings.
 export PATH="usr/local/cargo/bin:$PATH"
 
+
+# Tool settings.
+# Command line fuzzy finder settings.
+#
+# Flags:
+#     -f: Check if file exists and is a regular file.
+if [ -f ~/.fzf.zsh ]; then
+    source ~/.fzf.zsh
+fi
+export BAT_THEME="Solarized (light)"
+
+
 # Wasmtime settings.
 export PATH="$WASMTIME_HOME/bin:$PATH"

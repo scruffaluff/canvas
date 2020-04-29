@@ -61,5 +61,9 @@ fi
 export PATH="$CARGO_HOME/bin:$PATH"
 
 
+# Tool settings.
+export BAT_THEME="Solarized (light)"
+
+
 # Wasmtime settings.
 export PATH="$WASMTIME_HOME/bin:$PATH"
