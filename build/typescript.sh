@@ -6,7 +6,7 @@ set -e
 # Install TypeScript if requested.
 # Flags:
 #     -z: True if the string is null.
-if [ -z "$TYPESCRIPT_BUILD" ]; then
+if [ -z "$typescript_build" ]; then
     printf "^^^^^ TypeScript build skipped.\n ^^^^^"
 else
     printf "+++++ TypeScript build starting. +++++\n"

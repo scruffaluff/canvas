@@ -20,7 +20,7 @@ app = typer.Typer(
 @app.command()
 def build(tags: List[Tag]) -> None:
     """Build image TAGS from project Dockerfile."""
-    fmt_str = '--build-arg {}_BUILD="TRUE"'
+    fmt_str = '--build-arg {}_build="true"'
 
     for tag in tags:
         if tag == Tag.ALL:
@@ -30,7 +30,7 @@ def build(tags: List[Tag]) -> None:
                 if tag not in [Tag.ALL, Tag.SLIM]
             ]
         else:
-            args = [fmt_str.format(tag.value.upper())]
+            args = [fmt_str.format(tag.value)]
 
         build_args = " ".join(args)
         image, latest = image_name(tag)

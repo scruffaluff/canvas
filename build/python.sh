@@ -6,7 +6,7 @@ set -e
 # Install Python if requested.
 # Flags:
 #     -z: True if the string is null.
-if [ -z "$PYTHON_BUILD" ]; then
+if [ -z "$python_build" ]; then
     printf "^^^^^ Python build skipped. ^^^^^\n"
 else
     printf "##### Python build starting. #####\n"

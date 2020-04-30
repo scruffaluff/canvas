@@ -3,13 +3,13 @@ FROM buildpack-deps:19.10
 
 ### Build Arguments ###
 
-ARG CPP_BUILD
-ARG GO_BUILD
-ARG HASKELL_BUILD
-ARG PYTHON_BUILD
-ARG RUST_BUILD
-ARG SLIM_BUILD
-ARG TYPESCRIPT_BUILD
+ARG cpp_build
+ARG go_build
+ARG haskell_build
+ARG python_build
+ARG rust_build
+ARG slim_build
+ARG typescript_build
 
 
 ### System ###
@@ -33,7 +33,7 @@ RUN chmod 755 /tmp/system.sh \
 # Copy C++ build script and execute.
 COPY ./build/cpp.sh /tmp/cpp.sh 
 RUN chmod 755 /tmp/cpp.sh \
-    && /tmp/cpp.sh $CPP_BUILD \
+    && /tmp/cpp.sh $cpp_build \
     && rm -rf /tmp/*
 
 
@@ -42,7 +42,7 @@ RUN chmod 755 /tmp/cpp.sh \
 # Copy Go build script and execute.
 COPY ./build/go.sh /tmp/go.sh 
 RUN chmod 755 /tmp/go.sh \
-    && /tmp/go.sh $GO_BUILD \
+    && /tmp/go.sh $go_build \
     && rm -rf /tmp/*
 
 
@@ -51,7 +51,7 @@ RUN chmod 755 /tmp/go.sh \
 # Copy Haskell build script and execute.
 COPY ./build/haskell.sh /tmp/haskell.sh 
 RUN chmod 755 /tmp/haskell.sh \
-    && /tmp/haskell.sh $HASKELL_BUILD \
+    && /tmp/haskell.sh $haskell_build \
     && rm -rf /tmp/*
 
 
@@ -68,7 +68,7 @@ ENV PATH=$PYENV_ROOT/bin:$PATH
 # Copy Python build script and execute.
 COPY ./build/python.sh /tmp/python.sh 
 RUN chmod 755 /tmp/python.sh \
-    && /tmp/python.sh $PYTHON_BUILD \
+    && /tmp/python.sh $python_build \
     && rm -rf /tmp/*
 
 
@@ -84,7 +84,7 @@ ENV PATH=$CARGO_HOME/bin:$WASMTIME_HOME/bin:$PATH
 # Copy Rust build script and execute.
 COPY ./build/rust.sh /tmp/rust.sh 
 RUN chmod 755 /tmp/rust.sh \
-    && /tmp/rust.sh $RUST_BUILD \
+    && /tmp/rust.sh $rust_build \
     && rm -rf /tmp/*
 
 
@@ -97,7 +97,7 @@ ENV \
 # Copy TypeScript build script and execute.
 COPY ./build/typescript.sh /tmp/typescript.sh 
 RUN chmod 755 /tmp/typescript.sh \
-    && /tmp/typescript.sh $TYPESCRIPT_BUILD \
+    && /tmp/typescript.sh $typescript_build \
     && rm -rf /tmp/*
 
 

@@ -6,7 +6,7 @@ set -e
 # Install Rust if requested.
 # Flags:
 #     -z: True if the string is null.
-if [ -z "$RUST_BUILD" ]; then
+if [ -z "$rust_build" ]; then
     printf "^^^^^ Rust build skipped.\n ^^^^^"
 else
     printf "##### Rust build starting. #####\n"
