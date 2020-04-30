@@ -18,29 +18,30 @@ app = typer.Typer(
 
 
 @app.command()
-def build(tag: Tag) -> None:
-    """Build image TAG from project Dockerfile."""
+def build(tags: List[Tag]) -> None:
+    """Build image TAGS from project Dockerfile."""
     fmt_str = '--build-arg {}_BUILD="TRUE"'
 
-    if tag == Tag.ALL:
-        args = [
-            fmt_str.format(tag.value.upper())
-            for tag in Tag
-            if tag not in [Tag.ALL, Tag.SLIM]
-        ]
-    else:
-        args = [fmt_str.format(tag.value.upper())]
+    for tag in tags:
+        if tag == Tag.ALL:
+            args = [
+                fmt_str.format(tag.value.upper())
+                for tag in Tag
+                if tag not in [Tag.ALL, Tag.SLIM]
+            ]
+        else:
+            args = [fmt_str.format(tag.value.upper())]
 
-    build_args = " ".join(args)
-    image, latest = image_name(tag)
+        build_args = " ".join(args)
+        image, latest = image_name(tag)
 
-    img_cmd = f"docker build -t {image} . {build_args}"
-    img_msg = f"Failed to build Docker image."
-    run_command(img_cmd, img_msg)
+        img_cmd = f"docker build -t {image} . {build_args}"
+        img_msg = f"Failed to build Docker image."
+        run_command(img_cmd, img_msg)
 
-    tag_cmd = f"docker tag {image} {latest}"
-    tag_msg = f"Failed to tag Docker image."
-    run_command(tag_cmd, tag_msg)
+        tag_cmd = f"docker tag {image} {latest}"
+        tag_msg = f"Failed to tag Docker image."
+        run_command(tag_cmd, tag_msg)
 
 
 def image_name(tag: Tag) -> Tuple[str, str]:
@@ -83,37 +84,40 @@ def run_command(command: str, error_msg: str) -> None:
 
 
 @app.command()
-def push(tag: Tag) -> None:
-    """Push Docker image TAG to DockerHub."""
-    image, latest = image_name(tag)
+def push(tags: List[Tag]) -> None:
+    """Push Docker image TAGS to DockerHub."""
+    for tag in tags:
+        image, latest = image_name(tag)
 
-    img_cmd = f"docker push {image}"
-    img_msg = "Failed to push Docker image."
-    run_command(img_cmd, img_msg)
+        img_cmd = f"docker push {image}"
+        img_msg = "Failed to push Docker image."
+        run_command(img_cmd, img_msg)
 
-    tag_cmd = f"docker push {latest}"
-    tag_msg = "Failed to push Docker image tag."
-    run_command(tag_cmd, tag_msg)
+        tag_cmd = f"docker push {latest}"
+        tag_msg = "Failed to push Docker image tag."
+        run_command(tag_cmd, tag_msg)
 
 
 @app.command()
 def run(
-    tag: Tag, ports: List[int] = typer.Option([], help="Ports to expose.")
+    tags: List[Tag],
+    ports: List[int] = typer.Option([], help="Ports to expose."),
 ) -> None:
-    """Run project Docker image TAG."""
-    image, full_tag = image_name(tag)
+    """Run project Docker image TAGS."""
+    for tag in tags:
+        image, full_tag = image_name(tag)
 
-    match = re.match(r"^.*:(\w+)$", full_tag)
-    if match is None:
-        typer.secho("Error: Invalid full tag name.")
-        raise typer.Exit(1)
-    else:
-        name = f"canvas-{match.group(1)}"
+        match = re.match(r"^.*:(\w+)$", full_tag)
+        if match is None:
+            typer.secho("Error: Invalid full tag name.")
+            raise typer.Exit(1)
+        else:
+            name = f"canvas-{match.group(1)}"
 
-    volume = f"{pathlib.Path.home()}:/home/canvas/host"
-    command = f"docker run -dit -v {volume} --rm --name {name} {image} zsh"
-    error_msg = "Failed to run Docker container."
-    run_command(command, error_msg)
+        volume = f"{pathlib.Path.home()}:/home/canvas/host"
+        command = f"docker run -dit -v {volume} --rm --name {name} {image} zsh"
+        error_msg = "Failed to run Docker container."
+        run_command(command, error_msg)
 
 
 if __name__ == "__main__":
