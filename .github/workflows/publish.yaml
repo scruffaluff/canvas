@@ -4,23 +4,45 @@ on:
     branches:
       - master
 jobs:
-  publish:
+  slim:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code repository checkout
+        uses: actions/checkout@v2
+      - uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: wolfgangwazzlestrauss/canvas
+          tags: slim, 0.0.1-slim
+  tag:
     strategy:
       fail-fast: false
       matrix:
         build_arg:
           - python
           - rust
-          - slim
           - typescript
     runs-on: ubuntu-latest
     steps:
       - name: Code repository checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
       - uses: docker/build-push-action@v1
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: wolfgangwazzlestrauss/canvas
           tags: ${{ matrix.build_arg }}, 0.0.1-${{ matrix.build_arg }}
-          build_args: format('{0}_build="true"', ${{ matrix.build_arg }})
+          build_args: ${{ matrix.build_arg }}_build="true"
+  all:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code repository checkout
+        uses: actions/checkout@v2
+      - uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: wolfgangwazzlestrauss/canvas
+          tags: latest, 0.0.1
+          build_args: python_build="true",rust_build="true",typescript_build="true
