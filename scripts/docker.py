@@ -33,15 +33,11 @@ def build(tags: List[Tag]) -> None:
             args = [fmt_str.format(tag.value)]
 
         build_args = " ".join(args)
-        image, latest = image_name(tag)
+        _, latest = image_name(tag)
 
-        img_cmd = f"docker build -t {image} . {build_args}"
+        img_cmd = f"docker build -t {latest} . {build_args}"
         img_msg = f"Failed to build Docker image."
         run_command(img_cmd, img_msg)
-
-        tag_cmd = f"docker tag {image} {latest}"
-        tag_msg = f"Failed to tag Docker image."
-        run_command(tag_cmd, tag_msg)
 
 
 def image_name(tag: Tag) -> Tuple[str, str]:
@@ -87,11 +83,7 @@ def run_command(command: str, error_msg: str) -> None:
 def push(tags: List[Tag]) -> None:
     """Push Docker image TAGS to DockerHub."""
     for tag in tags:
-        image, latest = image_name(tag)
-
-        img_cmd = f"docker push {image}"
-        img_msg = "Failed to push Docker image."
-        run_command(img_cmd, img_msg)
+        _, latest = image_name(tag)
 
         tag_cmd = f"docker push {latest}"
         tag_msg = "Failed to push Docker image tag."
@@ -105,9 +97,9 @@ def run(
 ) -> None:
     """Run project Docker image TAGS."""
     for tag in tags:
-        image, full_tag = image_name(tag)
+        image, latest = image_name(tag)
 
-        match = re.match(r"^.*:(\w+)$", full_tag)
+        match = re.match(r"^.*:(\w+)$", latest)
         if match is None:
             typer.secho("Error: Invalid full tag name.")
             raise typer.Exit(1)
@@ -115,7 +107,7 @@ def run(
             name = f"canvas-{match.group(1)}"
 
         volume = f"{pathlib.Path.home()}:/home/canvas/host"
-        command = f"docker run -dit -v {volume} --rm --name {name} {image} zsh"
+        command = f"docker run -dit -v {volume} --rm --name {name} {latest} zsh"
         error_msg = "Failed to run Docker container."
         run_command(command, error_msg)
 
