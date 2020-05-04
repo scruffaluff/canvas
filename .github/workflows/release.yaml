@@ -1,10 +1,20 @@
 name: publish
 on:
   push:
-    branches:
-      - master
+    tags:
+      - "[0-9]+.[0-9]+.[0-9]+"
 jobs:
+  release:
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.extract_tag.outputs.tag }}
+    steps:
+      - name: Extract tag
+        shell: bash
+        run: echo "##[set-output name=tag;]$(echo ${GITHUB_REF#refs/tags/})"
+        id: extract_tag
   slim:
+    needs: release
     runs-on: ubuntu-latest
     steps:
       - name: Code repository checkout
@@ -14,8 +24,9 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: wolfgangwazzlestrauss/canvas
-          tags: slim
+          tags: ${{ needs.release.outputs.tag }}-slim
   tag:
+    needs: release
     strategy:
       fail-fast: false
       matrix:
@@ -32,9 +43,10 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: wolfgangwazzlestrauss/canvas
-          tags: ${{ matrix.build_arg }}
+          tags: ${{ needs.release.outputs.tag }}-${{ matrix.build_arg }}
           build_args: ${{ matrix.build_arg }}_build="true"
   all:
+    needs: release
     runs-on: ubuntu-latest
     steps:
       - name: Code repository checkout
@@ -44,5 +56,5 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: wolfgangwazzlestrauss/canvas
-          tags: latest
+          tags: ${{ needs.release.outputs.tag }}
           build_args: python_build="true",rust_build="true",typescript_build="true
