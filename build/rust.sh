@@ -47,6 +47,7 @@ else
     cargo install \
         cargo-edit \
         cargo-make \
+        nu \
         pyoxidizer
 
     # Add additional Rust toolchain targets.

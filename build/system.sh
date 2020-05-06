@@ -34,9 +34,9 @@ install_tar() {
         # Extract folder stem from URL.
         #
         # Flags:
-        #     -P:
-        #     -o:
-        #     <<<:
+        #     -P: Interpret pattern as Perl regular expression.
+        #     -o: Print only the matched parts of a line.
+        #     <<<: Expand word to the command on its standard input.
         local directory=$(grep -Po '[^/]+(?=\.tar\.gz$)' <<< $1)
         # Move binary from directory.
         mv $directory/$2 /usr/local/bin
@@ -67,7 +67,7 @@ install_zip() {
     # Flags:
     #     -L: Follow redirect request.
     #     -S: Show errors.
-    #     -s: (curl) Disable progress bars.
+    #     -s: Disable progress bars.
     curl -LSs $1 -o "$2.zip"
 
     # Unzip and delete archive.
@@ -136,8 +136,6 @@ install_tar https://github.com/sharkdp/bat/releases/download/v0.15.0/bat-v0.15.0
 install_tar https://github.com/dandavison/delta/releases/download/0.1.1/delta-0.1.1-x86_64-unknown-linux-musl.tar.gz delta
 # MdBook.
 install_tar https://github.com/rust-lang/mdBook/releases/download/v0.3.7/mdbook-v0.3.7-x86_64-unknown-linux-gnu.tar.gz mdbook
-# NuShell.
-# install_tar https://github.com/nushell/nushell/releases/download/0.13.0/nu_0_13_0_linux.tar.gz nu
 # Packer.
 install_zip https://releases.hashicorp.com/packer/1.5.5/packer_1.5.5_linux_amd64.zip packer
 # Terraform
