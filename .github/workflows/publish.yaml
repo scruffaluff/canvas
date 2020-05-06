@@ -20,6 +20,7 @@ jobs:
       fail-fast: false
       matrix:
         build_arg:
+          - go
           - python
           - rust
           - typescript
@@ -45,4 +46,4 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: wolfgangwazzlestrauss/canvas
           tags: latest
-          build_args: python_build="true",rust_build="true",typescript_build="true
+          build_args: go_build="true",python_build="true",rust_build="true",typescript_build="true

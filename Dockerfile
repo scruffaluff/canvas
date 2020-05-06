@@ -39,6 +39,9 @@ RUN chmod 755 /tmp/cpp.sh \
 
 ### Go ###
 
+# Add Go binaries to PATH.
+ENV PATH=/usr/local/go/bin:$PATH
+
 # Copy Go build script and execute.
 COPY ./build/go.sh /tmp/go.sh 
 RUN chmod 755 /tmp/go.sh \

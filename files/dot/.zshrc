@@ -27,6 +27,10 @@ source $ZSH/oh-my-zsh.sh
 export PATH="$HOME/.local/bin:$PATH"
 
 
+# Go settings.
+export PATH="/usr/local/go/bin:$PATH"
+
+
 # Node settings.
 # Load Node version manager and its bash completion.
 #
@@ -63,6 +67,7 @@ export PATH="$CARGO_HOME/bin:$PATH"
 
 # Tool settings.
 export BAT_THEME="Solarized (light)"
+complete -C /usr/local/bin/terraform terraform
 
 
 # Wasmtime settings.

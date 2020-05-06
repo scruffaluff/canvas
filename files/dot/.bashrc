@@ -3,6 +3,10 @@
 export PATH="$HOME/.local/bin:$PATH"
 
 
+# Go settings.
+export PATH="/usr/local/go/bin:$PATH"
+
+
 # Node settings.
 # Load Node version manager and its bash completion.
 #
@@ -38,14 +42,8 @@ export PATH="usr/local/cargo/bin:$PATH"
 
 
 # Tool settings.
-# Command line fuzzy finder settings.
-#
-# Flags:
-#     -f: Check if file exists and is a regular file.
-if [ -f ~/.fzf.zsh ]; then
-    source ~/.fzf.zsh
-fi
 export BAT_THEME="Solarized (light)"
+complete -C /usr/local/bin/terraform terraform
 
 
 # Wasmtime settings.
