@@ -48,3 +48,7 @@ complete -C /usr/local/bin/terraform terraform
 
 # Wasmtime settings.
 export PATH="$WASMTIME_HOME/bin:$PATH"
+
+
+# Starship settings.
+eval "$(starship init bash)"

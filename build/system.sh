@@ -9,8 +9,6 @@ set -e
 #     Binary remote URL.
 #     Binary name.
 install_tar() {
-    # Get current working directory.
-    cwd=$(pwd)
     # Change to tmp directory.
     cd /tmp
 
@@ -47,8 +45,8 @@ install_tar() {
     # Change binary executable permissions.
     chmod 755 /usr/local/bin/$2
 
-    # Change back to previous working directory.
-    cd $cwd
+    # Change back to tmp directory.
+    cd /tmp
 }
 
 # Download and install zip binary to /usr/local/bin.
@@ -57,8 +55,6 @@ install_tar() {
 #     Binary remote URL.
 #     Binary name.
 install_zip() {
-    # Get current working directory.
-    cwd=$(pwd)
     # Change to tmp directory.
     cd /tmp
 
@@ -80,8 +76,8 @@ install_zip() {
     # Change binary executable permissions.
     chmod 755 /usr/local/bin/$2
 
-    # Change back to previous working directory.
-    cd $cwd
+    # Change back to tmp directory.
+    cd /tmp
 }
 
 
@@ -104,6 +100,7 @@ echo $TZ > /etc/timezone
 #     --no-install-recommends: Do not install recommended packages.
 apt-get update -m && apt-get install -qy --no-install-recommends \
     apt-utils \
+    bsdmainutils \
     build-essential \
     ca-certificates \
     curl \
@@ -140,6 +137,33 @@ install_tar https://github.com/rust-lang/mdBook/releases/download/v0.3.7/mdbook-
 install_zip https://releases.hashicorp.com/packer/1.5.5/packer_1.5.5_linux_amd64.zip packer
 # Terraform
 install_zip https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_linux_amd64.zip terraform
+
+
+# Download AWS CLI.
+#
+# Flags:
+#     -L: Follow redirect request.
+#     -S: Show errors.
+#     -s: Disable progress bars.
+curl -LSs https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip
+# Unzip and delete archive.
+unzip awscliv2.zip && rm awscliv2.zip
+# Install AWS CLI
+/tmp/aws/install
+# Check that AWS CLI was successfully installed.
+aws --version
+
+
+# Install Starship for shell prompts.
+#
+# Flags:
+#     -L: Follow redirect request.
+#     -S: Show errors.
+#     -f: Fail silently on server errors.
+#     -s: (curl) Disable progress bars.
+#     -s: (sh) Read commands from standard input.
+#     -y: Skip confirmation prompt.
+curl -LSfs https://starship.rs/install.sh | bash -s -- -y
 
 
 # Install Fixuid for dynamically editing file permissions.
