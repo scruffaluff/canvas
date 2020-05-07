@@ -105,11 +105,14 @@ apt-get update -m && apt-get install -qy --no-install-recommends \
     ca-certificates \
     curl \
     fonts-powerline \
+    fish \
     fzf \
     git \
     git-lfs \
+    groff \
     hub \
     iputils-ping \
+    less \
     lldb \
     llvm \
     make \
