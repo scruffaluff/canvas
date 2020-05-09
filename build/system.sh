@@ -130,6 +130,8 @@ apt-get update -m && apt-get install -qy --no-install-recommends \
 
 
 # Install additional utilities.
+# 1Password
+install_zip https://cache.agilebits.com/dist/1P/op/pkg/v0.10.0/op_linux_amd64_v0.10.0.zip op
 # Bat
 install_tar https://github.com/sharkdp/bat/releases/download/v0.15.0/bat-v0.15.0-x86_64-unknown-linux-gnu.tar.gz bat
 # Delta for Git.

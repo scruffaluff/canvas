@@ -1,4 +1,4 @@
-FROM buildpack-deps:19.10
+FROM buildpack-deps:20.04
 
 
 ### Build Arguments ###
