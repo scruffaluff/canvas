@@ -139,7 +139,7 @@ install_tar https://github.com/dandavison/delta/releases/download/0.1.1/delta-0.
 # MdBook.
 install_tar https://github.com/rust-lang/mdBook/releases/download/v0.3.7/mdbook-v0.3.7-x86_64-unknown-linux-gnu.tar.gz mdbook
 # Packer.
-install_zip https://releases.hashicorp.com/packer/1.5.5/packer_1.5.5_linux_amd64.zip packer
+install_zip https://releases.hashicorp.com/packer/1.5.6/packer_1.5.6_linux_amd64.zip packer
 # Terraform
 install_zip https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_linux_amd64.zip terraform
 
@@ -150,6 +150,7 @@ install_zip https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_l
 #     -L: Follow redirect request.
 #     -S: Show errors.
 #     -s: Disable progress bars.
+#     -o: Write output to given file instead of stdout.
 curl -LSs https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip
 # Unzip and delete archive.
 unzip awscliv2.zip && rm awscliv2.zip
@@ -169,6 +170,18 @@ aws --version
 #     -s: (sh) Read commands from standard input.
 #     -y: Skip confirmation prompt.
 curl -LSfs https://starship.rs/install.sh | bash -s -- -y
+
+
+# Install Terragrunt.
+#
+# Flags:
+#     -L: Follow redirect request.
+#     -S: Show errors.
+#     -s: Disable progress bars.
+#     -o: Write output to given file instead of stdout.
+curl -LSs https://github.com/gruntwork-io/terragrunt/releases/download/v0.23.18/terragrunt_linux_amd64 -o /usr/local/bin/terragrunt
+# Change Terragrunt executable permissions.
+chmod 755 /usr/local/bin/terragrunt
 
 
 # Install Fixuid for dynamically editing file permissions.
