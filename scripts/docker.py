@@ -36,7 +36,7 @@ def build(tags: List[Tag]) -> None:
         _, latest = image_name(tag)
 
         img_cmd = f"docker build -t {latest} . {build_args}"
-        img_msg = f"Failed to build Docker image."
+        img_msg = "Failed to build Docker image."
         run_command(img_cmd, img_msg)
 
 
