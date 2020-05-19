@@ -94,6 +94,7 @@ RUN chmod 755 /tmp/rust.sh \
 ### TypeScript ###
 
 ENV \
+    DENO_INSTALL=/usr/local/deno \
     # Set Node version manager location.
     NVM_DIR=/usr/local/nvm
 

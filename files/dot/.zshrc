@@ -43,6 +43,9 @@ if [ -s "$NVM_DIR/bash_completion" ]; then
     source "$NVM_DIR/bash_completion"
 fi
 export PATH="$HOME/.npm-global/bin:$PATH"
+# Deno settings.
+export DENO_INSTALL="/usr/local/deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
 
 
 # Python settings.

@@ -39,4 +39,13 @@ else
     #     -R: Apply modifications recursivley to a directory.
     #     a+rw: Give read and write permissions to all users.
     chmod -R a+rw $NVM_DIR
+
+    # Install Deno
+    #
+    # Flags:
+    #     -L: Follow redirect request.
+    #     -S: Show errors.
+    #     -f: Fail silently on server errors.
+    #     -s: Disable progress bars.
+    curl -LSfs https://deno.land/x/install/install.sh | sh
 fi
