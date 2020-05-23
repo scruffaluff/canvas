@@ -11,11 +11,21 @@ if [ -z "$csharp_build" ]; then
 else
     printf "##### C# build starting. #####\n"
 
+    # Download Microsoft package repository installer.
     curl -O https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb
+    # Install Microsoft package repository.
     dpkg -i packages-microsoft-prod.deb
 
-    apt-get update
-    apt-get install -y dotnet-sdk-3.1
-    apt-get install -y aspnetcore-runtime-3.1
-    apt-get install -y dotnet-runtime-3.1
+    # Install C# frameworks, runtimes, and package managers.
+    #
+    # Flags:
+    #     -m: Ignore missing packages and handle result.
+    #     -q: Produce log suitable output by omitting progress indicators.
+    #     -y: Assume "yes" as answer to all prompts and run non-interactively.
+    #     --no-install-recommends: Do not install recommended packages.
+    apt-get update -m && apt-get install -y --no-install-recommends \
+		aspnetcore-runtime-3.1 \
+        dotnet-runtime-3.1 \
+        dotnet-sdk-3.1 \
+        nuget
 fi
