@@ -15,6 +15,8 @@ else
     curl -O https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb
     # Install Microsoft package repository.
     dpkg -i packages-microsoft-prod.deb
+    # Remove package installer.
+    rm packages-microsoft-prod.deb
 
     # Install C# frameworks, runtimes, and package managers.
     #
@@ -28,4 +30,8 @@ else
         dotnet-runtime-3.1 \
         dotnet-sdk-3.1 \
         nuget
+
+    # Check that dotnet and nuget were installed successfully.
+    dotnet --version
+    nuget help
 fi
