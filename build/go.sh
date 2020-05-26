@@ -14,8 +14,8 @@ else
     # Download Go.
     #
     # Flags:
-    #     -L:
-    #     -O:
+    #     -L: Follow redirect request.
+    #     -O: Redirect output to file with remote name.
     #     -S: Show errors.
     #     -f: Fail silently on server errors.
     #     -s: (curl) Disable progress bars.
@@ -32,4 +32,27 @@ else
 
     # Check that Go was installed successfully.
     go version
+
+
+    # Download Hugo.
+    #
+    # Flags:
+    #     -L: Follow redirect request.
+    #     -O: Redirect output to file with remote name.
+    #     -S: Show errors.
+    #     -f: Fail silently on server errors.
+    #     -s: (curl) Disable progress bars.
+    curl -LOSfs https://github.com/gohugoio/hugo/releases/download/v0.71.0/hugo_0.71.0_Linux-64bit.tar.gz
+
+    # Install Hugo.
+    #
+    # Flags:
+    #     -C: Change to given directory before performing any operation.
+    #     -f: Use archive file. Must be third flag.
+    #     -x: Extract files from an archive. Must be first flag.
+    #     -z: Filter the archive through gzip. Must be second flag.
+    tar -C /usr/local/bin -xzf hugo_0.71.0_Linux-64bit.tar.gz
+
+    # Check that Hugo was installed successfully.
+    hugo version
 fi
