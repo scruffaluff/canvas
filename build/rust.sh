@@ -46,9 +46,13 @@ else
     # Install Cargo packges.
     cargo install \
         cargo-edit \
+        cargo-eval \
         cargo-make \
+        cargo-watch \
+        evcxr_repl \
         nu \
-        pyoxidizer
+        pyoxidizer \
+        watchexec
 
     # Add additional Rust toolchain targets.
     # Install Rust nightly toolchain.
