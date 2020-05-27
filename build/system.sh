@@ -104,16 +104,20 @@ apt-get update -m && apt-get install -qy --no-install-recommends \
     bsdmainutils \
     build-essential \
     ca-certificates \
+    cmake \
     curl \
     fonts-powerline \
     fish \
     fzf \
     git \
     git-lfs \
+    gcc \
+    g++ \
     groff \
     hub \
     iputils-ping \
     less \
+    libtinfo5 \
     lldb \
     llvm \
     make \
