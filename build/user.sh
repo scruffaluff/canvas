@@ -34,6 +34,10 @@ touch $HOME/.sudo_as_admin_successful
 # Change owner of sudo login disable file.
 chown canvas:canvas $HOME/.sudo_as_admin_successful
 
+# Fix current sudo bug for containers.
+# https://github.com/sudo-project/sudo/issues/42
+echo "Set disable_coredump false" >> /etc/sudo.conf
+
 
 # Create directory for host home directory volume mounts.
 #
