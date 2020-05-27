@@ -8,6 +8,7 @@ class Tag(enum.Enum):
     """Tag options for Canvas images."""
 
     ALL = "all"
+    CSHARP = "csharp"
     CPP = "cpp"
     GO = "go"
     HASKELL = "haskell"

@@ -4,6 +4,7 @@ FROM buildpack-deps:20.04
 ### Build Arguments ###
 
 ARG cpp_build
+ARG csharp_build
 ARG go_build
 ARG haskell_build
 ARG python_build
@@ -25,6 +26,15 @@ ENV \
 COPY ./build/system.sh /tmp/system.sh
 RUN chmod 755 /tmp/system.sh \
     && /tmp/system.sh \
+    && rm -rf /tmp/*
+
+
+### C# ###
+
+# Copy C# build script and execute.
+COPY ./build/csharp.sh /tmp/csharp.sh 
+RUN chmod 755 /tmp/csharp.sh \
+    && /tmp/csharp.sh $csharp_build \
     && rm -rf /tmp/*
 
 
