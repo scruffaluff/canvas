@@ -53,6 +53,7 @@ chown canvas:canvas $HOME/host
 # Flags:
 #     -s: Make symbolic links instead of hard links.
 ln -s $HOME/host/.aws $HOME/.aws
+ln -s $HOME/host/.config/gloud $HOME/.config/gcloud
 ln -s $HOME/host/.gitconfig $HOME/.gitconfig
 ln -s $HOME/host/.ssh $HOME/.ssh
 

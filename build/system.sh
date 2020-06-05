@@ -165,6 +165,15 @@ unzip awscliv2.zip && rm awscliv2.zip
 aws --version
 
 
+# Install GCloud.
+# curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-294.0.0-linux-x86_64.tar.gz
+# tar zxvf google-cloud-sdk-294.0.0-linux-x86_64.tar.gz google-cloud-sdk
+# mv google-cloud-sdk /usr/local
+# chmod 755 -R /usr/local/google-cloud-sdk
+# /usr/local/google-cloud-sdk/install.sh -q
+# gcloud config set disable_usage_reporting false
+
+
 # Install Starship for shell prompts.
 #
 # Flags:
