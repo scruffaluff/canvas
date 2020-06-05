@@ -25,10 +25,10 @@ def build(tags: List[Tag]) -> None:
     for tag in tags:
         if tag == Tag.ALL:
             args = [
-                fmt_str.format(tag.value.upper())
+                fmt_str.format(tag.value)
                 for tag in Tag
                 if tag not in [Tag.ALL, Tag.SLIM]
-            ]
+            ] + [fmt_str.format("vscode")]
         else:
             args = [fmt_str.format(tag.value)]
 

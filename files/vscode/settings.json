@@ -1,0 +1,59 @@
+{
+  "autoDocstring.docstringFormat": "google",
+  "editor.acceptSuggestionOnEnter": "off",
+  "editor.autoClosingBrackets": "never",
+  "editor.autoClosingQuotes": "never",
+  "editor.detectIndentation": false,
+  "editor.fontFamily": "MesloLGS NF",
+  "editor.minimap.enabled": false,
+  "editor.parameterHints.enabled": true,
+  "editor.rulers": [80],
+  "editor.tabSize": 4,
+  "[html]": {
+    "editor.tabSize": 2
+  },
+  "[javascript]": {
+    "editor.tabSize": 2
+  },
+  "[json]": {
+    "editor.tabSize": 2
+  },
+  "[terraform]": {
+    "editor.tabSize": 2
+  },
+  "[yaml]": {
+    "editor.tabSize": 2
+  },
+  "[rust]": {
+    "editor.rulers": [100]
+  },
+  "emmet.excludeLanguages": [],
+  "emmet.includeLanguages": {
+    "markdown": "html"
+  },
+  "emmet.triggerExpansionOnTab": true,
+  "explorer.autoReveal": false,
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "explorer.openEditors.visible": 0,
+  "extensions.ignoreRecommendations": true,
+  "files.insertFinalNewline": true,
+  "latex-workshop.bind.enter.key": false,
+  "latex-workshop.view.pdf.viewer": "tab",
+  "latex-workshop.latex.autoBuild.run": "onFileChange",
+  "python.terminal.activateEnvironment": false,
+  "python.linting.flake8Enabled": true,
+  "python.linting.flake8Args": ["--max-line-length=80"],
+  "python.linting.mypyEnabled": true,
+  "python.testing.promptToConfigure": false,
+  "python.testing.pytestEnabled": true,
+  "python.testing.pytestPath": "tests",
+  "terminal.integrated.cursorStyle": "line",
+  "terminal.integrated.fontFamily": "MesloLGS NF",
+  "terminal.integrated.inheritEnv": false,
+  "terminal.integrated.shell.linux": "/bin/bash",
+  "workbench.colorTheme": "Solarized Light",
+  "workbench.startupEditor": "welcomePage",
+  "workbench.statusBar.visible": true,
+  "workbench.iconTheme": "vscode-icons"
+}
