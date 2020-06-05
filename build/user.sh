@@ -39,6 +39,11 @@ chown canvas:canvas $HOME/.sudo_as_admin_successful
 echo "Set disable_coredump false" >> /etc/sudo.conf
 
 
+# Create Canvas settings directory.
+mkdir -p $HOME/.canvas && chmod 777 -R $HOME/.canvas
+chown canvas:canvas $HOME/.canvas
+
+
 # Create directory for host home directory volume mounts.
 #
 # Flags:

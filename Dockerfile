@@ -11,6 +11,7 @@ ARG python_build
 ARG rust_build
 ARG slim_build
 ARG typescript_build
+ARG vscode_build
 
 
 ### System ###
@@ -115,6 +116,19 @@ RUN chmod 755 /tmp/typescript.sh \
     && rm -rf /tmp/*
 
 
+### VSCode ###
+
+# Copy Theia and VSCode configuration files.
+RUN mkdir /usr/local/theia && chmod 777 -R /usr/local/theia
+COPY ./files/vscode/package.json /usr/local/theia/
+
+# Copy VSCode build script and execute.
+COPY ./build/vscode.sh /tmp/vscode.sh 
+RUN chmod 755 /tmp/vscode.sh \
+    && /tmp/vscode.sh $vscode_build \
+    && rm -rf /tmp/*
+
+
 ### User ###
 
 ENV \
@@ -139,5 +153,13 @@ VOLUME $HOME/host
 # Copy dot files.
 COPY --chown=canvas:canvas ./files/dot/ $HOME/
 
+# Make Theia configuration directory and settings files.
+RUN mkdir -p $HOME/.theia
+COPY --chown=canvas:canvas ./files/vscode/settings.json $HOME/.theia/
 
-ENTRYPOINT ["fixuid"]
+# Copy entrypoint script and make executable.
+COPY --chown=canvas:canvas ./files/entry.sh $HOME/.canvas/
+RUN chmod 755 $HOME/.canvas/entry.sh
+
+
+ENTRYPOINT ["fixuid", "/home/canvas/.canvas/entry.sh"]

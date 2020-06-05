@@ -1,0 +1,32 @@
+{
+  "private": true,
+  "dependencies": {
+    "@theia/callhierarchy": "next",
+    "@theia/file-search": "next",
+    "@theia/git": "next",
+    "@theia/json": "next",
+    "@theia/markers": "next",
+    "@theia/messages": "next",
+    "@theia/mini-browser": "next",
+    "@theia/navigator": "next",
+    "@theia/outline-view": "next",
+    "@theia/plugin-ext-vscode": "next",
+    "@theia/preferences": "next",
+    "@theia/preview": "next",
+    "@theia/search-in-workspace": "next",
+    "@theia/terminal": "next"
+  },
+  "devDependencies": {
+    "@theia/cli": "next"
+  },
+  "scripts": {
+    "clean": "theia clean",
+    "build": "theia build --mode development",
+    "start": "theia start --plugins=local-dir:plugins",
+    "download": "theia download:plugins"
+  },
+  "theiaPluginsDir": "plugins",
+  "theiaPlugins": {
+    "vscode-gitlens": "https://github.com/eamodio/vscode-gitlens/releases/download/v10.2.1/gitlens-10.2.1.vsix"
+  }
+}
