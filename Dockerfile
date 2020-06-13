@@ -154,12 +154,13 @@ VOLUME $HOME/host
 COPY --chown=canvas:canvas ./files/dot/ $HOME/
 
 # Copy Theia settings files.
+COPY --chown=canvas:canvas ./files/vscode/keybindings.json $HOME/.theia/
 COPY --chown=canvas:canvas ./files/vscode/settings.json $HOME/.theia/
 
 # Copy entrypoint script and make executable.
-COPY --chown=canvas:canvas ./files/entry.sh $HOME/.canvas/
+COPY --chown=canvas:canvas ./files/entrypoint.sh $HOME/.canvas/
 
-RUN chmod 755 $HOME/.canvas/entry.sh
+RUN chmod 755 $HOME/.canvas/entrypoint.sh
 
 
-ENTRYPOINT ["fixuid", "/home/canvas/.canvas/entry.sh"]
+ENTRYPOINT ["fixuid", "/home/canvas/.canvas/entrypoint.sh"]
