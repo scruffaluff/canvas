@@ -25,6 +25,7 @@ jobs:
           - python
           - rust
           - typescript
+          - vscode
     runs-on: ubuntu-latest
     steps:
       - name: Code repository checkout
