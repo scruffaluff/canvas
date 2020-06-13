@@ -159,7 +159,6 @@ COPY --chown=canvas:canvas ./files/vscode/settings.json $HOME/.theia/
 
 # Copy entrypoint script and make executable.
 COPY --chown=canvas:canvas ./files/entrypoint.sh $HOME/.canvas/
-
 RUN chmod 755 $HOME/.canvas/entrypoint.sh
 
 
