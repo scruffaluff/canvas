@@ -153,12 +153,12 @@ VOLUME $HOME/host
 # Copy dot files.
 COPY --chown=canvas:canvas ./files/dot/ $HOME/
 
-# Make Theia configuration directory and settings files.
-RUN mkdir -p $HOME/.theia
+# Copy Theia settings files.
 COPY --chown=canvas:canvas ./files/vscode/settings.json $HOME/.theia/
 
 # Copy entrypoint script and make executable.
 COPY --chown=canvas:canvas ./files/entry.sh $HOME/.canvas/
+
 RUN chmod 755 $HOME/.canvas/entry.sh
 
 

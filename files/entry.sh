@@ -7,4 +7,4 @@
 # Run Theia IDE server.
 cd /usr/local/theia
 nvm use 10
-yarn start ~/host --hostname 0.0.0.0 --port 8080 &> ~/.canvas/theia.log
+yarn start ~/host --hostname 0.0.0.0 --port 9765 &> ~/.canvas/theia.log

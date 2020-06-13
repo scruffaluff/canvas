@@ -23,4 +23,7 @@ else
     yarn
     yarn theia build
     yarn download
+
+    # Make Theia configuration directory.
+    mkdir -p $HOME/.theia
 fi
