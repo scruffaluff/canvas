@@ -52,7 +52,7 @@
   "terminal.integrated.fontFamily": "MesloLGS NF",
   "terminal.integrated.inheritEnv": false,
   "terminal.integrated.shell.linux": "/bin/bash",
-  "workbench.colorTheme": "light",
+  "workbench.colorTheme": "Solarized Light",
   "workbench.startupEditor": "welcomePage",
   "workbench.statusBar.visible": true,
   "workbench.iconTheme": "vscode-icons"

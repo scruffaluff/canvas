@@ -153,6 +153,10 @@ VOLUME $HOME/host
 # Copy dot files.
 COPY --chown=canvas:canvas ./files/dot/ $HOME/
 
+# Copy Code Server settings files.
+COPY --chown=canvas:canvas ./files/vscode/keybindings.json $HOME/.local/share/code-server/User/
+COPY --chown=canvas:canvas ./files/vscode/settings.json $HOME/.local/share/code-server/User/
+
 # Copy Theia settings files.
 COPY --chown=canvas:canvas ./files/vscode/keybindings.json $HOME/.theia/
 COPY --chown=canvas:canvas ./files/vscode/settings.json $HOME/.theia/
