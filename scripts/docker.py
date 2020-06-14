@@ -12,9 +12,7 @@ import canvas
 from canvas.typing import Tag
 
 
-app = typer.Typer(
-    help="Script for building images and running containers with Docker."
-)
+app = typer.Typer(help=__doc__)
 
 
 @app.command()
