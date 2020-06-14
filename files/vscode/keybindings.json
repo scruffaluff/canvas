@@ -1,0 +1,9 @@
+[
+  { "key": "ctrl+`", "command": "workbench.action.terminal.toggleTerminal" },
+  {
+    "key": "ctrl+`",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "terminalFocus"
+  },
+  { "key": "alt+shift+p", "command": "workbench.action.showCommands" }
+]

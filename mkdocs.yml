@@ -1,11 +1,11 @@
 copyright: Copyright &copy; 2019 Macklan Weinstein
 extra:
   social:
-    - type: home
+    - icon: fontawesome/brands/github-alt
       link: https://wolfgangwazzlestrauss.com
-    - type: github
+    - icon: fontawesome/brands/github-alt
       link: https://github.com/wolfgangwazzlestrauss
-    - type: inbox
+    - icon: fontawesome/brands/github-alt
       link: mailto://wolfgangwazzlestrauss@gmail.com
 extra_javascript:
   - https://unpkg.com/mermaid@8.4.8/dist/mermaid.min.js
@@ -47,6 +47,8 @@ site_description: Docker image designed for containerized development.
 site_name: Canvas
 site_url: https://wolfgangwazzlestrauss.github.io/canvas/
 theme:
+  features:
+    - tab
   name: material
   palette:
     accent: cyan
