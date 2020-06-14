@@ -15,6 +15,8 @@ app = typer.Typer(help=__doc__)
 def build() -> None:
     """Build the MkDocs documentation."""
 
+    repo_path = pathlib.Path(__file__).parents[1]
+    copy_files(repo_path)
     run("mkdocs build", "Failed to build project documentation.")
 
 
