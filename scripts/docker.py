@@ -94,10 +94,7 @@ def push(tags: List[Tag]) -> None:
 
 
 @app.command()
-def run(
-    tags: List[Tag],
-    ports: List[int] = typer.Option([], help="Ports to expose."),
-) -> None:
+def run(tags: List[Tag]) -> None:
     """Run project Docker image TAGS."""
 
     for tag in tags:
@@ -110,8 +107,11 @@ def run(
         else:
             name = f"canvas-{match.group(1)}"
 
-        volume = f"{pathlib.Path.home()}:/home/canvas/host"
-        command = f"docker run -dit -v {volume} --rm --name {name} {latest} zsh"
+        ports = '-p "9765:9765"' if tag == Tag.VSCODE else ""
+        volumes = f"-v {pathlib.Path.home()}:/home/canvas/host"
+        command = (
+            f"docker run -dit {ports} {volumes} --rm --name {name} {latest} zsh"
+        )
         error_msg = "Failed to run Docker container."
         run_command(command, error_msg)
 
