@@ -2,6 +2,7 @@
 application-import-names = canvas
 docstring-convention = google
 exclude = **/jupyter_notebook_config.py
+ignore = D202
 import-order-style = google
 max-complexity = 10
 max-line-length = 80

@@ -18,6 +18,7 @@ app = typer.Typer(help=__doc__)
 @app.command()
 def build(tags: List[Tag]) -> None:
     """Build image TAGS from project Dockerfile."""
+
     fmt_str = '--build-arg {}_build="true"'
 
     for tag in tags:
@@ -47,6 +48,7 @@ def image_name(tag: Tag) -> Tuple[str, str]:
     Returns:
         Full image name for DockerHub and latest tag name.
     """
+
     version = canvas.__version__
 
     prefix = "wolfgangwazzlestrauss/canvas:{}"
@@ -59,6 +61,7 @@ def image_name(tag: Tag) -> Tuple[str, str]:
 @app.command()
 def prune() -> None:
     """Prune all containers and images on system."""
+
     error_msg = "Failed to prune system."
     run_command("docker system prune -f", error_msg)
 
@@ -70,6 +73,7 @@ def run_command(command: str, error_msg: str) -> None:
         command: Command to execute after preparing documentation.
         error_msg: Error message if command fails.
     """
+
     try:
         subprocess.run(args=command, shell=True, check=True)
     except subprocess.CalledProcessError:
@@ -80,6 +84,7 @@ def run_command(command: str, error_msg: str) -> None:
 @app.command()
 def push(tags: List[Tag]) -> None:
     """Push Docker image TAGS to DockerHub."""
+
     for tag in tags:
         _, latest = image_name(tag)
 
@@ -94,6 +99,7 @@ def run(
     ports: List[int] = typer.Option([], help="Ports to expose."),
 ) -> None:
     """Run project Docker image TAGS."""
+
     for tag in tags:
         image, latest = image_name(tag)
 
