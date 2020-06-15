@@ -29,6 +29,7 @@
   "theiaPlugins": {
     "vscode-gitlens": "https://github.com/eamodio/vscode-gitlens/releases/download/v10.2.1/gitlens-10.2.1.vsix",
     "vscode-python": "https://github.com/microsoft/vscode-python/releases/download/2020.5.86806/ms-python-release.vsix",
-    "vscode-rust": "https://github.com/rust-lang/rls-vscode/releases/download/v0.7.8/rust.vsix"
+    "vscode-rust": "https://github.com/rust-lang/rls-vscode/releases/download/v0.7.8/rust.vsix",
+    "vscode-solarized-theme": "https://open-vsx.org/api/vscode/theme-solarized-light/1.46.0/file/vscode.theme-solarized-light-1.46.0.vsix"
   }
 }

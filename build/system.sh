@@ -121,6 +121,7 @@ apt-get update -m && apt-get install -qy --no-install-recommends \
     lldb \
     llvm \
     make \
+    net-tools \
     openssh-client \
     openssh-server \
     openssl \
