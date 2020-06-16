@@ -11,9 +11,16 @@ if [ -z "$vscode_build" ]; then
 else
     printf "##### VSCode build starting. #####\n"
 
-    # Install Coder.
+    # Install Code Server.
+    #
+    # Flags:
+    #     -L: Follow redirect request.
+    #     -S: Show errors.
+    #     -f: Fail silently on server errors.
+    #     -s: Disable progress bars.
     curl -LSfs https://code-server.dev/install.sh | sh -s -- --prefix=/usr/local
 
+    # Install VSCode extensions.
     code-server --install-extension bungcip.better-toml
     code-server --install-extension coenraads.bracket-pair-colorizer-2
     code-server --install-extension eamodio.gitlens
@@ -28,5 +35,10 @@ else
     code-server --install-extension vadimcn.vscode-lldb
     code-server --install-extension yzhang.markdown-all-in-one
 
+    # Esnure that all users can read and write to NVM files.
+    #
+    # Flags:
+    #     -R: Apply modifications recursivley to a directory.
+    #     777: Give read, write, and execute permissions to all users.
     chmod 777 -R /usr/local/code-server
 fi

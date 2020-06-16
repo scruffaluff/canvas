@@ -10,5 +10,10 @@ if [ -x ~/host/entrypoint.sh ]; then
 fi
 
 
-# Run Code Server IDE.
-code-server
+# Execute Code Server if it exists.
+#
+# Flags:
+#     -x: Check if execute permission is granted.
+if [ -x code-server ]; then
+    code-server
+fi

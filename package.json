@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "format": "prettier --write **/*.{css,html,js,json,md,yaml,yml}",
+    "test": "prettier --check **/*.{css,html,js,json,md,yaml,yml}"
+  },
   "devDependencies": {
     "prettier": "^1.19.1"
   },
