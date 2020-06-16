@@ -11,41 +11,22 @@ if [ -z "$vscode_build" ]; then
 else
     printf "##### VSCode build starting. #####\n"
 
-    # Source NVM configuration.
-    . $NVM_DIR/nvm.sh
-
-    # Install Yarn.
-    nvm use 10
-    npm install -g yarn
-
-    # Build Theia IDE and download extensions.
-    # Theia extensions can be found at https://open-vsx.org/.
-    cd /usr/local/theia
-    yarn
-    yarn theia build
-    yarn download
-
-    # Make Theia configuration directory.
-    mkdir -p $HOME/.theia
-
-
     # Install Coder.
     curl -LSfs https://code-server.dev/install.sh | sh -s -- --prefix=/usr/local
 
-    # If the XDG_DATA_HOME environment variable is set the data directory will 
-    # be $XDG_DATA_HOME/code-server/extensions. In general we try to follow the 
-    # XDG directory spec.
-    code-server --install-extension \
-        coenraads.bracket-pair-colorizer-2 \
-        eamodio.gitlens \
-        esbenp.prettier-vscode \
-        james-yu.latex-workshop \
-        ms-dotnettools.csharp \
-        ms-python.python \
-        ms-vscode.cpptools \
-        ritwickdey.liveserver \
-        rust-lang.rust \
-        stkb.rewrap \
-        vadimcn.vscode-lldb \
-        yzhang.markdown-all-in-one
+    code-server --install-extension bungcip.better-toml
+    code-server --install-extension coenraads.bracket-pair-colorizer-2
+    code-server --install-extension eamodio.gitlens
+    code-server --install-extension esbenp.prettier-vscode
+    code-server --install-extension james-yu.latex-workshop
+    code-server --install-extension ms-dotnettools.csharp
+    code-server --install-extension ms-python.python
+    code-server --install-extension ms-vscode.cpptools
+    code-server --install-extension ritwickdey.liveserver
+    code-server --install-extension rust-lang.rust
+    code-server --install-extension stkb.rewrap
+    code-server --install-extension vadimcn.vscode-lldb
+    code-server --install-extension yzhang.markdown-all-in-one
+
+    chmod 777 -R /usr/local/code-server
 fi

@@ -118,9 +118,14 @@ RUN chmod 755 /tmp/typescript.sh \
 
 ### VSCode ###
 
-# Copy Theia and VSCode configuration files.
-RUN mkdir /usr/local/theia && chmod 777 -R /usr/local/theia
-COPY ./files/vscode/package.json /usr/local/theia/
+ENV \
+    CODE_SERVER_CONFIG=/usr/local/code-server/config.yaml \
+    XDG_DATA_HOME=/usr/local
+
+# Copy Code Server configuration files.
+COPY ./files/vscode/config.yaml $CODE_SERVER_CONFIG
+COPY ./files/vscode/keybindings.json $XDG_DATA_HOME/code-server/User/
+COPY ./files/vscode/settings.json $XDG_DATA_HOME/code-server/User/
 
 # Copy VSCode build script and execute.
 COPY ./build/vscode.sh /tmp/vscode.sh 
@@ -152,14 +157,6 @@ VOLUME $HOME/host
 
 # Copy dot files.
 COPY --chown=canvas:canvas ./files/dot/ $HOME/
-
-# Copy Code Server settings files.
-COPY --chown=canvas:canvas ./files/vscode/keybindings.json $HOME/.local/share/code-server/User/
-COPY --chown=canvas:canvas ./files/vscode/settings.json $HOME/.local/share/code-server/User/
-
-# Copy Theia settings files.
-COPY --chown=canvas:canvas ./files/vscode/keybindings.json $HOME/.theia/
-COPY --chown=canvas:canvas ./files/vscode/settings.json $HOME/.theia/
 
 # Copy entrypoint script and make executable.
 COPY --chown=canvas:canvas ./files/entrypoint.sh $HOME/.canvas/
