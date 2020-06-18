@@ -16,8 +16,6 @@ fi
 #     -x: Check if execute permission is granted.
 if [ -x /usr/bin/code-server ]; then
     code-server
-else
-    tail -f /dev/null
 fi
 
 
