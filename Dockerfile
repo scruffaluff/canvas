@@ -163,4 +163,5 @@ COPY --chown=canvas:canvas ./files/entrypoint.sh $HOME/.canvas/
 RUN chmod 755 $HOME/.canvas/entrypoint.sh
 
 
-ENTRYPOINT ["fixuid", "/home/canvas/.canvas/entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/fixuid", "/home/canvas/.canvas/entrypoint.sh"]
+CMD ["/bin/bash"]
