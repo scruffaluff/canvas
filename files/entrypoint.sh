@@ -14,8 +14,10 @@ fi
 #
 # Flags:
 #     -x: Check if execute permission is granted.
-if [ -x code-server ]; then
+if [ -x /usr/bin/code-server ]; then
     code-server
+else
+    tail -f /dev/null
 fi
 
 
