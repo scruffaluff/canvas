@@ -123,7 +123,6 @@ ENV \
     XDG_DATA_HOME=/usr/local
 
 # Copy Code Server configuration files.
-COPY ./files/vscode/config.yaml $CODE_SERVER_CONFIG
 COPY ./files/vscode/keybindings.json $XDG_DATA_HOME/code-server/User/
 COPY ./files/vscode/settings.json $XDG_DATA_HOME/code-server/User/
 

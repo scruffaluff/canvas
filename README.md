@@ -64,6 +64,9 @@ services:
       - "./:/home/canvas/host"
 ```
 
+For working with self-signed certificates see
+https://github.com/FiloSottile/mkcert.
+
 ## Contributing
 
 ## License

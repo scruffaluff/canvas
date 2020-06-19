@@ -1,3 +1,0 @@
-auth: password
-bind-addr: 0.0.0.0:9765
-cert: true
