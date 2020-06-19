@@ -43,6 +43,12 @@ else
     rustup component add rustfmt
     rustup component add rls
 
+    # Add additional Rust toolchain targets.
+    # Install Rust nightly toolchain.
+    rustup toolchain install nightly
+    # Install WASM toolchain target.
+    rustup target add wasm32-wasi
+
     # Install Cargo packges.
     cargo install \
         cargo-edit \
@@ -54,11 +60,8 @@ else
         pyoxidizer \
         watchexec
 
-    # Add additional Rust toolchain targets.
-    # Install Rust nightly toolchain.
-    rustup toolchain install nightly
-    # Install WASM toolchain target.
-    rustup target add wasm32-wasi
+    # Clear Cargo registry
+    rm -fr /usr/local/cargo/registry
 
     # Esnure that all users can read and write to cargo files.
     #
