@@ -48,6 +48,13 @@ docker pull wolfgangwazzlestrauss/canvas:latest
 Each Canvas image expects to use `/home/canvas/host` as a volume mount to the
 user's `$HOME` folder.
 
+Canvas can avoid UID permission errors on Linux by explicitly passing it your
+user UID with `-u=<uid>:<uid>` in the command line or setting
+`user: <uid>:<uid>` in a compose file.
+
+The following compose file exposes the expected ports, solves Linux UID errors
+for Linux user 1005, and mounts the user's home directory.
+
 ```yaml
 version: "3.3"
 services:
@@ -56,16 +63,36 @@ services:
     command: bash
     image: wolfgangwazzlestrauss/canvas:latest
     ports:
-      - "8000:8000"
+      - "8080:8080"
       - "9765:9765"
     restart: always
     tty: true
+    user: "1005:1005"
     volumes:
       - "./:/home/canvas/host"
 ```
 
+### VSCode
+
+Canvas tags following the formats `latest`, `vscode`, `vscode`, and
+`<version>-vscode` have built-in VSCode servers with
+[Code Server](https://github.com/cdr/code-server).
+
+To run a HTTP VSCode server change the Docker command to
+
+```console
+code-server --bind-addr=0.0.0.0:9765
+```
+
+To run a HTTPS VSCode server with existing TLS certificates signed by a CA,
+change the Docker command to
+
+```console
+code-server --bind-addr=0.0.0.0:9765 --cert=<cert_path> --cert-key=<key_path>
+```
+
 For working with self-signed certificates see
-https://github.com/FiloSottile/mkcert.
+[mkcert](https://github.com/FiloSottile/mkcert).
 
 ## Contributing
 
