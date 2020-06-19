@@ -6,7 +6,7 @@
 # Flags:
 #     -x: Check if execute permission is granted.
 if [ -x ~/host/entrypoint.sh ]; then
-    ~/host/entrypoint.sh
+    . ~/host/entrypoint.sh
 fi
 
 
