@@ -13,4 +13,5 @@ fi
 
 # Expand and execute Docker container command line arguments.
 # Using exec command causes bug in Code Server where a terminal cannot start.
-bash "$@"
+# Using "$@" only passes first argument to bash -c.
+bash -c "$*"
