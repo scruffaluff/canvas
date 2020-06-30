@@ -3,6 +3,18 @@
 export PATH="$HOME/.local/bin:$PATH"
 
 
+# Bash settings
+# Load Bash completion if it exists.
+#
+# Bash completion file is not executable but can be sourced.
+#
+# Flags:
+#     -f: Check if file exists and is a regular file.
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+fi
+
+
 # Go settings.
 export PATH="/usr/local/go/bin:$PATH"
 
@@ -11,11 +23,11 @@ export PATH="/usr/local/go/bin:$PATH"
 # Load Node version manager and its bash completion.
 #
 # Flags:
-#     -s: Check if file exists and has size greater than zero.
-if [ -s "$NVM_DIR/nvm.sh" ]; then
+#     -f: Check if file exists and is a regular file.
+if [ -f "$NVM_DIR/nvm.sh" ]; then
     source "$NVM_DIR/nvm.sh" 
 fi
-if [ -s "$NVM_DIR/bash_completion" ]; then
+if [ -f "$NVM_DIR/bash_completion" ]; then
     source "$NVM_DIR/bash_completion"
 fi
 export PATH="$HOME/.npm-global/bin:$PATH"

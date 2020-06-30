@@ -101,6 +101,7 @@ echo $TZ > /etc/timezone
 apt-get update -m && apt-get install -qy --no-install-recommends \
     apt-transport-https \
     apt-utils \
+    bash-completion \
     bsdmainutils \
     build-essential \
     ca-certificates \
