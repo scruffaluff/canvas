@@ -4,7 +4,7 @@
   "editor.autoClosingQuotes": "never",
   "editor.detectIndentation": false,
   "editor.fontFamily": "MesloLGS NF",
-  "editor.fontSize": 12,
+  "editor.fontSize": 14,
   "editor.minimap.enabled": false,
   "editor.parameterHints.enabled": true,
   "editor.rulers": [80],
@@ -50,11 +50,14 @@
   "python.testing.pytestPath": "tests",
   "terminal.integrated.cursorStyle": "line",
   "terminal.integrated.fontFamily": "MesloLGS NF",
-  "terminal.integrated.fontSize": 12,
+  "terminal.integrated.fontSize": 14,
   "terminal.integrated.inheritEnv": false,
   "terminal.integrated.shell.linux": "/bin/bash",
   "workbench.colorTheme": "Solarized Light",
   "workbench.startupEditor": "welcomePage",
   "workbench.statusBar.visible": true,
-  "workbench.iconTheme": "vscode-icons"
+  "workbench.iconTheme": "vscode-icons",
+
+  // Block update messages.
+  "vsicons.dontShowNewVersionMessage": true
 }
