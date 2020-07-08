@@ -32,6 +32,7 @@ else
     code-server --install-extension ritwickdey.liveserver
     code-server --install-extension rust-lang.rust
     code-server --install-extension stkb.rewrap
+    code-server --install-extension tabnine.tabnine-vscode
     code-server --install-extension vadimcn.vscode-lldb
     code-server --install-extension vscode-icons-team.vscode-icons
     code-server --install-extension yzhang.markdown-all-in-one
