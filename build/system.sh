@@ -138,17 +138,17 @@ apt-get update -m && apt-get install -qy --no-install-recommends \
 
 # Install additional utilities.
 # 1Password
-install_zip https://cache.agilebits.com/dist/1P/op/pkg/v0.10.0/op_linux_amd64_v0.10.0.zip op
+install_zip https://cache.agilebits.com/dist/1P/op/pkg/v1.2.1/op_linux_amd64_v1.2.1.zip op
 # Bat
-install_tar https://github.com/sharkdp/bat/releases/download/v0.15.0/bat-v0.15.0-x86_64-unknown-linux-gnu.tar.gz bat
+install_tar https://github.com/sharkdp/bat/releases/download/v0.15.4/bat-v0.15.4-x86_64-unknown-linux-gnu.tar.gz bat
 # Delta for Git.
-install_tar https://github.com/dandavison/delta/releases/download/0.1.1/delta-0.1.1-x86_64-unknown-linux-musl.tar.gz delta
+install_tar https://github.com/dandavison/delta/releases/download/0.3.0/delta-0.3.0-x86_64-unknown-linux-musl.tar.gz delta
 # MdBook.
-install_tar https://github.com/rust-lang/mdBook/releases/download/v0.3.7/mdbook-v0.3.7-x86_64-unknown-linux-gnu.tar.gz mdbook
+install_tar https://github.com/rust-lang/mdBook/releases/download/v0.4.1/mdbook-v0.4.1-x86_64-unknown-linux-gnu.tar.gz mdbook
 # Packer.
-install_zip https://releases.hashicorp.com/packer/1.5.6/packer_1.5.6_linux_amd64.zip packer
+install_zip https://releases.hashicorp.com/packer/1.6.0/packer_1.6.0_linux_amd64.zip packer
 # Terraform
-install_zip https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_linux_amd64.zip terraform
+install_zip https://releases.hashicorp.com/terraform/0.12.28/terraform_0.12.28_linux_amd64.zip terraform
 
 
 # Download AWS CLI.
@@ -186,7 +186,7 @@ curl -LSfs https://starship.rs/install.sh | bash -s -- -y
 #     -S: Show errors.
 #     -s: Disable progress bars.
 #     -o: Write output to given file instead of stdout.
-curl -LSs https://github.com/gruntwork-io/terragrunt/releases/download/v0.23.18/terragrunt_linux_amd64 -o /usr/local/bin/terragrunt
+curl -LSs https://github.com/gruntwork-io/terragrunt/releases/download/v0.23.31/terragrunt_linux_amd64 -o /usr/local/bin/terragrunt
 # Change Terragrunt executable permissions.
 chmod 755 /usr/local/bin/terragrunt
 
@@ -201,7 +201,7 @@ chmod 755 /usr/local/bin/terragrunt
 #     -s: (curl) Disable progress bars.
 #     -x: Extract files from an archive. Must be first flag.
 #     -z: Filter the archive through gzip. Must be second flag.
-curl -LSs https://github.com/boxboat/fixuid/releases/download/v0.4/fixuid-0.4-linux-amd64.tar.gz | tar -C /usr/local/bin -xzf -
+curl -LSs https://github.com/boxboat/fixuid/releases/download/v0.5/fixuid-0.5-linux-amd64.tar.gz | tar -C /usr/local/bin -xzf -
 # Make root user owner of Fixuid.
 chown root:root /usr/local/bin/fixuid
 # Change Fixuid executable permissions.
