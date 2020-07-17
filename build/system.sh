@@ -179,6 +179,18 @@ aws --version
 curl -LSfs https://starship.rs/install.sh | bash -s -- -y
 
 
+# Donwload Data Version Control package.
+#
+# Flags:
+#     -L: Follow redirect request.
+#     -S: Show errors.
+#     -s: Disable progress bars.
+#     -o: Write output to given file instead of stdout.
+curl -LOSfs https://github.com/iterative/dvc/releases/download/1.1.10/dvc_1.1.10_amd64.deb
+# Install Data Version Control.
+apt-get install ./dvc_1.1.10_amd64.deb
+
+
 # Install Terragrunt.
 #
 # Flags:
