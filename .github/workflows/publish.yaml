@@ -52,6 +52,8 @@ jobs:
   doc:
     runs-on: ubuntu-latest
     steps:
+      - name: Code repository checkout
+        uses: actions/checkout@v2
       - name: DockerHub description
         uses: peter-evans/dockerhub-description@v2
         env:
