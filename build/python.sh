@@ -68,14 +68,15 @@ else
     #
     # Flags:
     #     -m: Run library module as a script.
-    /usr/local/pyenv/shims/python3.6 -m pip install poetry typer
-    /usr/local/pyenv/shims/python3.7 -m pip install poetry typer
+    /usr/local/pyenv/shims/python3.6 -m pip install poetry typer wheel
+    /usr/local/pyenv/shims/python3.7 -m pip install poetry typer wheel
     /usr/local/pyenv/shims/python3.8 -m pip install \
         cookiecutter \
         gdbgui \
         poetry \
         pre-commit \
-        typer
+        typer \
+        wheel
 
     # Esnure that all users can read and write to Pyenv Python files.
     #
