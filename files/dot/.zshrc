@@ -31,6 +31,12 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="/usr/local/go/bin:$PATH"
 
 
+# Haskell settings.
+# Load Stack Zsh completion.
+# See https://docs.haskellstack.org/en/stable/shell_autocompletion/#for-zsh-users
+# Zsh completion.
+
+
 # Node settings.
 # Load Node version manager and its bash completion.
 #

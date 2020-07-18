@@ -18,7 +18,7 @@ else
     #     -q: Produce log suitable output by omitting progress indicators.
     #     -y: Assume "yes" as answer to all prompts and run non-interactively.
     #     --no-install-recommends: Do not install recommended packages.
-    apt-get update -m && apt-get install -y --no-install-recommends \
+    apt-get update -m && apt-get install -qy --no-install-recommends \
 		libbluetooth-dev \
 		tk-dev \
 		uuid-dev

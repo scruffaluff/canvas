@@ -19,6 +19,17 @@ fi
 export PATH="/usr/local/go/bin:$PATH"
 
 
+# Haskell settings.
+export STACK_ROOT=
+# Load Stack Bash completion.
+#
+# Flags:
+#     -x: Check if execute permission is granted.
+if [ -x "$(command -v stack)" ]; then
+    eval "$(stack --bash-completion-script stack)"
+fi
+
+
 # Node settings.
 # Load Node version manager and its bash completion.
 #
