@@ -3,6 +3,17 @@
 set -e
 
 
+# Find latest Pyenv supported Python version with prefix.
+#
+# Arguments:
+#     Python version prefix.
+latest_version() {
+    local list=$(pyenv install --list)
+    local matches=$
+    echo $(pyenv install --list | grep -E "^\s+$1.[0-9]+$" | tail -1)
+}
+
+
 # Install Python if requested.
 # Flags:
 #     -z: True if the string is null.
@@ -45,13 +56,13 @@ else
     curl -Sfs https://pyenv.run | bash
 
     # Install multiple Python versions using Pyenv.
-    pyenv install 3.8.4
+    pyenv install 3.8.5
     pyenv install 3.7.8
     pyenv install 3.6.11
 
     # Set globally accessible Python versions.
     # First version is the global default.
-    pyenv global 3.8.4 3.7.8 3.6.11
+    pyenv global 3.8.5 3.7.8 3.6.11
 
     # No checks for successful Python installations since Pyenv needs to
     # source shell profiles beforehand.

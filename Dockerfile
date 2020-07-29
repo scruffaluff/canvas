@@ -22,7 +22,12 @@ ENV \
     DEBIAN_FRONTEND=noninteractive \
     LANG=en_US.UTF-8 \
     LC_ALL=C.UTF-8 \
-    TZ=America/Los_Angeles
+    TZ=America/Los_Angeles \
+    XDG_CONFIG_HOME=/usr/local \
+    XDG_DATA_HOME=/usr/local
+
+# Copy system configuration files.
+COPY --chown=canvas:canvas ./files/init.vim /usr/local/nvim/
 
 COPY ./build/system.sh /tmp/system.sh
 RUN chmod 755 /tmp/system.sh \
@@ -119,8 +124,7 @@ RUN chmod 755 /tmp/typescript.sh \
 ### VSCode ###
 
 ENV \
-    CODE_SERVER_CONFIG=/usr/local/code-server/config.yaml \
-    XDG_DATA_HOME=/usr/local
+    CODE_SERVER_CONFIG=/usr/local/code-server/config.yaml
 
 # Copy Code Server configuration files.
 COPY ./files/vscode/keybindings.json $XDG_DATA_HOME/code-server/User/
@@ -156,6 +160,9 @@ VOLUME $HOME/host
 
 # Copy dot files.
 COPY --chown=canvas:canvas ./files/dot/ $HOME/
+
+# Copy Neovim configuration.
+COPY --chown=canvas:canvas ./files/init.vim $HOME/.config/nvim/
 
 # Copy entrypoint script and make executable.
 COPY --chown=canvas:canvas ./files/entrypoint.sh $HOME/.canvas/

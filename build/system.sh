@@ -122,6 +122,7 @@ apt-get update -m && apt-get install -qy --no-install-recommends \
     lldb \
     llvm \
     make \
+    neovim \
     net-tools \
     openssh-client \
     openssh-server \
@@ -131,9 +132,13 @@ apt-get update -m && apt-get install -qy --no-install-recommends \
     texlive \
     tmux \
     unzip \
-    vim \
     zsh \
     zsh-syntax-highlighting
+
+
+# Configure Neovim
+mkdir /usr/local/nvim
+chmod 777 -R /usr/local/nvim
 
 
 # Install additional utilities.
