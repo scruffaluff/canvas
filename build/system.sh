@@ -137,7 +137,6 @@ apt-get update -m && apt-get install -qy --no-install-recommends \
 
 
 # Configure Neovim
-mkdir /usr/local/nvim
 chmod 777 -R /usr/local/nvim
 
 

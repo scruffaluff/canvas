@@ -27,7 +27,7 @@ ENV \
     XDG_DATA_HOME=/usr/local
 
 # Copy system configuration files.
-COPY --chown=canvas:canvas ./files/init.vim /usr/local/nvim/
+COPY ./files/init.vim /usr/local/nvim/
 
 COPY ./build/system.sh /tmp/system.sh
 RUN chmod 755 /tmp/system.sh \
@@ -160,9 +160,6 @@ VOLUME $HOME/host
 
 # Copy dot files.
 COPY --chown=canvas:canvas ./files/dot/ $HOME/
-
-# Copy Neovim configuration.
-COPY --chown=canvas:canvas ./files/init.vim $HOME/.config/nvim/
 
 # Copy entrypoint script and make executable.
 COPY --chown=canvas:canvas ./files/entrypoint.sh $HOME/.canvas/
