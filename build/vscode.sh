@@ -26,11 +26,12 @@ else
     code-server --install-extension eamodio.gitlens
     code-server --install-extension esbenp.prettier-vscode
     code-server --install-extension james-yu.latex-workshop
+    code-server --install-extension matklad.rust-analyzer
     code-server --install-extension ms-dotnettools.csharp
     code-server --install-extension ms-python.python
     code-server --install-extension ms-vscode.cpptools
+    code-server --install-extension octref.vetur
     code-server --install-extension ritwickdey.liveserver
-    code-server --install-extension rust-lang.rust
     code-server --install-extension stkb.rewrap
     code-server --install-extension tabnine.tabnine-vscode
     code-server --install-extension vadimcn.vscode-lldb
