@@ -26,12 +26,12 @@ else
     . $NVM_DIR/nvm.sh
 
     # Install multiple Node versions using NVM.
-    nvm install 14.5.0
-    nvm install 12.18.2
-    nvm install 10.21.0
+    nvm install 14
+    nvm install 12
+    nvm install 10
 
     # Install Node packages.
-    nvm use 14.5.0 && npm install -g gitmoji-cli
+    nvm use 14 && npm install -g gitmoji-cli
 
     # Esnure that all users can read and write to NVM files.
     #
