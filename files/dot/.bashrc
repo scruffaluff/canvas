@@ -4,9 +4,6 @@
 
 
 # Aliases.
-if [ "$(command -v z)" ]; then
-    alias cd="z"
-fi
 if [ "$(command -v exa)" ]; then
     alias exa="exa -hl -s type --color auto"
     alias ls="exa"
