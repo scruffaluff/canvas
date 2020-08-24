@@ -8,9 +8,9 @@ set -e
 # Flags:
 #     -l: Do not add user to lastlog database.
 #     -m: Create user home directory if it does not exist.
-#     -s /bin/zsh: Set user login shell to Zsh.
+#     -s /bin/bash: Set user login shell to Bash.
 #     -u 1000: Give new user UID value 1000.
-useradd -lm -s /bin/zsh -u 1000 canvas
+useradd -lm -s /bin/bash -u 1000 canvas
 
 
 ### Sudo ###

@@ -107,13 +107,14 @@ apt-get update -m && apt-get install -qy --no-install-recommends \
     ca-certificates \
     cmake \
     curl \
-    fonts-powerline \
+    fd-find \
     fish \
+    fonts-powerline \
     fzf \
+    g++ \
+    gcc \
     git \
     git-lfs \
-    gcc \
-    g++ \
     groff \
     hub \
     iputils-ping \

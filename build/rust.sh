@@ -56,12 +56,18 @@ else
         cargo-make \
         cargo-watch \
         evcxr_repl \
+        exa \
+        gitui \
         nu \
         pyoxidizer \
-        watchexec
+        watchexec \
+        zoxide
 
     # Clear Cargo registry
     rm -fr /usr/local/cargo/registry
+
+    # Exa Bash completion: 
+    # https://raw.githubusercontent.com/ogham/exa/master/contrib/completions.bash.
 
     # Esnure that all users can read and write to cargo files.
     #

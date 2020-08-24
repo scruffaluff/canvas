@@ -1,3 +1,23 @@
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# See /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples.
+
+
+# Aliases.
+if [ "$(command -v z)" ]; then
+    alias cd="z"
+fi
+if [ "$(command -v exa)" ]; then
+    alias exa="exa -hl -s type --color auto"
+    alias ls="exa"
+fi
+# alias cat="bat"
+alias fd="fdfind --color auto"
+alias find="fd"
+alias grep="rg"
+alias vim="nvim"
+
+
 # User settings.
 # Add scripts directory to PATH environment variable.
 export PATH="$HOME/.local/bin:$PATH"
@@ -59,6 +79,7 @@ export PATH="usr/local/cargo/bin:$PATH"
 # Tool settings.
 export BAT_THEME="Solarized (light)"
 complete -C /usr/local/bin/terraform terraform
+eval "$(zoxide init bash)"
 
 
 # Wasmtime settings.
