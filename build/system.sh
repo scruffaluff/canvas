@@ -109,6 +109,7 @@ apt-get update -m && apt-get install -qy --no-install-recommends \
     curl \
     fd-find \
     fish \
+    fonts-firacode \
     fonts-powerline \
     fzf \
     g++ \
