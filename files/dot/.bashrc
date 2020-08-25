@@ -4,11 +4,8 @@
 
 
 # Aliases.
-if [ "$(command -v exa)" ]; then
-    alias exa="exa -hl -s type --color auto"
-    alias ls="exa"
-fi
-# alias cat="bat"
+alias exa="exa -hl -s type --color auto"
+alias ls="exa"
 alias fd="fdfind --color auto"
 alias find="fd"
 alias grep="rg"

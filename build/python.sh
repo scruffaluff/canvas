@@ -46,12 +46,12 @@ else
 
     # Install multiple Python versions using Pyenv.
     pyenv install 3.8.5
-    pyenv install 3.7.8
-    pyenv install 3.6.11
+    pyenv install 3.7.9
+    pyenv install 3.6.12
 
     # Set globally accessible Python versions.
     # First version is the global default.
-    pyenv global 3.8.5 3.7.8 3.6.11
+    pyenv global 3.8.5 3.7.9 3.6.12
 
     # No checks for successful Python installations since Pyenv needs to
     # source shell profiles beforehand.
