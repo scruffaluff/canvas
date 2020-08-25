@@ -31,7 +31,7 @@ else
     nvm install 10
 
     # Install Node packages.
-    nvm use 14 && npm install -g gitmoji-cli
+    nvm use 14 && npm install -g gitmoji-cli @vue/cli
 
     # Esnure that all users can read and write to NVM files.
     #
