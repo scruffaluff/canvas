@@ -136,6 +136,10 @@ apt-get update -m && apt-get install -qy --no-install-recommends \
     zsh
 
 
+# Configure Neovim
+chmod 777 -R /usr/local/nvim
+
+
 # Install additional utilities.
 # Bat
 install_tar https://github.com/sharkdp/bat/releases/download/v0.15.4/bat-v0.15.4-x86_64-unknown-linux-gnu.tar.gz bat

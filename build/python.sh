@@ -3,6 +3,17 @@
 set -e
 
 
+# Find latest Pyenv supported Python version with prefix.
+#
+# Arguments:
+#     Python version prefix.
+latest_version() {
+    local list=$(pyenv install --list)
+    local matches=$
+    echo $(pyenv install --list | grep -E "^\s+$1.[0-9]+$" | tail -1)
+}
+
+
 # Install Python if requested.
 # Flags:
 #     -z: True if the string is null.
