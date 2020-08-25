@@ -133,7 +133,8 @@ apt-get update -m && apt-get install -qy --no-install-recommends \
     texlive \
     tmux \
     unzip \
-    zsh
+    zsh \
+    zsh-syntax-highlighting
 
 
 # Configure Neovim

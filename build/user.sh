@@ -70,9 +70,23 @@ chown -h canvas:canvas \
     $HOME/.gitconfig \
     $HOME/.ssh
 
-# Create Fish configuration directory.
-mkdir -p $HOME/.config/fish
 
+# Configure Fish shell.
+
+# Create Fish configuration and function directories.
+mkdir -p $HOME/.config/fish/functions
+
+# Install Fast NVM Fish
+#
+# Flags:
+#     -c: Read commands from the command string operand.
+#     -L: Follow redirect request.
+#     -S: Show errors.
+#     -f: Fail silently on server errors.
+curl -LSfs https://raw.githubusercontent.com/brigand/fast-nvm-fish/master/nvm.fish > ~/.config/fish/functions/nvm.fish
+
+
+# Configure Zsh shell.
 
 # Install Oh My Zsh
 #
