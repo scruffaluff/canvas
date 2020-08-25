@@ -23,3 +23,11 @@ set smartindent  " Enable smart-indent.
 set smarttab  " Enable smart-tabs.
 set softtabstop=4  " Number of spaces per Tab.
 set tabstop=4
+
+
+" Keybinding settings.
+
+noremap ; l
+noremap l k
+noremap k j
+noremap j h
