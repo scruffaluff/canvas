@@ -75,8 +75,8 @@ services:
 ### VSCode
 
 Canvas tags following the formats `latest`, `<version>`, `vscode`, and
-`<version>-vscode` have built-in VSCode servers with [Code
-Server](https://github.com/cdr/code-server).
+`<version>-vscode` have built-in VSCode servers with
+[Code Server](https://github.com/cdr/code-server).
 
 To run a HTTP VSCode server change the Docker command to
 
