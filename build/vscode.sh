@@ -32,6 +32,7 @@ else
     code-server --install-extension ms-vscode.cpptools
     code-server --install-extension octref.vetur
     code-server --install-extension ritwickdey.liveserver
+    code-server --install-extension skyapps.fish-vscode
     code-server --install-extension stkb.rewrap
     code-server --install-extension tabnine.tabnine-vscode
     code-server --install-extension vadimcn.vscode-lldb

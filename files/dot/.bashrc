@@ -6,11 +6,13 @@ source "$HOME/.aliases"
 
 
 # User settings.
+
 # Add scripts directory to PATH environment variable.
 export PATH="$HOME/.local/bin:$PATH"
 
 
 # Bash settings
+
 # Load Bash completion if it exists.
 #
 # Bash completion file is not executable but can be sourced.
@@ -27,6 +29,7 @@ export PATH="/usr/local/go/bin:$PATH"
 
 
 # Node settings.
+
 # Load Node version manager and its bash completion.
 #
 # Flags:
@@ -45,6 +48,7 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 
 
 # Python settings.
+
 # Make Poetry create virutal environments inside projects.
 export POETRY_VIRTUALENVS_IN_PROJECT=1
 

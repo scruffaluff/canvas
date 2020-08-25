@@ -15,6 +15,7 @@ source "$HOME/.aliases"
 
 
 # User settings.
+
 # Add scripts directory to PATH environment variable.
 export PATH="$HOME/.local/bin:$PATH"
 
@@ -24,15 +25,13 @@ export PATH="/usr/local/go/bin:$PATH"
 
 
 # Node settings.
-# Load Node version manager and its bash completion.
+
+# Load Node version manager.
 #
 # Flags:
 #     -s: Check if file exists and has size greater than zero.
 if [ -s "$NVM_DIR/nvm.sh" ]; then
     source "$NVM_DIR/nvm.sh" 
-fi
-if [ -s "$NVM_DIR/bash_completion" ]; then
-    source "$NVM_DIR/bash_completion"
 fi
 export PATH="$HOME/.npm-global/bin:$PATH"
 
@@ -42,6 +41,7 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 
 
 # Python settings.
+
 # Add pyenv executables and shims to PATH environment variable.
 export PATH="$PYENV_ROOT/bin:$PATH"
 
@@ -64,7 +64,6 @@ export PATH="$CARGO_HOME/bin:$PATH"
 
 # Tool settings.
 export BAT_THEME="Solarized (light)"
-complete -C /usr/local/bin/terraform terraform
 
 
 # Wasmtime settings.
