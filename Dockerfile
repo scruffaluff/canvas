@@ -139,8 +139,7 @@ ENV \
     HOME=/home/canvas
 # Configure ZSH environment variables.
 ENV ZSH=$HOME/.oh-my-zsh \
-    ZSH_CUSTOM=$HOME/.oh-my-zsh/custom \
-    ZSH_THEME=powerlevel10k/powerlevel10k
+    ZSH_CUSTOM=$HOME/.oh-my-zsh/custom
 
 COPY ./build/user.sh /tmp/user.sh
 RUN chmod 755 /tmp/user.sh \
@@ -156,6 +155,9 @@ VOLUME $HOME/host
 
 # Copy dot files.
 COPY --chown=canvas:canvas ./files/dot/ $HOME/
+
+# Copy Fish settings file.
+COPY --chown=canvas:canvas ./files/config.fish $HOME/.config/fish/config.fish
 
 # Copy entrypoint script and make executable.
 COPY --chown=canvas:canvas ./files/entrypoint.sh $HOME/.canvas/

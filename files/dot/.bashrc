@@ -1,15 +1,8 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# See /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples.
+# Bash settings file for non-login shells.
 
 
 # Aliases.
-alias exa="exa -hl -s type --color auto"
-alias ls="exa"
-alias fd="fdfind --color auto"
-alias find="fd"
-alias grep="rg"
-alias vim="nvim"
+source "$HOME/.aliases"
 
 
 # User settings.
@@ -45,6 +38,7 @@ if [ -f "$NVM_DIR/bash_completion" ]; then
     source "$NVM_DIR/bash_completion"
 fi
 export PATH="$HOME/.npm-global/bin:$PATH"
+
 # Deno settings.
 export DENO_INSTALL="/usr/local/deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
@@ -53,6 +47,7 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 # Python settings.
 # Make Poetry create virutal environments inside projects.
 export POETRY_VIRTUALENVS_IN_PROJECT=1
+
 # Initialize pyenv if installed.
 #
 # Flags:
@@ -62,7 +57,7 @@ if [ -x "$(command -v pyenv)" ]; then
     eval "$(pyenv virtualenv-init -)"
 
     # Load Pyenv completions.
-    source $(pyenv root)/completions/pyenv.bash
+    source "$(pyenv root)/completions/pyenv.bash"
 fi
 
 

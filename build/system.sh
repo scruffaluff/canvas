@@ -110,7 +110,6 @@ apt-get update -m && apt-get install -qy --no-install-recommends \
     fd-find \
     fish \
     fonts-firacode \
-    fonts-powerline \
     fzf \
     g++ \
     gcc \
@@ -124,19 +123,17 @@ apt-get update -m && apt-get install -qy --no-install-recommends \
     lldb \
     llvm \
     make \
+    neovim \
     net-tools \
     openssh-client \
     openssh-server \
     openssl \
-    powerline \
     ripgrep \
     software-properties-common \
     texlive \
     tmux \
     unzip \
-    vim \
-    zsh \
-    zsh-syntax-highlighting
+    zsh
 
 
 # Install additional utilities.
