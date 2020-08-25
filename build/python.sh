@@ -57,12 +57,12 @@ else
 
     # Install multiple Python versions using Pyenv.
     pyenv install 3.8.5
-    pyenv install 3.7.8
-    pyenv install 3.6.11
+    pyenv install 3.7.9
+    pyenv install 3.6.12
 
     # Set globally accessible Python versions.
     # First version is the global default.
-    pyenv global 3.8.5 3.7.8 3.6.11
+    pyenv global 3.8.5 3.7.9 3.6.12
 
     # No checks for successful Python installations since Pyenv needs to
     # source shell profiles beforehand.
@@ -79,13 +79,17 @@ else
     #
     # Flags:
     #     -m: Run library module as a script.
-    /usr/local/pyenv/shims/python3.6 -m pip install poetry typer wheel
-    /usr/local/pyenv/shims/python3.7 -m pip install poetry typer wheel
+    /usr/local/pyenv/shims/python3.6 -m pip install poetry wheel
+    /usr/local/pyenv/shims/python3.7 -m pip install poetry wheel
     /usr/local/pyenv/shims/python3.8 -m pip install \
+        black \
         cookiecutter \
+        flake8 \
         gdbgui \
+        mypy \
         poetry \
         pre-commit \
+        pytest \
         typer \
         wheel
 

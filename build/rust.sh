@@ -52,16 +52,16 @@ else
     # Install Cargo packges.
     cargo install \
         cargo-edit \
-        cargo-eval \
         cargo-make \
         cargo-watch \
         evcxr_repl \
-        nu \
-        pyoxidizer \
-        watchexec
+        pyoxidizer
 
     # Clear Cargo registry
     rm -fr /usr/local/cargo/registry
+
+    # Exa Bash completion: 
+    # https://raw.githubusercontent.com/ogham/exa/master/contrib/completions.bash.
 
     # Esnure that all users can read and write to cargo files.
     #

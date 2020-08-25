@@ -74,7 +74,7 @@ services:
 
 ### VSCode
 
-Canvas tags following the formats `latest`, `vscode`, `vscode`, and
+Canvas tags following the formats `latest`, `<version>`, `vscode`, and
 `<version>-vscode` have built-in VSCode servers with
 [Code Server](https://github.com/cdr/code-server).
 

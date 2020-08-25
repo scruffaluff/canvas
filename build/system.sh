@@ -107,13 +107,14 @@ apt-get update -m && apt-get install -qy --no-install-recommends \
     ca-certificates \
     cmake \
     curl \
-    fonts-powerline \
+    fd-find \
     fish \
+    fonts-firacode \
     fzf \
+    g++ \
+    gcc \
     git \
     git-lfs \
-    gcc \
-    g++ \
     groff \
     hub \
     iputils-ping \
@@ -127,13 +128,12 @@ apt-get update -m && apt-get install -qy --no-install-recommends \
     openssh-client \
     openssh-server \
     openssl \
-    powerline \
     ripgrep \
+    software-properties-common \
     texlive \
     tmux \
     unzip \
-    zsh \
-    zsh-syntax-highlighting
+    zsh
 
 
 # Configure Neovim
@@ -141,18 +141,16 @@ chmod 777 -R /usr/local/nvim
 
 
 # Install additional utilities.
-# 1Password
-install_zip https://cache.agilebits.com/dist/1P/op/pkg/v1.2.1/op_linux_amd64_v1.2.1.zip op
 # Bat
 install_tar https://github.com/sharkdp/bat/releases/download/v0.15.4/bat-v0.15.4-x86_64-unknown-linux-gnu.tar.gz bat
-# Delta for Git.
-install_tar https://github.com/dandavison/delta/releases/download/0.3.0/delta-0.3.0-x86_64-unknown-linux-musl.tar.gz delta
+# GitUI
+install_tar https://github.com/extrawurst/gitui/releases/download/v0.9.1/gitui-linux-musl.tar.gz gitui
 # MdBook.
-install_tar https://github.com/rust-lang/mdBook/releases/download/v0.4.1/mdbook-v0.4.1-x86_64-unknown-linux-gnu.tar.gz mdbook
+install_tar https://github.com/rust-lang/mdBook/releases/download/v0.4.2/mdbook-v0.4.2-x86_64-unknown-linux-gnu.tar.gz mdbook
 # Packer.
-install_zip https://releases.hashicorp.com/packer/1.6.0/packer_1.6.0_linux_amd64.zip packer
+install_zip https://releases.hashicorp.com/packer/1.6.1/packer_1.6.1_linux_amd64.zip packer
 # Terraform
-install_zip https://releases.hashicorp.com/terraform/0.12.28/terraform_0.12.28_linux_amd64.zip terraform
+install_zip https://releases.hashicorp.com/terraform/0.13.0/terraform_0.13.0_linux_amd64.zip terraform
 
 
 # Download AWS CLI.
@@ -171,6 +169,34 @@ unzip awscliv2.zip && rm awscliv2.zip
 aws --version
 
 
+# Donwload Data Version Control package.
+#
+# Flags:
+#     -L: Follow redirect request.
+#     -S: Show errors.
+#     -s: Disable progress bars.
+#     -o: Write output to given file instead of stdout.
+curl -LOSfs https://github.com/iterative/dvc/releases/download/1.6.1/dvc_1.6.1_amd64.deb
+# Install Data Version Control.
+apt-get install ./dvc_1.6.1_amd64.deb
+
+
+# Install Exa.
+#
+# Flags:
+#     -L: Follow redirect request.
+#     -O: Redirect output to file with remote name.
+#     -S: Show errors.
+#     -s: Disable progress bars.
+curl -LOSs https://github.com/ogham/exa/releases/download/v0.9.0/exa-linux-x86_64-0.9.0.zip
+# Unzip and delete archive.
+unzip exa-linux-x86_64-0.9.0.zip
+# Move binary to /usr/local/bin.
+mv exa-linux-x86_64 /usr/local/bin/exa
+# Change Exa executable permissions.
+chmod 755 /usr/local/bin/exa
+
+
 # Install Starship for shell prompts.
 #
 # Flags:
@@ -183,18 +209,6 @@ aws --version
 curl -LSfs https://starship.rs/install.sh | bash -s -- -y
 
 
-# Donwload Data Version Control package.
-#
-# Flags:
-#     -L: Follow redirect request.
-#     -S: Show errors.
-#     -s: Disable progress bars.
-#     -o: Write output to given file instead of stdout.
-curl -LOSfs https://github.com/iterative/dvc/releases/download/1.1.10/dvc_1.1.10_amd64.deb
-# Install Data Version Control.
-apt-get install ./dvc_1.1.10_amd64.deb
-
-
 # Install Terragrunt.
 #
 # Flags:
@@ -202,9 +216,21 @@ apt-get install ./dvc_1.1.10_amd64.deb
 #     -S: Show errors.
 #     -s: Disable progress bars.
 #     -o: Write output to given file instead of stdout.
-curl -LSs https://github.com/gruntwork-io/terragrunt/releases/download/v0.23.31/terragrunt_linux_amd64 -o /usr/local/bin/terragrunt
+curl -LSs https://github.com/gruntwork-io/terragrunt/releases/download/v0.23.34/terragrunt_linux_amd64 -o /usr/local/bin/terragrunt
 # Change Terragrunt executable permissions.
 chmod 755 /usr/local/bin/terragrunt
+
+
+# Install Zoxide.
+#
+# Flags:
+#     -L: Follow redirect request.
+#     -S: Show errors.
+#     -s: Disable progress bars.
+#     -o: Write output to given file instead of stdout.
+curl -LSs https://github.com/ajeetdsouza/zoxide/releases/download/v0.4.3/zoxide-x86_64-unknown-linux-gnu -o /usr/local/bin/zoxide
+# Change Zoxide executable permissions.
+chmod 755 /usr/local/bin/zoxide
 
 
 # Install Fixuid for dynamically editing file permissions.

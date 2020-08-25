@@ -50,7 +50,7 @@ else
     #     -S: Show errors.
     #     -f: Fail silently on server errors.
     #     -s: (curl) Disable progress bars.
-    curl -LOSfs http://doxygen.nl/files/doxygen-1.8.18.linux.bin.tar.gz
+    curl -LOSfs http://doxygen.nl/files/doxygen-1.8.20.linux.bin.tar.gz
 
     # Install Doxygen.
     #
@@ -58,10 +58,10 @@ else
     #     -f: Use archive file. Must be third flag.
     #     -x: Extract files from an archive. Must be first flag.
     #     -z: Filter the archive through gzip. Must be second flag.
-    tar -xzf doxygen-1.8.18.linux.bin.tar.gz
+    tar -xzf doxygen-1.8.20.linux.bin.tar.gz
 
     # Move binary from directory.
-    mv doxygen-1.8.18/bin/doxygen /usr/local/bin/
+    mv doxygen-1.8.20/bin/doxygen /usr/local/bin/
     # Make root user owner of binary.
     chown root:root /usr/local/bin/doxygen
     # Change binary executable permissions.
