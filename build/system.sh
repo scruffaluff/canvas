@@ -132,14 +132,12 @@ apt-get update -m && apt-get install -qy --no-install-recommends \
     software-properties-common \
     texlive \
     tmux \
-    unzip \
-    zsh \
-    zsh-syntax-highlighting
+    unzip
 
 
 # Create configuration directory.
-mkdir -p "$XDG_CONFIG_HOME"
-chmod 755 "$XDG_CONFIG_HOME"
+mkdir -p "$XDG_CONFIG_HOME/configstore"
+chmod 777 -R "$XDG_CONFIG_HOME"
 
 # Configure Neovim.
 mkdir "$XDG_CONFIG_HOME/nvim"
@@ -148,7 +146,6 @@ chmod 777 -R "$XDG_CONFIG_HOME/nvim"
 # Configure Fish.
 mkdir "$XDG_CONFIG_HOME/fish"
 mkdir -p "$XDG_CONFIG_HOME/fish/functions"
-
 chmod 777 -R "$XDG_CONFIG_HOME/fish"
 
 

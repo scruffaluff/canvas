@@ -110,7 +110,7 @@ def run(tags: List[Tag]) -> None:
         ports = '-p "9765:9765"' if tag == Tag.VSCODE else ""
         volumes = f"-v {pathlib.Path.home()}:/home/canvas/host"
         command = (
-            f"docker run -dit {ports} {volumes} --rm --name {name} {latest} zsh"
+            f"docker run -dit {ports} {volumes} --rm --name {name} {latest} fish"
         )
         error_msg = "Failed to run Docker container."
         run_command(command, error_msg)

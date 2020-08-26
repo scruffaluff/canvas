@@ -140,9 +140,6 @@ RUN chmod 755 /tmp/vscode.sh \
 
 ENV \
     HOME=/home/canvas
-# Configure ZSH environment variables.
-ENV ZSH=$HOME/.oh-my-zsh \
-    ZSH_CUSTOM=$HOME/.oh-my-zsh/custom
 
 COPY ./build/user.sh /tmp/user.sh
 RUN chmod 755 /tmp/user.sh \
