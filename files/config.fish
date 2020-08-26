@@ -23,6 +23,14 @@ set -x PATH "/usr/local/go/bin:$PATH"
 # Node settings.
 set -x PATH "$HOME/.npm-global/bin:$PATH"
 
+# Initialize NVM default version of Node if installed.
+#
+# Flags:
+#     -q: Only check for exit status by supressing output.
+if type -q nvm
+    nvm use default
+end
+
 # Deno settings.
 set -x DENO_INSTALL "/usr/local/deno"
 set -x PATH "$DENO_INSTALL/bin:$PATH"
@@ -32,7 +40,7 @@ set -x PATH "$DENO_INSTALL/bin:$PATH"
 # Make Poetry create virutal environments inside projects.
 set -x POETRY_VIRTUALENVS_IN_PROJECT 1
 
-# Initialize pyenv if installed.
+# Initialize Pyenv if installed.
 #
 # Flags:
 #     -q: Only check for exit status by supressing output.
