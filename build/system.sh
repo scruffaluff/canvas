@@ -137,8 +137,19 @@ apt-get update -m && apt-get install -qy --no-install-recommends \
     zsh-syntax-highlighting
 
 
-# Configure Neovim
-chmod 777 -R /usr/local/nvim
+# Create configuration directory.
+mkdir -p "$XDG_CONFIG_HOME"
+chmod 755 "$XDG_CONFIG_HOME"
+
+# Configure Neovim.
+mkdir "$XDG_CONFIG_HOME/nvim"
+chmod 777 -R "$XDG_CONFIG_HOME/nvim"
+
+# Configure Fish.
+mkdir "$XDG_CONFIG_HOME/fish"
+mkdir -p "$XDG_CONFIG_HOME/fish/functions"
+
+chmod 777 -R "$XDG_CONFIG_HOME/fish"
 
 
 # Install additional utilities.
@@ -170,7 +181,7 @@ unzip awscliv2.zip && rm awscliv2.zip
 aws --version
 
 
-# Donwload Data Version Control package.
+# Download Data Version Control package.
 #
 # Flags:
 #     -L: Follow redirect request.

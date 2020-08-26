@@ -44,8 +44,6 @@ else
     rustup component add rls
 
     # Add additional Rust toolchain targets.
-    # Install Rust nightly toolchain.
-    rustup toolchain install nightly
     # Install WASM toolchain target.
     rustup target add wasm32-wasi
 

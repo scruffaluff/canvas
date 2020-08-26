@@ -23,8 +23,7 @@ ENV \
     LANG=en_US.UTF-8 \
     LC_ALL=C.UTF-8 \
     TZ=America/Los_Angeles \
-    XDG_CONFIG_HOME=/usr/local \
-    XDG_DATA_HOME=/usr/local
+    XDG_CONFIG_HOME=/usr/local/config
 
 # Copy system configuration files.
 COPY ./files/init.vim /usr/local/nvim/
@@ -161,7 +160,7 @@ VOLUME $HOME/host
 COPY --chown=canvas:canvas ./files/dot/ $HOME/
 
 # Copy Fish settings file.
-COPY --chown=canvas:canvas ./files/config.fish $HOME/.config/fish/config.fish
+COPY --chown=canvas:canvas ./files/config.fish $XDG_CONFIG_HOME/fish/config.fish
 
 # Copy entrypoint script and make executable.
 COPY --chown=canvas:canvas ./files/entrypoint.sh $HOME/.canvas/

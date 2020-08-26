@@ -8,9 +8,9 @@ set -e
 # Flags:
 #     -l: Do not add user to lastlog database.
 #     -m: Create user home directory if it does not exist.
-#     -s /bin/bash: Set user login shell to Bash.
+#     -s /usr/bin/fish: Set user login shell to Fish.
 #     -u 1000: Give new user UID value 1000.
-useradd -lm -s /bin/bash -u 1000 canvas
+useradd -lm -s /usr/bin/fish -u 1000 canvas
 
 
 # Configure sudo for standard user.
@@ -69,21 +69,6 @@ chown -h canvas:canvas \
     $HOME/.aws \
     $HOME/.gitconfig \
     $HOME/.ssh
-
-
-# Configure Fish shell.
-
-# Create Fish configuration and function directories.
-mkdir -p $HOME/.config/fish/functions
-
-# Install Fast NVM Fish
-#
-# Flags:
-#     -c: Read commands from the command string operand.
-#     -L: Follow redirect request.
-#     -S: Show errors.
-#     -f: Fail silently on server errors.
-curl -LSfs https://raw.githubusercontent.com/brigand/fast-nvm-fish/master/nvm.fish > ~/.config/fish/functions/nvm.fish
 
 
 # Configure Zsh shell.
