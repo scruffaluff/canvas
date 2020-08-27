@@ -26,8 +26,7 @@ ENV \
     DEBIAN_FRONTEND=noninteractive \
     LANG=en_US.UTF-8 \
     LC_ALL=C.UTF-8 \
-    TZ=America/Los_Angeles \
-    XDG_CONFIG_HOME=/usr/local/config
+    TZ=America/Los_Angeles
 
 # Copy system configuration files.
 COPY ./files/init.vim /usr/local/nvim/
@@ -129,10 +128,6 @@ RUN chmod 755 /tmp/typescript.sh \
 ENV \
     CODE_SERVER_CONFIG=/usr/local/code-server/config.yaml
 
-# Copy Code Server configuration files.
-COPY ./files/vscode/keybindings.json $XDG_DATA_HOME/code-server/User/
-COPY ./files/vscode/settings.json $XDG_DATA_HOME/code-server/User/
-
 # Copy VSCode build script and execute.
 COPY ./build/vscode.sh /tmp/vscode.sh 
 RUN chmod 755 /tmp/vscode.sh \
@@ -161,7 +156,10 @@ VOLUME $HOME/host
 COPY --chown=canvas:canvas ./files/dot/ $HOME/
 
 # Copy Fish settings file.
-COPY --chown=canvas:canvas ./files/config.fish $XDG_CONFIG_HOME/fish/config.fish
+COPY --chown=canvas:canvas ./files/config.fish $HOME/.config/fish/config.fish
+
+# Copy Code Server configuration files.
+COPY --chown=canvas:canvas ./files/vscode/ $HOME/.local/share/code-server/User/
 
 # Copy entrypoint script and make executable.
 COPY --chown=canvas:canvas ./files/entrypoint.sh $HOME/.canvas/

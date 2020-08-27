@@ -39,7 +39,7 @@ else
     code-server --install-extension vscode-icons-team.vscode-icons
     code-server --install-extension yzhang.markdown-all-in-one
 
-    # Esnure that all users can read and write to NVM files.
+    # Esnure that all users can read and write to code server files.
     #
     # Flags:
     #     -R: Apply modifications recursivley to a directory.

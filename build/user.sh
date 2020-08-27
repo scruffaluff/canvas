@@ -3,6 +3,23 @@
 set -e
 
 
+# Create directory with open permissions and canvas owner.
+#
+# Arguments:
+#     Directory path.
+make_folder() {
+
+    # Create directory and parent directories if necessary.
+    mkdir -p "$1"
+
+    # Allow all permissions for files in directory.
+    chmod 777 -R "$1"
+
+    # Change owner of directory and its files.
+    chown canvas:canvas -R "$1"
+}
+
+
 # Create non-priviledged user.
 #
 # Flags:
@@ -40,18 +57,14 @@ echo "Set disable_coredump false" >> /etc/sudo.conf
 
 
 # Create Canvas settings directory.
-mkdir -p $HOME/.canvas && chmod 777 -R $HOME/.canvas
-chown canvas:canvas $HOME/.canvas
+make_folder $HOME/.canvas
 
 
 # Create directory for host home directory volume mounts.
 #
 # Flags:
 #     -p: No error if existing, make parent directories as needed.
-mkdir -p $HOME/host
-
-# Change owner of volume directory.
-chown canvas:canvas $HOME/host
+make_folder $HOME/host
 
 # Create symbolic links to host configuration files.
 #
@@ -71,5 +84,30 @@ chown -h canvas:canvas \
     $HOME/.ssh
 
 
-# Update config store.
-chown canvas:canvas -R /usr/local/config/configstore
+# Setup user configurations.
+
+# Create configuration directories.
+mkdir -p "$HOME/.config/nvim"
+mkdir -p "$HOME/.config/fish/functions"
+mkdir -p "$HOME/.local/share/code-server/User"
+
+# Install Fast NVM Fish if NVM is installed.
+#
+# Flags:
+#     -c: Read commands from the command string operand.
+#     -L: Follow redirect request.
+#     -S: Show errors.
+#     -f: Fail silently on server errors.
+#     -x: Check if execute permission is granted.
+if [ -x "$(command -v nvm)" ]; then
+    curl -LSfs https://raw.githubusercontent.com/brigand/fast-nvm-fish/master/nvm.fish \
+        > "$HOME/.config/fish/functions/nvm.fish"
+fi
+
+# Change owner and permissions of configuration files.
+chmod 777 -R "$HOME/.config"
+chown canvas:canvas -R "$HOME/.config"
+
+# Change owner and permissions of local files.
+chmod 777 -R "$HOME/.local"
+chown canvas:canvas -R "$HOME/.local"

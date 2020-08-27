@@ -135,20 +135,6 @@ apt-get update -m && apt-get install -qy --no-install-recommends \
     unzip
 
 
-# Create configuration directory.
-mkdir -p "$XDG_CONFIG_HOME/configstore"
-chmod 777 -R "$XDG_CONFIG_HOME"
-
-# Configure Neovim.
-mkdir "$XDG_CONFIG_HOME/nvim"
-chmod 777 -R "$XDG_CONFIG_HOME/nvim"
-
-# Configure Fish.
-mkdir "$XDG_CONFIG_HOME/fish"
-mkdir -p "$XDG_CONFIG_HOME/fish/functions"
-chmod 777 -R "$XDG_CONFIG_HOME/fish"
-
-
 # Install additional utilities.
 # Bat
 install_tar https://github.com/sharkdp/bat/releases/download/v0.15.4/bat-v0.15.4-x86_64-unknown-linux-gnu.tar.gz bat

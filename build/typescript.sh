@@ -40,15 +40,6 @@ else
     #     a+rw: Give read and write permissions to all users.
     chmod -R a+rw $NVM_DIR
 
-    # Install Fast NVM Fish
-    #
-    # Flags:
-    #     -c: Read commands from the command string operand.
-    #     -L: Follow redirect request.
-    #     -S: Show errors.
-    #     -f: Fail silently on server errors.
-    curl -LSfs https://raw.githubusercontent.com/brigand/fast-nvm-fish/master/nvm.fish > "$XDG_CONFIG_HOME/fish/functions/nvm.fish"
-
     # Install Deno
     #
     # Flags:
