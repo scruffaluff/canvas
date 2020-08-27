@@ -19,7 +19,7 @@ else
     #     -S: Show errors.
     #     -f: Fail silently on server errors.
     #     -s: (curl) Disable progress bars.
-    curl -LOSfs https://dl.google.com/go/go1.14.4.linux-amd64.tar.gz
+    curl -LOSfs https://dl.google.com/go/go1.15.linux-amd64.tar.gz
 
     # Install Go.
     #
@@ -28,7 +28,10 @@ else
     #     -f: Use archive file. Must be third flag.
     #     -x: Extract files from an archive. Must be first flag.
     #     -z: Filter the archive through gzip. Must be second flag.
-    tar -C /usr/local -xzf go1.14.4.linux-amd64.tar.gz
+    tar -C /usr/local -xzf go1.15.linux-amd64.tar.gz
+
+    # Remove Go archive.
+    rm go1.15.linux-amd64.tar.gz
 
     # Check that Go was installed successfully.
     go version

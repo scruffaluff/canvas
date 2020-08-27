@@ -14,6 +14,10 @@ ARG typescript_build
 ARG vscode_build
 
 
+# Install everything from temporary directory.
+WORKDIR /tmp
+
+
 ### System ###
 
 # Set system language settings.
