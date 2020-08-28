@@ -42,6 +42,7 @@
   "latex-workshop.bind.enter.key": false,
   "latex-workshop.view.pdf.viewer": "tab",
   "latex-workshop.latex.autoBuild.run": "onFileChange",
+  "powershell.integratedConsole.showOnStartup": false,
   "python.terminal.activateEnvironment": false,
   "python.linting.flake8Enabled": true,
   "python.linting.flake8Args": ["--max-line-length=80"],
@@ -58,8 +59,5 @@
   "workbench.colorTheme": "Solarized Light",
   "workbench.startupEditor": "welcomePage",
   "workbench.statusBar.visible": true,
-  "workbench.iconTheme": "vscode-icons",
-
-  // Block update messages.
-  "vsicons.dontShowNewVersionMessage": true
+  "workbench.iconTheme": "vscode-icons"
 }
