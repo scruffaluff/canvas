@@ -11,6 +11,13 @@ if [ -z "$vscode_build" ]; then
 else
     printf "##### VSCode build starting. #####\n"
 
+    # Set USER for Code Server installation.
+    #
+    # On line 85 the Code Server installation shell script attempts to print a
+    # helpful message to the user. As a result, the script will fail if the
+    # user is not set.
+    export USER=canvas
+
     # Install Code Server.
     #
     # Flags:
