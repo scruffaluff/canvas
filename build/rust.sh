@@ -43,22 +43,23 @@ else
     rustup component add rustfmt
     rustup component add rls
 
+    # Add additional Rust toolchain targets.
+    # Install WASM toolchain target.
+    rustup target add wasm32-wasi
+
     # Install Cargo packges.
     cargo install \
         cargo-edit \
-        cargo-eval \
         cargo-make \
         cargo-watch \
         evcxr_repl \
-        nu \
-        pyoxidizer \
-        watchexec
+        pyoxidizer
 
-    # Add additional Rust toolchain targets.
-    # Install Rust nightly toolchain.
-    rustup toolchain install nightly
-    # Install WASM toolchain target.
-    rustup target add wasm32-wasi
+    # Clear Cargo registry
+    rm -fr /usr/local/cargo/registry
+
+    # Exa Bash completion: 
+    # https://raw.githubusercontent.com/ogham/exa/master/contrib/completions.bash.
 
     # Esnure that all users can read and write to cargo files.
     #

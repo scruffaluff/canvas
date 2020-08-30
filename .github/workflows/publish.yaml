@@ -25,6 +25,7 @@ jobs:
           - python
           - rust
           - typescript
+          - vscode
     runs-on: ubuntu-latest
     steps:
       - name: Code repository checkout
@@ -47,4 +48,16 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: wolfgangwazzlestrauss/canvas
           tags: latest
-          build_args: csharp_build="true",go_build="true",python_build="true",rust_build="true",typescript_build="true
+          build_args: csharp_build="true",go_build="true",python_build="true",rust_build="true",typescript_build="true",vscode_build="true"
+  doc:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code repository checkout
+        uses: actions/checkout@v2
+      - name: DockerHub description
+        uses: peter-evans/dockerhub-description@v2
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKERHUB_REPOSITORY: wolfgangwazzlestrauss/canvas
+          README_FILEPATH: ./README.md

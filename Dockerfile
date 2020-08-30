@@ -11,6 +11,11 @@ ARG python_build
 ARG rust_build
 ARG slim_build
 ARG typescript_build
+ARG vscode_build
+
+
+# Install everything from temporary directory.
+WORKDIR /tmp
 
 
 ### System ###
@@ -22,6 +27,9 @@ ENV \
     LANG=en_US.UTF-8 \
     LC_ALL=C.UTF-8 \
     TZ=America/Los_Angeles
+
+# Copy system configuration files.
+COPY ./files/init.vim /usr/local/nvim/
 
 COPY ./build/system.sh /tmp/system.sh
 RUN chmod 755 /tmp/system.sh \
@@ -115,14 +123,22 @@ RUN chmod 755 /tmp/typescript.sh \
     && rm -rf /tmp/*
 
 
+### VSCode ###
+
+ENV \
+    CODE_SERVER_CONFIG=/usr/local/code-server/config.yaml
+
+# Copy VSCode build script and execute.
+COPY ./build/vscode.sh /tmp/vscode.sh 
+RUN chmod 755 /tmp/vscode.sh \
+    && /tmp/vscode.sh $vscode_build \
+    && rm -rf /tmp/*
+
+
 ### User ###
 
 ENV \
     HOME=/home/canvas
-# Configure ZSH environment variables.
-ENV ZSH=$HOME/.oh-my-zsh \
-    ZSH_CUSTOM=$HOME/.oh-my-zsh/custom \
-    ZSH_THEME=powerlevel10k/powerlevel10k
 
 COPY ./build/user.sh /tmp/user.sh
 RUN chmod 755 /tmp/user.sh \
@@ -139,5 +155,16 @@ VOLUME $HOME/host
 # Copy dot files.
 COPY --chown=canvas:canvas ./files/dot/ $HOME/
 
+# Copy Fish settings file.
+COPY --chown=canvas:canvas ./files/config.fish $HOME/.config/fish/config.fish
 
-ENTRYPOINT ["fixuid"]
+# Copy Code Server configuration files.
+COPY --chown=canvas:canvas ./files/vscode/ $HOME/.local/share/code-server/User/
+
+# Copy entrypoint script and make executable.
+COPY --chown=canvas:canvas ./files/entrypoint.sh $HOME/.canvas/
+RUN chmod 755 $HOME/.canvas/entrypoint.sh
+
+
+ENTRYPOINT ["/usr/local/bin/fixuid", "/home/canvas/.canvas/entrypoint.sh"]
+CMD ["/bin/bash"]

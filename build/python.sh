@@ -3,6 +3,17 @@
 set -e
 
 
+# Find latest Pyenv supported Python version with prefix.
+#
+# Arguments:
+#     Python version prefix.
+latest_version() {
+    local list=$(pyenv install --list)
+    local matches=$
+    echo $(pyenv install --list | grep -E "^\s+$1.[0-9]+$" | tail -1)
+}
+
+
 # Install Python if requested.
 # Flags:
 #     -z: True if the string is null.
@@ -45,13 +56,13 @@ else
     curl -Sfs https://pyenv.run | bash
 
     # Install multiple Python versions using Pyenv.
-    pyenv install 3.8.2
-    pyenv install 3.7.7
-    pyenv install 3.6.10
+    pyenv install 3.8.5
+    pyenv install 3.7.9
+    pyenv install 3.6.12
 
     # Set globally accessible Python versions.
     # First version is the global default.
-    pyenv global 3.8.2 3.7.7 3.6.10
+    pyenv global 3.8.5 3.7.9 3.6.12
 
     # No checks for successful Python installations since Pyenv needs to
     # source shell profiles beforehand.
@@ -68,14 +79,19 @@ else
     #
     # Flags:
     #     -m: Run library module as a script.
-    /usr/local/pyenv/shims/python3.6 -m pip install poetry typer
-    /usr/local/pyenv/shims/python3.7 -m pip install poetry typer
+    /usr/local/pyenv/shims/python3.6 -m pip install poetry wheel
+    /usr/local/pyenv/shims/python3.7 -m pip install poetry wheel
     /usr/local/pyenv/shims/python3.8 -m pip install \
+        black \
         cookiecutter \
+        flake8 \
         gdbgui \
+        mypy \
         poetry \
         pre-commit \
-        typer
+        pytest \
+        typer \
+        wheel
 
     # Esnure that all users can read and write to Pyenv Python files.
     #
@@ -83,4 +99,9 @@ else
     #     -R: Apply modifications recursivley to a directory.
     #     a+rw: Give read and write permissions to all users.
     chmod -R a+rw $PYENV_ROOT
+
+    # Create Jupyter settings folder and give permissions for all users.
+    # Needed since Jupyter will try to create the folder on startup and will
+    # not have permissions.
+    mkdir /usr/local/jupyter && chmod 777 /usr/local/jupyter
 fi

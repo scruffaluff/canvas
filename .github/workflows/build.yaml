@@ -10,19 +10,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Code repository checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
       - name: Install Node
         uses: actions/setup-node@v1
         with:
-          node-version: 13.5
+          node-version: 14
       - name: Install Node dependencies
         run: |
           npm install
       - name: Check format of configuration files
         run: |
-          npm test
+          npm run lint
       - name: Install Python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
           python-version: 3.8
       - name: Install Python dependencies
@@ -33,6 +33,6 @@ jobs:
       - name: Build and static test Python code
         run: |
           poetry run black --check .
-          poetry run flake8 scripts
-          poetry run mypy scripts
+          poetry run flake8 scripts/ src/
+          poetry run mypy scripts/ src/
           poetry run python scripts/docs.py build

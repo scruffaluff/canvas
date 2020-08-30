@@ -16,3 +16,4 @@ class Tag(enum.Enum):
     RUST = "rust"
     SLIM = "slim"
     TYPESCRIPT = "typescript"
+    VSCODE = "vscode"

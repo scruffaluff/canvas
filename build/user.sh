@@ -3,19 +3,36 @@
 set -e
 
 
+# Create directory with open permissions and canvas owner.
+#
+# Arguments:
+#     Directory path.
+make_folder() {
+
+    # Create directory and parent directories if necessary.
+    mkdir -p "$1"
+
+    # Allow all permissions for files in directory.
+    chmod 777 -R "$1"
+
+    # Change owner of directory and its files.
+    chown canvas:canvas -R "$1"
+}
+
+
 # Create non-priviledged user.
 #
 # Flags:
 #     -l: Do not add user to lastlog database.
 #     -m: Create user home directory if it does not exist.
-#     -s /bin/zsh: Set user login shell to Zsh.
+#     -s /usr/bin/fish: Set user login shell to Fish.
 #     -u 1000: Give new user UID value 1000.
-useradd -lm -s /bin/zsh -u 1000 canvas
+useradd -lm -s /usr/bin/fish -u 1000 canvas
 
 
-### Sudo ###
+# Configure sudo for standard user.
 
-# Inst
+# Install sudo.
 apt-get update && apt-get install -y sudo
 
 # Add standard user to sudoers group.
@@ -39,14 +56,15 @@ chown canvas:canvas $HOME/.sudo_as_admin_successful
 echo "Set disable_coredump false" >> /etc/sudo.conf
 
 
+# Create Canvas settings directory.
+make_folder $HOME/.canvas
+
+
 # Create directory for host home directory volume mounts.
 #
 # Flags:
 #     -p: No error if existing, make parent directories as needed.
-mkdir -p $HOME/host
-
-# Change owner of volume directory.
-chown canvas:canvas $HOME/host
+make_folder $HOME/host
 
 # Create symbolic links to host configuration files.
 #
@@ -67,28 +85,30 @@ chown -h canvas:canvas \
     $HOME/.ssh
 
 
-# Install Oh My Zsh
+# Setup user configurations.
+
+# Create configuration directories.
+mkdir -p "$HOME/.config/nvim"
+mkdir -p "$HOME/.config/fish/functions"
+mkdir -p "$HOME/.local/share/code-server/User"
+
+# Install Fast NVM Fish if NVM is installed.
 #
 # Flags:
 #     -c: Read commands from the command string operand.
 #     -L: Follow redirect request.
 #     -S: Show errors.
 #     -f: Fail silently on server errors.
-#     -s: (curl) Disable progress bars.
-sh -c "$(curl -LSfs https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+#     -x: Check if execute permission is granted.
+if [ -x "$(command -v nvm)" ]; then
+    curl -LSfs https://raw.githubusercontent.com/brigand/fast-nvm-fish/master/nvm.fish \
+        > "$HOME/.config/fish/functions/nvm.fish"
+fi
 
+# Change owner and permissions of configuration files.
+chmod 777 -R "$HOME/.config"
+chown canvas:canvas -R "$HOME/.config"
 
-# Install Powerlevel10k
-#
-# Flags:
-#     --depth=1: Create shallow clone with history truncated to 1 commit.
-git clone --depth=1 https://github.com/romkatv/powerlevel10k $ZSH_CUSTOM/themes/powerlevel10k
-
-
-
-# Bash completion.
-# Rustup Completetions.
-# rustup completions bash > ~/.local/share/bash-completion/completions/rustup
-
-# Zsh completion.
-# rustup completions zsh > ~/.zfunc/_rustup
+# Change owner and permissions of local files.
+chmod 777 -R "$HOME/.local"
+chown canvas:canvas -R "$HOME/.local"
