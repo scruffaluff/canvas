@@ -193,12 +193,18 @@ chmod 755 /usr/local/bin/exa
 
 
 # Install GCloud.
-curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-294.0.0-linux-x86_64.tar.gz
-tar zxvf google-cloud-sdk-294.0.0-linux-x86_64.tar.gz google-cloud-sdk
-mv google-cloud-sdk /usr/local
-chmod 755 -R /usr/local/google-cloud-sdk
-/usr/local/google-cloud-sdk/install.sh -q
-gcloud config set disable_usage_reporting false
+
+# Add the Cloud SDK distribution URI as a package source
+echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+
+# Import the Google Cloud public key
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+
+# Update the package list and install the Cloud SDK
+apt-get update && apt-get install -y google-cloud-sdk
+
+# Initialize GCloud
+gclout init --console-only
 
 
 # Install Starship for shell prompts.

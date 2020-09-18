@@ -81,6 +81,7 @@ ln -s $HOME/host/.ssh $HOME/.ssh
 #     -h: Affect symbolic links instead of any referenced file.
 chown -h canvas:canvas \
     $HOME/.aws \
+    $HOME/host/.config/gloud \
     $HOME/.gitconfig \
     $HOME/.ssh
 
