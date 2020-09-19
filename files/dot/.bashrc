@@ -29,6 +29,7 @@ export PATH="/usr/local/go/bin:$PATH"
 
 
 # Google Cloud Platform settings.
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/usr/local/google-cloud-sdk/path.bash.inc' ]; then 
     source '/usr/local/google-cloud-sdk/path.bash.inc'
@@ -63,7 +64,7 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 # Make Poetry create virutal environments inside projects.
 export POETRY_VIRTUALENVS_IN_PROJECT=1
 
-# Initialize pyenv if installed.
+# Initialize Pyenv if available.
 #
 # Flags:
 #     -x: Check if execute permission is granted.
@@ -83,7 +84,14 @@ export PATH="usr/local/cargo/bin:$PATH"
 # Tool settings.
 export BAT_THEME="Solarized (light)"
 complete -C /usr/local/bin/terraform terraform
-eval "$(zoxide init bash)"
+
+# Initialize Zoxide if available.
+#
+# Flags:
+#     -x: Check if execute permission is granted.
+if [ -x "$(command -v zoxide)" ]; then
+    eval "$(zoxide init bash)"
+fi
 
 
 # Wasmtime settings.
@@ -91,4 +99,11 @@ export PATH="$WASMTIME_HOME/bin:$PATH"
 
 
 # Starship settings.
-eval "$(starship init bash)"
+
+# Initialize Starship if available.
+#
+# Flags:
+#     -x: Check if execute permission is granted.
+if [ -x "$(command -v starship)" ]; then
+    eval "$(starship init bash)"
+fi
