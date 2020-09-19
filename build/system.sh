@@ -139,13 +139,13 @@ apt-get update -m && apt-get install -qy --no-install-recommends \
 # Bat
 install_tar https://github.com/sharkdp/bat/releases/download/v0.15.4/bat-v0.15.4-x86_64-unknown-linux-gnu.tar.gz bat
 # GitUI
-install_tar https://github.com/extrawurst/gitui/releases/download/v0.9.1/gitui-linux-musl.tar.gz gitui
+install_tar https://github.com/extrawurst/gitui/releases/download/v0.10.1/gitui-linux-musl.tar.gz gitui
 # MdBook.
-install_tar https://github.com/rust-lang/mdBook/releases/download/v0.4.2/mdbook-v0.4.2-x86_64-unknown-linux-gnu.tar.gz mdbook
+install_tar https://github.com/rust-lang/mdBook/releases/download/v0.4.3/mdbook-v0.4.3-x86_64-unknown-linux-gnu.tar.gz mdbook
 # Packer.
-install_zip https://releases.hashicorp.com/packer/1.6.1/packer_1.6.1_linux_amd64.zip packer
+install_zip https://releases.hashicorp.com/packer/1.6.2/packer_1.6.2_linux_amd64.zip packer
 # Terraform
-install_zip https://releases.hashicorp.com/terraform/0.13.0/terraform_0.13.0_linux_amd64.zip terraform
+install_zip https://releases.hashicorp.com/terraform/0.13.3/terraform_0.13.3_linux_amd64.zip terraform
 
 
 # Download AWS CLI.
@@ -171,9 +171,9 @@ aws --version
 #     -S: Show errors.
 #     -s: Disable progress bars.
 #     -o: Write output to given file instead of stdout.
-curl -LOSfs https://github.com/iterative/dvc/releases/download/1.6.1/dvc_1.6.1_amd64.deb
+curl -LOSfs https://github.com/iterative/dvc/releases/download/1.7.2/dvc_1.7.2_amd64.deb
 # Install Data Version Control.
-apt-get install ./dvc_1.6.1_amd64.deb
+apt-get install ./dvc_1.7.2_amd64.deb
 
 
 # Install Exa.
@@ -226,7 +226,7 @@ curl -LSfs https://starship.rs/install.sh | bash -s -- -y
 #     -S: Show errors.
 #     -s: Disable progress bars.
 #     -o: Write output to given file instead of stdout.
-curl -LSs https://github.com/gruntwork-io/terragrunt/releases/download/v0.23.34/terragrunt_linux_amd64 -o /usr/local/bin/terragrunt
+curl -LSs https://github.com/gruntwork-io/terragrunt/releases/download/v0.24.4/terragrunt_linux_amd64 -o /usr/local/bin/terragrunt
 # Change Terragrunt executable permissions.
 chmod 755 /usr/local/bin/terragrunt
 
