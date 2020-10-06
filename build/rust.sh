@@ -50,6 +50,7 @@ else
     # Install Cargo packges.
     cargo install \
         cargo-edit \
+        cargo-generate \
         cargo-make \
         cargo-watch \
         evcxr_repl \
