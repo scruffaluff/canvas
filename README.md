@@ -9,7 +9,7 @@
 <!-- prettier-ignore -->
 **Docker Hub**: https://hub.docker.com/repository/docker/wolfgangwazzlestrauss/canvas
 
-**Source Code**: https://github.com/wolfgangwazzlestrauss/cloudpath
+**Source Code**: https://github.com/wolfgangwazzlestrauss/canvas
 
 ---
 
