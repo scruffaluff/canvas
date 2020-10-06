@@ -148,22 +148,6 @@ install_zip https://releases.hashicorp.com/packer/1.6.2/packer_1.6.2_linux_amd64
 install_zip https://releases.hashicorp.com/terraform/0.13.3/terraform_0.13.3_linux_amd64.zip terraform
 
 
-# Download AWS CLI.
-#
-# Flags:
-#     -L: Follow redirect request.
-#     -S: Show errors.
-#     -s: Disable progress bars.
-#     -o: Write output to given file instead of stdout.
-curl -LSs https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip
-# Unzip and delete archive.
-unzip awscliv2.zip && rm awscliv2.zip
-# Install AWS CLI
-/tmp/aws/install
-# Check that AWS CLI was successfully installed.
-aws --version
-
-
 # Download Data Version Control package.
 #
 # Flags:
@@ -190,21 +174,6 @@ unzip exa-linux-x86_64-0.9.0.zip
 mv exa-linux-x86_64 /usr/local/bin/exa
 # Change Exa executable permissions.
 chmod 755 /usr/local/bin/exa
-
-
-# Install GCloud.
-
-# Add the Cloud SDK distribution URI as a package source
-echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-
-# Import the Google Cloud public key
-curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
-
-# Update the package list and install the Cloud SDK
-apt-get update && apt-get install -y google-cloud-sdk
-
-# Initialize GCloud
-gclout init --console-only
 
 
 # Install Starship for shell prompts.
