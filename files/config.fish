@@ -77,7 +77,7 @@ if type -q zoxide
 end
 
 
-# Typescript settings.
+# TypeScript settings.
 
 # Add NPM global binaries to system path.
 set -x PATH "$HOME/.npm-global/bin:$PATH"

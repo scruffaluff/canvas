@@ -59,6 +59,11 @@ RUN chmod 755 /tmp/go.sh \
 
 ### Lean ###
 
+ENV \
+    # Make Pipx install applications outside of user folder.
+    PIPX_BIN_DIR=/usr/local/bin \
+    PIPX_HOME=/usr/local/pipx \
+
 # Copy Lean build script and execute.
 COPY ./build/lean.sh /tmp/lean.sh 
 RUN chmod 755 /tmp/lean.sh \
@@ -69,9 +74,10 @@ RUN chmod 755 /tmp/lean.sh \
 ### Python ###
 
 ENV \
-    # Make Poetry create virutal environments inside projects.
+    # Make Pipx install applications outside of user folder.
     PIPX_BIN_DIR=/usr/local/bin \
     PIPX_HOME=/usr/local/pipx \
+    # Make Poetry create virutal environments inside projects.
     POETRY_VIRTUALENVS_IN_PROJECT=1 \
     PYENV_ROOT=/usr/local/pyenv
 # Require separate ENV statement to use defined environment variables.

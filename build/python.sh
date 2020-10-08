@@ -45,7 +45,7 @@ else
     ln -s /usr/bin/python3 /usr/bin/python
 
     # Create Pipx home directory.
-    mkdir $PIPX_HOME
+    mkdir -p $PIPX_HOME
 
     # Install Pipx and command line Python applications.
     /usr/bin/python3 -m pip install pipx

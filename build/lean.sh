@@ -6,7 +6,7 @@ set -e
 # Install Lean if requested.
 # Flags:
 #     -z: True if the string is null.
-if [ -z "$haskell_build" ]; then
+if [ -z "$lean_build" ]; then
     printf "^^^^^ Lean build skipped. ^^^^^\n"
 else
     printf "+++++ Lean build not yet supported. +++++\n"
@@ -33,7 +33,17 @@ else
     # Flags:
     curl -LOSs https://raw.githubusercontent.com/Kha/elan/master/elan-init.sh | sh -s -- -y --no-modify-path
 
-    python3 -m pip install --user pipx
-    python3 -m pipx ensurepath
+    # Create Pipx home directory.
+    mkdir -p $PIPX_HOME
+
+    # Install Pipx and command line Python applications.
+    /usr/bin/python3 -m pip install pipx
     pipx install mathlibtools
+
+    # Esnure that all users can read and write to Pipx files.
+    #
+    # Flags:
+    #     -R: Apply modifications recursivley to a directory.
+    #     a+rw: Give read and write permissions to all users.
+    chmod -R a+rw $PIPX_HOME
 fi
