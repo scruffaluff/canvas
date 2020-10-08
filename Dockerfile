@@ -62,7 +62,7 @@ RUN chmod 755 /tmp/go.sh \
 ENV \
     # Make Pipx install applications outside of user folder.
     PIPX_BIN_DIR=/usr/local/bin \
-    PIPX_HOME=/usr/local/pipx \
+    PIPX_HOME=/usr/local/pipx
 
 # Copy Lean build script and execute.
 COPY ./build/lean.sh /tmp/lean.sh 

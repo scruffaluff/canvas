@@ -56,8 +56,8 @@ else
     #
     # Flags:
     #     -R: Apply modifications recursivley to a directory.
-    #     a+rw: Give read and write permissions to all users.
-    chmod -R a+rw $PIPX_HOME
+    #     777: Give read, write, and execute permissions to all users.
+    chmod -R 777 $PIPX_HOME
 
     # Install Pyenv required dependencies.
     #
@@ -144,8 +144,8 @@ else
     #
     # Flags:
     #     -R: Apply modifications recursivley to a directory.
-    #     a+rw: Give read and write permissions to all users.
-    chmod -R a+rw $PYENV_ROOT
+    #     777: Give read, write, and execute permissions to all users.
+    chmod -R 777 $PYENV_ROOT
 
     # Create Jupyter settings folder and give permissions for all users.
     # Needed since Jupyter will try to create the folder on startup and will

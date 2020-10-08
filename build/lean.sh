@@ -44,6 +44,6 @@ else
     #
     # Flags:
     #     -R: Apply modifications recursivley to a directory.
-    #     a+rw: Give read and write permissions to all users.
-    chmod -R a+rw $PIPX_HOME
+    #     777: Give read, write, and execute permissions to all users.
+    chmod -R 777 $PIPX_HOME
 fi

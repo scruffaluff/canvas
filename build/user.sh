@@ -92,12 +92,15 @@ mkdir -p "$HOME/.local/share/code-server/User"
 # Install Fast NVM Fish if NVM is installed.
 #
 # Flags:
-#     -c: Read commands from the command string operand.
-#     -L: Follow redirect request.
-#     -S: Show errors.
-#     -f: Fail silently on server errors.
-#     -x: Check if execute permission is granted.
-if [ -x "$(command -v nvm)" ]; then
+#     -d: Check if file exists and is a directory.
+if [ -d "$NVM_DIR" ]; then
+    # Install Fast NVM Fish.
+    #
+    # Flags:
+    #     -c: Read commands from the command string operand.
+    #     -L: Follow redirect request.
+    #     -S: Show errors.
+    #     -f: Fail silently on server errors.
     curl -LSfs https://raw.githubusercontent.com/brigand/fast-nvm-fish/master/nvm.fish \
         > "$HOME/.config/fish/functions/nvm.fish"
 fi
