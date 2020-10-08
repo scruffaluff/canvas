@@ -27,7 +27,9 @@ make_folder() {
 #     -m: Create user home directory if it does not exist.
 #     -s /usr/bin/fish: Set user login shell to Fish.
 #     -u 1000: Give new user UID value 1000.
-useradd -lm -s /usr/bin/fish -u 1000 canvas
+if ! id canvas &>/dev/null ; then
+    useradd -lm -s /usr/bin/fish -u 1000 canvas
+fi
 
 
 # Configure sudo for standard user.

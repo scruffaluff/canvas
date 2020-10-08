@@ -11,6 +11,20 @@ if [ -z "$vscode_build" ]; then
 else
     printf "##### VSCode build starting. #####\n"
 
+    # Create non-priviledged user.
+    #
+    # Flags:
+    #     -l: Do not add user to lastlog database.
+    #     -m: Create user home directory if it does not exist.
+    #     -s /usr/bin/fish: Set user login shell to Fish.
+    #     -u 1000: Give new user UID value 1000.
+    if ! id canvas &>/dev/null ; then
+        useradd -lm -s /usr/bin/fish -u 1000 canvas
+    fi
+
+    # Install sudo.
+    apt-get update && apt-get install -y sudo
+
     # Set USER for Code Server installation.
     #
     # On line 85 the Code Server installation shell script attempts to print a
@@ -27,7 +41,22 @@ else
     #     -s: Disable progress bars.
     curl -LSfs https://code-server.dev/install.sh | sh -s -- --prefix=/usr/local
 
-    # Install VSCode extensions.
+    # Esnure that all users can read and write to code server files.
+    #
+    # Flags:
+    #     -R: Apply modifications recursivley to a directory.
+    #     -p: Make parent directories as needed and do not error if existing.
+    #     777: Give read, write, and execute permissions to all users.
+    mkdir -p /usr/local/code-server
+    chmod 777 -R /usr/local/code-server
+
+    # Install VSCode extensions as canvas user.
+    #
+    # Flags:
+    #     -H: Set HOME environment variable to user's home directory.
+    #     -i: Run command with user's login shell.
+    #     -u canvas: Run command as canvas user.
+    sudo -Hi -u canvas bash << EOF
     code-server --install-extension bungcip.better-toml
     code-server --install-extension coenraads.bracket-pair-colorizer-2
     code-server --install-extension eamodio.gitlens
@@ -45,11 +74,5 @@ else
     code-server --install-extension vadimcn.vscode-lldb
     code-server --install-extension vscode-icons-team.vscode-icons
     code-server --install-extension yzhang.markdown-all-in-one
-
-    # Esnure that all users can read and write to code server files.
-    #
-    # Flags:
-    #     -R: Apply modifications recursivley to a directory.
-    #     777: Give read, write, and execute permissions to all users.
-    chmod 777 -R /usr/local/code-server
+EOF
 fi
