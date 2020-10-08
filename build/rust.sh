@@ -19,6 +19,8 @@ else
     #     -y: Assume "yes" as answer to all prompts and run non-interactively.
     #     --no-install-recommends: Do not install recommended packages.
     apt-get update -m && apt-get install -qy --no-install-recommends \
+        clang \
+        lld \
         lldb \
         llvm
     

@@ -27,9 +27,6 @@ ENV \
     LC_ALL=C.UTF-8 \
     TZ=America/Los_Angeles
 
-# Copy system configuration files.
-COPY ./files/init.vim /usr/local/nvim/
-
 COPY ./build/system.sh /tmp/system.sh
 RUN chmod 755 /tmp/system.sh \
     && /tmp/system.sh \
@@ -155,6 +152,9 @@ COPY --chown=canvas:canvas ./files/dot/ $HOME/
 
 # Copy Fish settings file.
 COPY --chown=canvas:canvas ./files/config.fish $HOME/.config/fish/config.fish
+
+# Copy Neovim settings file.
+COPY --chown=canvas:canvas ./files/init.vim $HOME/.config/nvim/init.vim
 
 # Copy Code Server configuration files.
 COPY --chown=canvas:canvas ./files/vscode/ $HOME/.local/share/code-server/User/
