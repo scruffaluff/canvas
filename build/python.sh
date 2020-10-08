@@ -22,7 +22,44 @@ if [ -z "$python_build" ]; then
 else
     printf "##### Python build starting. #####\n"
 
-    # Install Python required dependencies.
+    # Install system Python packages.
+    #
+    # Flags:
+    #     -m: Ignore missing packages and handle result.
+    #     -q: Produce log suitable output by omitting progress indicators.
+    #     -y: Assume "yes" as answer to all prompts and run non-interactively.
+    #     --no-install-recommends: Do not install recommended packages.
+    apt-get update -m && apt-get install -y --no-install-recommends \
+        python3 \
+        python3-dev \
+        python3-pip \
+        python3-venv
+
+    # Make system Python discoverable by Pyenv.
+    #
+    # Command taken from
+    # https://github.com/pyenv/pyenv/issues/1613#issuecomment-640195879.
+    #
+    # Flags:
+    #     -s: Make symbolic links instead of hard links.
+    ln -s /usr/bin/python3 /usr/bin/python
+
+    # Create Pipx home directory.
+    mkdir $PIPX_HOME
+
+    # Install Pipx and command line Python applications.
+    /usr/bin/python3 -m pip install pipx
+    pipx install cookiecutter
+    pipx install gdbgui
+
+    # Esnure that all users can read and write to Pipx files.
+    #
+    # Flags:
+    #     -R: Apply modifications recursivley to a directory.
+    #     a+rw: Give read and write permissions to all users.
+    chmod -R a+rw $PIPX_HOME
+
+    # Install Pyenv required dependencies.
     #
     # List taken from
     # https://github.com/pyenv/pyenv/wiki/Common-build-problems#prerequisites.
@@ -64,7 +101,6 @@ else
         libprotoc-dev \
         protobuf-compiler
 
-
     # Install Pyenv.
     #
     # Flags:
@@ -90,19 +126,19 @@ else
     #
     # Flags:
     #     -m: Run library module as a script.
-    /usr/local/pyenv/shims/python3.9 -m pip install --upgrade pip
-    /usr/local/pyenv/shims/python3.8 -m pip install --upgrade pip
-    /usr/local/pyenv/shims/python3.7 -m pip install --upgrade pip
-    /usr/local/pyenv/shims/python3.6 -m pip install --upgrade pip
+    $PYENV_ROOT/shims/python3.6 -m pip install --upgrade pip
+    $PYENV_ROOT/shims/python3.7 -m pip install --upgrade pip
+    $PYENV_ROOT/shims/python3.8 -m pip install --upgrade pip
+    $PYENV_ROOT/shims/python3.9 -m pip install --upgrade pip
 
     # Install globally accessible packages for each Python version.
     #
     # Flags:
     #     -m: Run library module as a script.
-    /usr/local/pyenv/shims/python3.6 -m pip install poetry wheel
-    /usr/local/pyenv/shims/python3.7 -m pip install poetry wheel
-    /usr/local/pyenv/shims/python3.8 -m pip install poetry wheel
-    /usr/local/pyenv/shims/python3.9 -m pip install poetry wheel
+    $PYENV_ROOT/shims/python3.6 -m pip install poetry wheel
+    $PYENV_ROOT/shims/python3.7 -m pip install poetry wheel
+    $PYENV_ROOT/shims/python3.8 -m pip install poetry wheel
+    $PYENV_ROOT/shims/python3.9 -m pip install poetry wheel
 
     # Esnure that all users can read and write to Pyenv Python files.
     #

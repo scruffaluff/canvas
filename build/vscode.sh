@@ -37,7 +37,6 @@ else
     code-server --install-extension matklad.rust-analyzer
     code-server --install-extension ms-dotnettools.csharp
     code-server --install-extension ms-python.python
-    code-server --install-extension ms-vscode.cpptools
     code-server --install-extension octref.vetur
     code-server --install-extension ritwickdey.liveserver
     code-server --install-extension skyapps.fish-vscode

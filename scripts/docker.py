@@ -7,6 +7,7 @@ import re
 import subprocess
 from typing import List, Tuple
 
+import toml
 import typer
 
 
@@ -46,9 +47,9 @@ def build(tags: List[Tag]) -> None:
         build_args = " ".join(args)
         _, latest = image_name(tag)
 
-        img_cmd = f"docker build -t {latest} . {build_args}"
-        img_msg = "Failed to build Docker image."
-        run_command(img_cmd, img_msg)
+        cmd = f"docker build -t {latest} . {build_args}"
+        msg = "Failed to build Docker image."
+        shell(cmd, msg)
 
 
 def image_name(tag: Tag) -> Tuple[str, str]:
@@ -61,36 +62,13 @@ def image_name(tag: Tag) -> Tuple[str, str]:
         Full image name for DockerHub and latest tag name.
     """
 
-    version = canvas.__version__
-
     prefix = "wolfgangwazzlestrauss/canvas:{}"
     if tag == Tag.ALL:
-        return prefix.format(version), prefix.format("latest")
+        return prefix.format(version()), prefix.format("latest")
     else:
-        return prefix.format(f"{version}-{tag.value}"), prefix.format(tag.value)
-
-
-@app.command()
-def prune() -> None:
-    """Prune all containers and images on system."""
-
-    error_msg = "Failed to prune system."
-    run_command("docker system prune -f", error_msg)
-
-
-def run_command(command: str, error_msg: str) -> None:
-    """Run shell command and print error message on failure.
-
-    Args:
-        command: Command to execute after preparing documentation.
-        error_msg: Error message if command fails.
-    """
-
-    try:
-        subprocess.run(args=command, shell=True, check=True)
-    except subprocess.CalledProcessError:
-        typer.secho(f"Error: {error_msg}", fg=typer.colors.RED, err=True)
-        raise typer.Exit(1)
+        return prefix.format(f"{version()}-{tag.value}"), prefix.format(
+            tag.value
+        )
 
 
 @app.command()
@@ -102,7 +80,7 @@ def push(tags: List[Tag]) -> None:
 
         tag_cmd = f"docker push {latest}"
         tag_msg = "Failed to push Docker image tag."
-        run_command(tag_cmd, tag_msg)
+        shell(tag_cmd, tag_msg)
 
 
 @app.command()
@@ -124,7 +102,33 @@ def run(tags: List[Tag]) -> None:
         args = f"run -dit {ports} {volumes} --rm --name {name}"
         command = f"docker {args} {latest} fish"
         error_msg = "Failed to run Docker container."
-        run_command(command, error_msg)
+        shell(command, error_msg)
+
+
+def shell(command: str, error_msg: str) -> None:
+    """Run shell command and print error message on failure.
+
+    Args:
+        command: Command to execute after preparing documentation.
+        error_msg: Error message if command fails.
+    """
+
+    try:
+        subprocess.run(args=command, shell=True, check=True)
+    except subprocess.CalledProcessError:
+        typer.secho(f"Error: {error_msg}", fg=typer.colors.RED, err=True)
+        raise typer.Exit(1)
+
+
+def version() -> str:
+    """Get project version from pyproject.toml file.
+
+    Returns:
+        Project version.
+    """
+
+    pyproject_path = pathlib.Path(__file__).parents[1] / "pyproject.toml"
+    return toml.load(pyproject_path)["tool"]["poetry"]["version"]
 
 
 if __name__ == "__main__":

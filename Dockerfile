@@ -70,6 +70,8 @@ RUN chmod 755 /tmp/lean.sh \
 
 ENV \
     # Make Poetry create virutal environments inside projects.
+    PIPX_BIN_DIR=/usr/local/bin \
+    PIPX_HOME=/usr/local/pipx \
     POETRY_VIRTUALENVS_IN_PROJECT=1 \
     PYENV_ROOT=/usr/local/pyenv
 # Require separate ENV statement to use defined environment variables.
