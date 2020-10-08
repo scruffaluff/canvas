@@ -48,9 +48,10 @@ else
     mkdir -p $PIPX_HOME
 
     # Install Pipx and command line Python applications.
-    /usr/bin/python3 -m pip install pipx
+    /usr/bin/python3 -m pip install pipx wheel
     pipx install cookiecutter
     pipx install gdbgui
+    pipx install poetry
 
     # Esnure that all users can read and write to Pipx files.
     #
@@ -135,10 +136,10 @@ else
     #
     # Flags:
     #     -m: Run library module as a script.
-    $PYENV_ROOT/shims/python3.6 -m pip install poetry wheel
-    $PYENV_ROOT/shims/python3.7 -m pip install poetry wheel
-    $PYENV_ROOT/shims/python3.8 -m pip install poetry wheel
-    $PYENV_ROOT/shims/python3.9 -m pip install poetry wheel
+    $PYENV_ROOT/shims/python3.6 -m pip install wheel
+    $PYENV_ROOT/shims/python3.7 -m pip install wheel
+    $PYENV_ROOT/shims/python3.8 -m pip install wheel
+    $PYENV_ROOT/shims/python3.9 -m pip install wheel
 
     # Esnure that all users can read and write to Pyenv Python files.
     #
