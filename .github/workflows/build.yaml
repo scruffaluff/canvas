@@ -24,7 +24,7 @@ jobs:
       - name: Install Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.8
+          python-version: 3.9
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
@@ -33,6 +33,6 @@ jobs:
       - name: Build and static test Python code
         run: |
           poetry run black --check .
-          poetry run flake8 scripts/ src/
-          poetry run mypy scripts/ src/
+          poetry run flake8 scripts/
+          poetry run mypy scripts/
           poetry run python scripts/docs.py build

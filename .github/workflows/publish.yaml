@@ -22,6 +22,7 @@ jobs:
         build_arg:
           - csharp
           - go
+          - lean
           - python
           - rust
           - typescript
@@ -48,7 +49,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: wolfgangwazzlestrauss/canvas
           tags: latest
-          build_args: csharp_build="true",go_build="true",python_build="true",rust_build="true",typescript_build="true",vscode_build="true"
+          build_args: csharp_build="true",go_build="true",lean_build="true",python_build="true",rust_build="true",typescript_build="true",vscode_build="true"
   doc:
     runs-on: ubuntu-latest
     steps:

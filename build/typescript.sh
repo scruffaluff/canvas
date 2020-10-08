@@ -20,7 +20,7 @@ else
     #     -S: Show errors.
     #     -f: Fail silently on server errors.
     #     -s: Disable progress bars.
-    curl -Sfs https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+    curl -Sfs https://raw.githubusercontent.com/nvm-sh/nvm/v0.36.0/install.sh | bash
 
     # Source NVM configuration.
     . $NVM_DIR/nvm.sh

@@ -15,9 +15,8 @@ class Tag(enum.Enum):
 
     ALL = "all"
     CSHARP = "csharp"
-    CPP = "cpp"
     GO = "go"
-    HASKELL = "haskell"
+    LEAN = "lean"
     PYTHON = "python"
     RUST = "rust"
     SLIM = "slim"

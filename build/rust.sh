@@ -41,7 +41,6 @@ else
     # Cargo components.
     rustup component add clippy
     rustup component add rustfmt
-    rustup component add rls
 
     # Add additional Rust toolchain targets.
     # Install WASM toolchain target.
@@ -52,15 +51,10 @@ else
         cargo-edit \
         cargo-generate \
         cargo-make \
-        cargo-watch \
-        evcxr_repl \
-        pyoxidizer
+        cargo-watch
 
     # Clear Cargo registry
     rm -fr /usr/local/cargo/registry
-
-    # Exa Bash completion: 
-    # https://raw.githubusercontent.com/ogham/exa/master/contrib/completions.bash.
 
     # Esnure that all users can read and write to cargo files.
     #

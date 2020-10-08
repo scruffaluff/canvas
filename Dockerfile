@@ -3,10 +3,9 @@ FROM buildpack-deps:20.04
 
 ### Build Arguments ###
 
-ARG cpp_build
 ARG csharp_build
 ARG go_build
-ARG haskell_build
+ARG learn_build
 ARG python_build
 ARG rust_build
 ARG slim_build
@@ -46,15 +45,6 @@ RUN chmod 755 /tmp/csharp.sh \
     && rm -rf /tmp/*
 
 
-### C++ ###
-
-# Copy C++ build script and execute.
-COPY ./build/cpp.sh /tmp/cpp.sh 
-RUN chmod 755 /tmp/cpp.sh \
-    && /tmp/cpp.sh $cpp_build \
-    && rm -rf /tmp/*
-
-
 ### Go ###
 
 # Add Go binaries to PATH.
@@ -67,12 +57,12 @@ RUN chmod 755 /tmp/go.sh \
     && rm -rf /tmp/*
 
 
-### Haskell ###
+### Lean ###
 
-# Copy Haskell build script and execute.
-COPY ./build/haskell.sh /tmp/haskell.sh 
-RUN chmod 755 /tmp/haskell.sh \
-    && /tmp/haskell.sh $haskell_build \
+# Copy Lean build script and execute.
+COPY ./build/lean.sh /tmp/lean.sh 
+RUN chmod 755 /tmp/lean.sh \
+    && /tmp/lean.sh $lean_build \
     && rm -rf /tmp/*
 
 
