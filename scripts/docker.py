@@ -1,6 +1,7 @@
 """Script for building images and running containers with Docker."""
 
 
+import enum
 import pathlib
 import re
 import subprocess
@@ -8,8 +9,20 @@ from typing import List, Tuple
 
 import typer
 
-import canvas
-from canvas.typing import Tag
+
+class Tag(enum.Enum):
+    """Tag options for Canvas images."""
+
+    ALL = "all"
+    CSHARP = "csharp"
+    CPP = "cpp"
+    GO = "go"
+    HASKELL = "haskell"
+    PYTHON = "python"
+    RUST = "rust"
+    SLIM = "slim"
+    TYPESCRIPT = "typescript"
+    VSCODE = "vscode"
 
 
 app = typer.Typer(help=__doc__)
