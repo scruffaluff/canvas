@@ -3,7 +3,7 @@
 
 # Aliases.
 
-# Load aliases if source file exists.
+# Load aliases if file exists.
 #
 # Flags:
 #     -f: Check if inode is a regular file.
@@ -14,7 +14,7 @@ end
 
 # User settings.
 
-# Add scripts directory to PATH environment variable.
+# Add scripts directory to system path.
 set -x PATH "$HOME/.local/bin:$PATH"
 
 
@@ -29,28 +29,14 @@ set -x GOPATH "/usr/local/go"
 set -x PATH "$GOPATH/bin:$PATH"
 
 
-# Node settings.
-
-# Add NPM global binaries to PATH environment variable.
-set -x PATH "$HOME/.npm-global/bin:$PATH"
-
-# Initialize NVM default version of Node if available.
-#
-# Flags:
-#     -q: Only check for exit status by supressing output.
-if type -q nvm
-    nvm use default
-end
-
-# Deno settings.
-set -x DENO_INSTALL "/usr/local/deno"
-set -x PATH "$DENO_INSTALL/bin:$PATH"
-
-
 # Python settings.
 
 # Make Poetry create virutal environments inside projects.
 set -x POETRY_VIRTUALENVS_IN_PROJECT 1
+
+# Add Pyenv binaries to system path.
+set -x PYENV_ROOT "/usr/local/pyenv"
+set -x PATH "$PYENV_ROOT/bin:$PATH"
 
 # Initialize Pyenv if available.
 #
@@ -63,7 +49,20 @@ end
 
 
 # Rust settings.
-set -x PATH "usr/local/cargo/bin:$PATH"
+set -x CARGO_HOME "/usr/local/cargo"
+set -x RUSTUP_HOME "/usr/local/rustup"
+set -x PATH "$CARGO_HOME/bin:$PATH"
+
+
+# Starship settings.
+
+# Initialize Starship if available.
+#
+# Flags:
+#     -q: Only check for exit status by supressing output.
+if type -q starship
+    starship init fish | source
+end
 
 
 # Tool settings.
@@ -78,17 +77,27 @@ if type -q zoxide
 end
 
 
-# Wasmtime settings.
-set -x WASMTIME_HOME "/usr/local/wasmtime"
-set -x PATH "$WASMTIME_HOME/bin:$PATH"
+# Typescript settings.
 
+# Add NPM global binaries to system path.
+set -x PATH "$HOME/.npm-global/bin:$PATH"
 
-# Starship settings.
+# Set Node version manager location.
+set -x NVM_DIR "/usr/local/nvm"
 
-# Initialize Starship if available.
+# Initialize NVM default version of Node if available.
 #
 # Flags:
 #     -q: Only check for exit status by supressing output.
-if type -q starship
-    starship init fish | source
+if type -q nvm
+    nvm use default
 end
+
+# Deno settings.
+set -x DENO_INSTALL "/usr/local/deno"
+set -x PATH "$DENO_INSTALL/bin:$PATH"
+
+
+# Wasmtime settings.
+set -x WASMTIME_HOME "/usr/local/wasmtime"
+set -x PATH "$WASMTIME_HOME/bin:$PATH"
