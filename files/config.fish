@@ -2,7 +2,14 @@
 
 
 # Aliases.
-source "$HOME/.aliases"
+
+# Load aliases if source file exists.
+#
+# Flags:
+#     -f: Check if inode is a regular file.
+if test -f "$HOME/.aliases"
+    source "$HOME/.aliases"
+end
 
 
 # User settings.
@@ -18,10 +25,13 @@ set fish_greeting
 
 
 # Go settings.
-set -x PATH "/usr/local/go/bin:$PATH"
+set -x GOPATH "/usr/local/go"
+set -x PATH "$GOPATH/bin:$PATH"
 
 
 # Node settings.
+
+# Add NPM global binaries to PATH environment variable.
 set -x PATH "$HOME/.npm-global/bin:$PATH"
 
 # Initialize NVM default version of Node if available.
@@ -69,6 +79,7 @@ end
 
 
 # Wasmtime settings.
+set -x WASMTIME_HOME "/usr/local/wasmtime"
 set -x PATH "$WASMTIME_HOME/bin:$PATH"
 
 

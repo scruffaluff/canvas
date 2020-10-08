@@ -33,6 +33,7 @@ else
     code-server --install-extension eamodio.gitlens
     code-server --install-extension esbenp.prettier-vscode
     code-server --install-extension james-yu.latex-workshop
+    code-server --install-extension jroesch.lean
     code-server --install-extension matklad.rust-analyzer
     code-server --install-extension ms-dotnettools.csharp
     code-server --install-extension ms-python.python

@@ -22,7 +22,10 @@ if [ -z "$python_build" ]; then
 else
     printf "##### Python build starting. #####\n"
 
-    # Install Python recommend dependencies
+    # Install Python required dependencies.
+    #
+    # List taken from
+    # https://github.com/pyenv/pyenv/wiki/Common-build-problems#prerequisites.
     #
     # Flags:
     #     -m: Ignore missing packages and handle result.
@@ -30,12 +33,27 @@ else
     #     -y: Assume "yes" as answer to all prompts and run non-interactively.
     #     --no-install-recommends: Do not install recommended packages.
     apt-get update -m && apt-get install -y --no-install-recommends \
-		libbluetooth-dev \
-		tk-dev \
-		uuid-dev
+        build-essential \
+        curl \
+        git \
+        libbluetooth-dev \
+        libbz2-dev \
+        libffi-dev \
+        liblzma-dev \
+        libncurses5-dev \
+        libncursesw5-dev \
+        libreadline-dev \
+        libsqlite3-dev \
+        libssl-dev \
+        llvm \
+        python-openssl \
+        tk-dev \
+        uuid-dev \
+        wget \
+        xz-utils \
+        zlib1g-dev
     
     # Install ONNX required utilites.
-    # https://github.com/pyenv/pyenv/wiki/Common-build-problems#prerequisites
     #
     # Flags:
     #     -q: Produce log suitable output by omitting progress indicators.
@@ -84,13 +102,7 @@ else
     /usr/local/pyenv/shims/python3.6 -m pip install poetry wheel
     /usr/local/pyenv/shims/python3.7 -m pip install poetry wheel
     /usr/local/pyenv/shims/python3.8 -m pip install poetry wheel
-    /usr/local/pyenv/shims/python3.9 -m pip install \
-        cookiecutter \
-        gdbgui \
-        poetry \
-        pre-commit \
-        typer \
-        wheel
+    /usr/local/pyenv/shims/python3.9 -m pip install poetry wheel
 
     # Esnure that all users can read and write to Pyenv Python files.
     #
