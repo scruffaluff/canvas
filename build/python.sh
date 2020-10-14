@@ -3,13 +3,27 @@
 set -e
 
 
-# Find latest Pyenv supported Python version with prefix.
+# Install specific version of Python with Pyenv.
+#
+# Arguments:
+#     Python version string.
+pyenv_install() {
+    # Install Python version using Pyenv.
+    pyenv install $version
+
+    # Install or update packages for Python version.
+    #
+    # Flags:
+    #     -m: Run library module as a script.
+    $PYENV_ROOT/versions/$1/bin/pip install --upgrade pip setuptools wheel
+}
+
+
+# Find latest patch release for a Python version prefix.
 #
 # Arguments:
 #     Python version prefix.
-latest_version() {
-    local list=$(pyenv install --list)
-    local matches=$
+pyenv_version() {
     echo $(pyenv install --list | grep -E "^\s+$1.[0-9]+$" | tail -1)
 }
 
@@ -110,36 +124,25 @@ else
     #     -s: Disable progress bars.
     curl -Sfs https://pyenv.run | bash
 
-    # Install multiple Python versions using Pyenv.
-    pyenv install 3.9.0
-    pyenv install 3.8.6
-    pyenv install 3.7.9
-    pyenv install 3.6.12
+    # Get latest patch versions based on Python prefixes.
+    prefixes=("3.9" "3.8" "3.7" "3.6")
+    versions=()
+    for prefix in ${prefixes[@]}; do
+        versions+="$(pyenv_version $prefix) "
+    done
+
+    # Install multiple Python versions concurrently.
+    for version in ${versions[@]}; do
+        pyenv_install $version &
+    done
+    wait
 
     # Set globally accessible Python versions.
     # First version is the global default.
-    pyenv global 3.9.0 3.8.6 3.7.9 3.6.12
+    pyenv global ${versions[@]}
 
     # No checks for successful Python installations since Pyenv needs to
     # source shell profiles beforehand.
-
-    # Upgrade pip for each Python version.
-    #
-    # Flags:
-    #     -m: Run library module as a script.
-    $PYENV_ROOT/shims/python3.6 -m pip install --upgrade pip
-    $PYENV_ROOT/shims/python3.7 -m pip install --upgrade pip
-    $PYENV_ROOT/shims/python3.8 -m pip install --upgrade pip
-    $PYENV_ROOT/shims/python3.9 -m pip install --upgrade pip
-
-    # Install globally accessible packages for each Python version.
-    #
-    # Flags:
-    #     -m: Run library module as a script.
-    $PYENV_ROOT/shims/python3.6 -m pip install wheel
-    $PYENV_ROOT/shims/python3.7 -m pip install wheel
-    $PYENV_ROOT/shims/python3.8 -m pip install wheel
-    $PYENV_ROOT/shims/python3.9 -m pip install wheel
 
     # Esnure that all users can read and write to Pyenv Python files.
     #

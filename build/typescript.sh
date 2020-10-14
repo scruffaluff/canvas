@@ -25,10 +25,11 @@ else
     # Source NVM configuration.
     . $NVM_DIR/nvm.sh
 
-    # Install multiple Node versions using NVM.
-    nvm install 14
-    nvm install 12
-    nvm install 10
+    # Install multiple Node versions concurrently using NVM.
+    nvm install 14 &
+    nvm install 12 &
+    nvm install 10 &
+    wait
 
     # Install Node packages.
     nvm use 14 && npm install -g gitmoji-cli @vue/cli
