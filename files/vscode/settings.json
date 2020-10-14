@@ -43,7 +43,7 @@
   "latex-workshop.view.pdf.viewer": "tab",
   "latex-workshop.latex.autoBuild.run": "onFileChange",
   "powershell.integratedConsole.showOnStartup": false,
-  "python.terminal.activateEnvironment": false,
+  "python.formatting.provider": "black",
   "python.linting.flake8Enabled": true,
   "python.linting.flake8Args": ["--max-line-length=80"],
   "python.linting.mypyEnabled": true,
