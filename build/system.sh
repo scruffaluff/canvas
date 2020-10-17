@@ -176,6 +176,16 @@ mv exa-linux-x86_64 /usr/local/bin/exa
 chmod 755 /usr/local/bin/exa
 
 
+# Install Hasura CLI.
+#
+# Flags:
+#     -L: Follow redirect request.
+#     -S: Show errors.
+#     -f: Fail silently on server errors.
+#     -s: Disable progress bars.
+curl -LSfs https://github.com/hasura/graphql-engine/raw/stable/cli/get.sh | bash
+
+
 # Install Starship for shell prompts.
 #
 # Flags:
