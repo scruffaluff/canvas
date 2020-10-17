@@ -49,7 +49,7 @@ else
         python3-pip \
         python3-venv
 
-    # Make system Python discoverable by Pyenv.
+    # Make system Python interpreter discoverable by Pyenv.
     #
     # Command taken from
     # https://github.com/pyenv/pyenv/issues/1613#issuecomment-640195879.

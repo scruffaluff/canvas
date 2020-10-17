@@ -53,6 +53,7 @@ else
         cargo-edit \
         cargo-generate \
         cargo-make \
+        cargo-tarpaulin \
         cargo-watch
 
     # Clear Cargo registry
