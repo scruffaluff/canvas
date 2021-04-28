@@ -22,10 +22,11 @@ jobs:
         id: extract_tag
 
   slim:
+    name: Build and push slim Docker image tag
     needs: release
     runs-on: ubuntu-latest
     steps:
-      - name: Code repository checkout
+      - name: Checkout code repository
         uses: actions/checkout@v2
       - uses: docker/build-push-action@v1
         with:
@@ -35,6 +36,7 @@ jobs:
           tags: ${{ needs.release.outputs.tag }}-slim
 
   tag:
+    name: Build and push {{ matrix.build_arg }} Docker image tag
     needs: release
     strategy:
       fail-fast: false
@@ -49,7 +51,7 @@ jobs:
           - vscode
     runs-on: ubuntu-latest
     steps:
-      - name: Code repository checkout
+      - name: Checkout code repository
         uses: actions/checkout@v2
       - uses: docker/build-push-action@v1
         with:
@@ -60,10 +62,11 @@ jobs:
           build_args: ${{ matrix.build_arg }}_build="true"
 
   all:
+    name: Build and push latest Docker image tag
     needs: release
     runs-on: ubuntu-latest
     steps:
-      - name: Code repository checkout
+      - name: Checkout code repository
         uses: actions/checkout@v2
       - uses: docker/build-push-action@v1
         with:
@@ -74,11 +77,12 @@ jobs:
           build_args: csharp_build="true",go_build="true",lean_build="true",python_build="true",rust_build="true",typescript_build="true",vscode_build="true"
 
   doc:
+    name: Publish repository description to Docker Hub
     runs-on: ubuntu-latest
     steps:
-      - name: Code repository checkout
+      - name: Checkout code repository
         uses: actions/checkout@v2
-      - name: DockerHub description
+      - name: Publish description to Docker Hub
         uses: peter-evans/dockerhub-description@v2
         env:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}
