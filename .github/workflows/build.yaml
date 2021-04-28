@@ -1,26 +1,40 @@
+# GitHub Actions workflow file.
+#
+# For more information, visit
+# https://docs.github.com/actions/learn-github-actions.
+
 name: build
+
+# Make workflow run only for commits pushed to othe develop, feature, main,
+# master branches, or pull requests made to the develop and master branches.
 on:
   push:
     branches:
       - develop
       - feature/*
+      - main
       - master
+  pull_request:
+    branches:
+      - develop
+      - main
+      - master
+
 jobs:
-  static:
+  lint:
+    name: Check code with formatter and linter
     runs-on: ubuntu-latest
     steps:
       - name: Code repository checkout
         uses: actions/checkout@v2
-      - name: Install Node
+      - name: Install Node interpreter
         uses: actions/setup-node@v1
         with:
-          node-version: 14
-      - name: Install Node dependencies
-        run: |
-          npm install
-      - name: Check format of configuration files
-        run: |
-          npm run lint
+          node-version: 16
+      - name: Install Prettier formatter
+        run: npm install -g prettier
+      - name: Check configuration file formatting
+        run: prettier --check .
       - name: Install Python
         uses: actions/setup-python@v2
         with:
@@ -30,7 +44,7 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install poetry
           poetry install -v
-      - name: Build and static test Python code
+      - name: Lint Python code
         run: |
           poetry run black --check .
           poetry run flake8 scripts/

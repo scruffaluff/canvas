@@ -1,8 +1,24 @@
+# GitHub Actions workflow file.
+#
+# For more information, visit
+# https://docs.github.com/actions/learn-github-actions.s
+
 name: publish
+
+# Make workflow run only for commits pushed or pull requests made to the
+# develop, main, and master branches.
 on:
   push:
     branches:
+      - develop
+      - main
       - master
+  pull_request:
+    branches:
+      - develop
+      - main
+      - master
+
 jobs:
   slim:
     runs-on: ubuntu-latest
@@ -15,6 +31,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: wolfgangwazzlestrauss/canvas
           tags: slim
+
   tag:
     strategy:
       fail-fast: false
@@ -38,6 +55,7 @@ jobs:
           repository: wolfgangwazzlestrauss/canvas
           tags: ${{ matrix.build_arg }}
           build_args: ${{ matrix.build_arg }}_build="true"
+
   all:
     runs-on: ubuntu-latest
     steps:
@@ -50,6 +68,7 @@ jobs:
           repository: wolfgangwazzlestrauss/canvas
           tags: latest
           build_args: csharp_build="true",go_build="true",lean_build="true",python_build="true",rust_build="true",typescript_build="true",vscode_build="true"
+
   doc:
     runs-on: ubuntu-latest
     steps:
