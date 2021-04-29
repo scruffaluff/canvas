@@ -61,7 +61,7 @@ jobs:
             wolfgangwazzlestrauss/canvas:${{ needs.release.outputs.tag }}-slim
 
   tag:
-    name: Build and push {{ matrix.build_arg }} Docker image tag
+    name: Build and push ${{ matrix.build_arg }} Docker image tag
     needs: release
     strategy:
       fail-fast: false
@@ -88,7 +88,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
-          build-args: ${{ matrix.build_arg }}_build="true"
+          build-args: "${{ matrix.build_arg }}_build=true"
           context: "."
           file: ./Dockerfile
           push: true
@@ -113,7 +113,14 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
-          build-args: csharp_build="true",go_build="true",lean_build="true",python_build="true",rust_build="true",typescript_build="true",vscode_build="true"
+          build-args: |
+            csharp_build=true
+            go_build=true
+            lean_build=true
+            python_build=true
+            rust_build=true
+            typescript_build=true
+            vscode_build=true
           context: "."
           file: ./Dockerfile
           push: true
