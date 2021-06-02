@@ -9,14 +9,14 @@ set -e
 #     Directory path.
 make_folder() {
 
-    # Create directory and parent directories if necessary.
-    mkdir -p "$1"
+  # Create directory and parent directories if necessary.
+  mkdir -p "$1"
 
-    # Allow all permissions for files in directory.
-    chmod 777 -R "$1"
+  # Allow all permissions for files in directory.
+  chmod 777 -R "$1"
 
-    # Change owner of directory and its files.
-    chown canvas:canvas -R "$1"
+  # Change owner of directory and its files.
+  chown canvas:canvas -R "$1"
 }
 
 
@@ -27,8 +27,8 @@ make_folder() {
 #     -m: Create user home directory if it does not exist.
 #     -s /usr/bin/fish: Set user login shell to Fish.
 #     -u 1000: Give new user UID value 1000.
-if ! id canvas &>/dev/null ; then
-    useradd -lm -s /usr/bin/fish -u 1000 canvas
+if ! id canvas &> "/dev/null" ; then
+  useradd -lm -s "/usr/bin/fish" -u 1000 canvas
 fi
 
 
@@ -45,72 +45,72 @@ usermod -a -G sudo canvas
 # Flags:
 #     -e: Enable interpretation of backslash escapes.
 #     -n: Do not output the trailing newline.
-printf "%%sudo ALL=(ALL) NOPASSWD:ALL\n" >> /etc/sudoers
+printf "%%sudo ALL=(ALL) NOPASSWD:ALL\n" >> "/etc/sudoers"
 
 # Disable sudo login welcome message.
-touch $HOME/.sudo_as_admin_successful
+touch "${HOME}/.sudo_as_admin_successful"
 
 # Change owner of sudo login disable file.
-chown canvas:canvas $HOME/.sudo_as_admin_successful
+chown canvas:canvas "${HOME}/.sudo_as_admin_successful"
 
 # Fix current sudo bug for containers.
 # https://github.com/sudo-project/sudo/issues/42
-echo "Set disable_coredump false" >> /etc/sudo.conf
+echo "Set disable_coredump false" >> "/etc/sudo.conf"
 
 
 # Create Canvas settings directory.
-make_folder $HOME/.canvas
+make_folder "${HOME}/.canvas"
 
 
 # Create directory for host home directory volume mounts.
 #
 # Flags:
 #     -p: No error if existing, make parent directories as needed.
-make_folder $HOME/host
+make_folder "${HOME}/host"
 
 # Create symbolic links to host configuration files.
 #
 # Flags:
 #     -s: Make symbolic links instead of hard links.
-ln -s $HOME/host/.gitconfig $HOME/.gitconfig
-ln -s $HOME/host/.ssh $HOME/.ssh
+ln -s "${HOME}/host/.gitconfig" "${HOME}/.gitconfig"
+ln -s "${HOME}/host/.ssh" "${HOME}/.ssh"
 
 # Change owner of symbolic links.
 #
 # Flags:
 #     -h: Affect symbolic links instead of any referenced file.
 chown -h canvas:canvas \
-    $HOME/.gitconfig \
-    $HOME/.ssh
+  "${HOME}/.gitconfig" \
+  "${HOME}/.ssh"
 
 
 # Setup user configurations.
 
 # Create configuration directories.
-mkdir -p "$HOME/.config/nvim"
-mkdir -p "$HOME/.config/fish/functions"
-mkdir -p "$HOME/.local/share/code-server/User"
+mkdir -p "${HOME}/.config/nvim"
+mkdir -p "${HOME}/.config/fish/functions"
+mkdir -p "${HOME}/.local/share/code-server/User"
 
 # Install Fast NVM Fish if NVM is installed.
 #
 # Flags:
 #     -d: Check if file exists and is a directory.
-if [ -d "$NVM_DIR" ]; then
-    # Install Fast NVM Fish.
-    #
-    # Flags:
-    #     -c: Read commands from the command string operand.
-    #     -L: Follow redirect request.
-    #     -S: Show errors.
-    #     -f: Fail silently on server errors.
-    curl -LSfs https://raw.githubusercontent.com/brigand/fast-nvm-fish/master/nvm.fish \
-        > "$HOME/.config/fish/functions/nvm.fish"
+if [ -d "${NVM_DIR}" ]; then
+  # Install Fast NVM Fish.
+  #
+  # Flags:
+  #     -c: Read commands from the command string operand.
+  #     -L: Follow redirect request.
+  #     -S: Show errors.
+  #     -f: Fail silently on server errors.
+  curl -LSfs "https://raw.githubusercontent.com/brigand/fast-nvm-fish/master/nvm.fish" \
+      > "${HOME}/.config/fish/functions/nvm.fish"
 fi
 
 # Change owner and permissions of configuration files.
-chmod 777 -R "$HOME/.config"
-chown canvas:canvas -R "$HOME/.config"
+chmod 777 -R "${HOME}/.config"
+chown canvas:canvas -R "${HOME}/.config"
 
 # Change owner and permissions of local files.
-chmod 777 -R "$HOME/.local"
-chown canvas:canvas -R "$HOME/.local"
+chmod 777 -R "${HOME}/.local"
+chown canvas:canvas -R "${HOME}/.local"

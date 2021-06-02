@@ -7,15 +7,15 @@
 #
 # Flags:
 #     -f: Check if file exists and is a regular file.
-if [ -f "$HOME/.aliases" ]; then
-    source "$HOME/.aliases"
+if [ -f "${HOME}/.aliases" ]; then
+    source "${HOME}/.aliases"
 fi
 
 
 # User settings.
 
 # Add scripts directory to PATH environment variable.
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="${HOME}/.local/bin:$PATH"
 
 
 # Bash settings
@@ -91,7 +91,7 @@ fi
 # TypeScript settings.
 
 # Add NPM global binaries to system path.
-export PATH="$HOME/.npm-global/bin:$PATH"
+export PATH="${HOME}/.npm-global/bin:$PATH"
 
 # Set Node version manager location.
 export NVM_DIR="/usr/local/nvm"

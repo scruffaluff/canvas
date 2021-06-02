@@ -1,4 +1,4 @@
-FROM buildpack-deps:20.04
+FROM buildpack-deps:21.04
 
 
 ### Build Arguments ###

@@ -5,9 +5,9 @@
 #
 # Flags:
 #     -x: Check if execute permission is granted.
-if [ -x ~/host/entrypoint.sh ]; then
+if [ -x "${HOME}/host/entrypoint.sh" ]; then
     # Dot is needed to persist exported variables.
-    . ~/host/entrypoint.sh
+    . "${HOME}/host/entrypoint.sh"
 fi
 
 

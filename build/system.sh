@@ -9,44 +9,46 @@ set -e
 #     Binary remote URL.
 #     Binary name.
 install_tar() {
-    # Change to tmp directory.
-    cd /tmp
+  local directory
 
-    # Download binary.
+  # Change to tmp directory.
+  cd "/tmp"
+
+  # Download binary.
+  #
+  # Flags:
+  #     -L: Follow redirect request.
+  #     -S: Show errors.
+  #     -f: Use archive file. Must be third flag.
+  #     -s: Disable progress bars.
+  #     -x: Extract files from an archive. Must be first flag.
+  #     -z: Filter the archive through gzip. Must be second flag.
+  curl -LSs "$1" | tar -xzf -
+
+  # Get binary file.
+  # Check if binary file was extracted from tar.
+  if [ -f "$2" ]; then
+    mv "$2" "/usr/local/bin"
+  # Else assume that binary file exists in an extracted folder.
+  else
+    # Extract folder stem from URL.
     #
     # Flags:
-    #     -L: Follow redirect request.
-    #     -S: Show errors.
-    #     -f: Use archive file. Must be third flag.
-    #     -s: Disable progress bars.
-    #     -x: Extract files from an archive. Must be first flag.
-    #     -z: Filter the archive through gzip. Must be second flag.
-    curl -LSs $1 | tar -xzf -
+    #     -P: Interpret pattern as Perl regular expression.
+    #     -o: Print only the matched parts of a line.
+    #     <<<: Expand word to the command on its standard input.
+    directory="$(grep -Po '[^/]+(?=\.tar\.gz$)' <<< "$1")"
+    # Move binary from directory.
+    mv "${directory}/$2" "/usr/local/bin"
+  fi
 
-    # Get binary file.
-    # Check if binary file was extracted from tar.
-    if [ -f $2 ]; then
-        mv $2 /usr/local/bin
-    # Else assume that binary file exists in an extracted folder.
-    else
-        # Extract folder stem from URL.
-        #
-        # Flags:
-        #     -P: Interpret pattern as Perl regular expression.
-        #     -o: Print only the matched parts of a line.
-        #     <<<: Expand word to the command on its standard input.
-        local directory=$(grep -Po '[^/]+(?=\.tar\.gz$)' <<< $1)
-        # Move binary from directory.
-        mv $directory/$2 /usr/local/bin
-    fi
+  # Make root user owner of binary.
+  chown root:root /usr/local/bin/$2
+  # Change binary executable permissions.
+  chmod 755 /usr/local/bin/$2
 
-    # Make root user owner of binary.
-    chown root:root /usr/local/bin/$2
-    # Change binary executable permissions.
-    chmod 755 /usr/local/bin/$2
-
-    # Change back to tmp directory.
-    cd /tmp
+  # Change back to tmp directory.
+  cd /tmp
 }
 
 # Download and install zip binary to /usr/local/bin.
@@ -55,29 +57,29 @@ install_tar() {
 #     Binary remote URL.
 #     Binary name.
 install_zip() {
-    # Change to tmp directory.
-    cd /tmp
+  # Change to tmp directory.
+  cd "/tmp"
 
-    # Download binary.
-    #
-    # Flags:
-    #     -L: Follow redirect request.
-    #     -S: Show errors.
-    #     -s: Disable progress bars.
-    curl -LSs $1 -o "$2.zip"
+  # Download binary.
+  #
+  # Flags:
+  #     -L: Follow redirect request.
+  #     -S: Show errors.
+  #     -s: Disable progress bars.
+  curl -LSs "$1" -o "$2.zip"
 
-    # Unzip and delete archive.
-    unzip "$2.zip" && rm "$2.zip"
-    # Move binary to /usr/local/bin.
-    mv $2 /usr/local/bin/$2
+  # Unzip and delete archive.
+  unzip "$2.zip" && rm "$2.zip"
+  # Move binary to /usr/local/bin.
+  mv "$2" "/usr/local/bin/$2"
 
-    # Make root user owner of binary.
-    chown root:root /usr/local/bin/$2
-    # Change binary executable permissions.
-    chmod 755 /usr/local/bin/$2
+  # Make root user owner of binary.
+  chown root:root "/usr/local/bin/$2"
+  # Change binary executable permissions.
+  chmod 755 "/usr/local/bin/$2"
 
-    # Change back to tmp directory.
-    cd /tmp
+  # Change back to tmp directory.
+  cd "/tmp"
 }
 
 
@@ -87,8 +89,8 @@ install_zip() {
 #     -f: Remove existing destination files.
 #     -n: Treat link as normal file if it is a symbolic link to a directory.
 #     -s: Make symbolic links instead of hard links.
-ln -fns /usr/share/zoneinfo/$TZ /etc/localtime
-echo $TZ > /etc/timezone
+ln -fns "/usr/share/zoneinfo/${TZ}" "/etc/localtime"
+echo "${TZ}" > "/etc/timezone"
 
 
 # Install developer desired utilites.
@@ -99,40 +101,40 @@ echo $TZ > /etc/timezone
 #     -y: Assume "yes" as answer to all prompts and run non-interactively.
 #     --no-install-recommends: Do not install recommended packages.
 apt-get update -m && apt-get install -qy --no-install-recommends \
-    apt-transport-https \
-    apt-utils \
-    bash-completion \
-    bsdmainutils \
-    build-essential \
-    ca-certificates \
-    cmake \
-    curl \
-    fd-find \
-    fish \
-    fonts-firacode \
-    fzf \
-    g++ \
-    gcc \
-    git \
-    git-lfs \
-    groff \
-    hub \
-    iputils-ping \
-    less \
-    libtinfo5 \
-    lldb \
-    llvm \
-    make \
-    neovim \
-    net-tools \
-    openssh-client \
-    openssh-server \
-    openssl \
-    ripgrep \
-    software-properties-common \
-    texlive \
-    tmux \
-    unzip
+  apt-transport-https \
+  apt-utils \
+  bash-completion \
+  bsdmainutils \
+  build-essential \
+  ca-certificates \
+  cmake \
+  curl \
+  fd-find \
+  fish \
+  fonts-firacode \
+  fzf \
+  g++ \
+  gcc \
+  git \
+  git-lfs \
+  groff \
+  hub \
+  iputils-ping \
+  less \
+  libtinfo5 \
+  lldb \
+  llvm \
+  make \
+  neovim \
+  net-tools \
+  openssh-client \
+  openssh-server \
+  openssl \
+  ripgrep \
+  software-properties-common \
+  texlive \
+  tmux \
+  unzip
 
 
 # Install additional utilities.
