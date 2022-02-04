@@ -39,7 +39,7 @@ jobs:
           context: "."
           file: ./Dockerfile
           push: true
-          tags: "wolfgangwazzlestrauss/canvas:slim"
+          tags: "scruffaluff/canvas:slim"
 
   tag:
     name: Build and push ${{ matrix.build_arg }} Docker image tag
@@ -72,7 +72,7 @@ jobs:
           context: "."
           file: ./Dockerfile
           push: true
-          tags: "wolfgangwazzlestrauss/canvas:${{ matrix.build_arg }}"
+          tags: "scruffaluff/canvas:${{ matrix.build_arg }}"
 
   all:
     name: Build and push latest Docker image tag
@@ -101,7 +101,7 @@ jobs:
           context: "."
           file: ./Dockerfile
           push: true
-          tags: "wolfgangwazzlestrauss/canvas:latest"
+          tags: "scruffaluff/canvas:latest"
 
   doc:
     name: Publish repository description to Docker Hub
@@ -114,5 +114,5 @@ jobs:
         env:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
           DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
-          DOCKERHUB_REPOSITORY: wolfgangwazzlestrauss/canvas
+          DOCKERHUB_REPOSITORY: scruffaluff/canvas
           README_FILEPATH: ./README.md

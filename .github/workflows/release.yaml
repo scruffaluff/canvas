@@ -33,8 +33,7 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: Bootware ${{ steps.extract_tag.outputs.tag }}
           body: >-
-            See the
-            [changelog](https://github.com/wolfgangwazzlestrauss/canvas/blob/${{
+            See the [changelog](https://github.com/scruffaluff/canvas/blob/${{
             steps.extract_tag.outputs.tag }}/CHANGELOG.md) for more information.
 
   slim:
@@ -58,7 +57,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: >-
-            wolfgangwazzlestrauss/canvas:${{ needs.release.outputs.tag }}-slim
+            scruffaluff/canvas:${{ needs.release.outputs.tag }}-slim
 
   tag:
     name: Build and push ${{ matrix.build_arg }} Docker image tag
@@ -93,7 +92,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: >-
-            wolfgangwazzlestrauss/canvas:${{ needs.release.outputs.tag }}-${{
+            scruffaluff/canvas:${{ needs.release.outputs.tag }}-${{
             matrix.build_arg }}
 
   all:
@@ -124,7 +123,7 @@ jobs:
           context: "."
           file: ./Dockerfile
           push: true
-          tags: "wolfgangwazzlestrauss/canvas:${{ needs.release.outputs.tag }}"
+          tags: "scruffaluff/canvas:${{ needs.release.outputs.tag }}"
 
   doc:
     name: Publish repository description to Docker Hub
@@ -137,5 +136,5 @@ jobs:
         env:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
           DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
-          DOCKERHUB_REPOSITORY: wolfgangwazzlestrauss/canvas
+          DOCKERHUB_REPOSITORY: scruffaluff/canvas
           README_FILEPATH: ./README.md

@@ -62,7 +62,7 @@ def image_name(tag: Tag) -> Tuple[str, str]:
         Full image name for DockerHub and latest tag name.
     """
 
-    prefix = "wolfgangwazzlestrauss/canvas:{}"
+    prefix = "scruffaluff/canvas:{}"
     if tag == Tag.ALL:
         return prefix.format(version()), prefix.format("latest")
     else:

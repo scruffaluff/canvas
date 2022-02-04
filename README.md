@@ -1,22 +1,21 @@
 # Canvas
 
 ![](https://img.shields.io/badge/code%20style-black-000000.svg)
-![](https://img.shields.io/github/repo-size/wolfgangwazzlestrauss/canvas)
-![](https://img.shields.io/github/license/wolfgangwazzlestrauss/canvas)
+![](https://img.shields.io/github/repo-size/scruffaluff/canvas)
+![](https://img.shields.io/github/license/scruffaluff/canvas)
 
 ---
 
 <!-- prettier-ignore -->
-**Docker Hub**: https://hub.docker.com/repository/docker/wolfgangwazzlestrauss/canvas
+**Docker Hub**: https://hub.docker.com/repository/docker/scruffaluff/canvas
 
-**Source Code**: https://github.com/wolfgangwazzlestrauss/canvas
+**Source Code**: https://github.com/scruffaluff/canvas
 
 ---
 
-[Canvas](https://wolfgangwazzlestrauss.github.io/canvas) is a set of Docker
-image tags designed to support development in containers. Each tag contains
-distinct set of development features or is a combination of other tags. The
-current tags are
+[Canvas](https://scruffaluff.github.io/canvas) is a set of Docker image tags
+designed to support development in containers. Each tag contains distinct set of
+development features or is a combination of other tags. The current tags are
 
 - all
 - csharp
@@ -28,10 +27,9 @@ current tags are
 - vscode
 
 The latest version of each tag has a Docker Hub path of
-`wolfgangwazzlestrauss/canvas:<tag>` or a version path
-`wolfgangwazzlestrauss/canvas:<version>-<tag>` except for the `all` tag. It has
-respective paths `wolfgangwazzlestrauss/canvas:latest` and
-`wolfgangwazzlestrauss/canvas:<version>`.
+`scruffaluff/canvas:<tag>` or a version path
+`scruffaluff/canvas:<version>-<tag>` except for the `all` tag. It has respective
+paths `scruffaluff/canvas:latest` and `scruffaluff/canvas:<version>`.
 
 ## Getting Started
 
@@ -40,7 +38,7 @@ respective paths `wolfgangwazzlestrauss/canvas:latest` and
 Canvas can be installed by pulling the Docker image.
 
 ```bash
-docker pull wolfgangwazzlestrauss/canvas:latest
+docker pull scruffaluff/canvas:latest
 ```
 
 ### Usage
@@ -61,7 +59,7 @@ services:
   canvas:
     container_name: canvas
     command: bash
-    image: wolfgangwazzlestrauss/canvas:latest
+    image: scruffaluff/canvas:latest
     ports:
       - "8080:8080"
       - "9765:9765"

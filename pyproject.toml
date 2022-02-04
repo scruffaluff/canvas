@@ -13,7 +13,7 @@ line-length = 80
 [tool.poetry]
 authors = ["Macklan Weinstein <wolfgang.wazzle.strauss@gmail.com>"]
 description = "Docker images designed for containerized development."
-homepage = "https://github.com/wolfgangwazzlestrauss/canvas"
+homepage = "https://github.com/scruffaluff/canvas"
 keywords = ["docker"]
 license = "MIT"
 name = "canvas"

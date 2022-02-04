@@ -6,11 +6,9 @@ copyright: Copyright &copy; 2021 Macklan Weinstein
 extra:
   social:
     - icon: fontawesome/brands/github-alt
-      link: https://wolfgangwazzlestrauss.com
+      link: https://github.com/scruffaluff
     - icon: fontawesome/brands/github-alt
-      link: https://github.com/wolfgangwazzlestrauss
-    - icon: fontawesome/brands/github-alt
-      link: mailto://wolfgangwazzlestrauss@gmail.com
+      link: mailto://macklan.weinstein@gmail.com
 extra_javascript:
   - https://unpkg.com/mermaid@8.9.3/dist/mermaid.min.js
   - js/index.js
@@ -45,11 +43,11 @@ nav:
 plugins:
   - search
 repo_name: canvas
-repo_url: https://github.com/wolfgangwazzlestrauss/canvas
+repo_url: https://github.com/scruffaluff/canvas
 site_author: Macklan Weinstein
 site_description: Docker image designed for containerized development.
 site_name: Canvas
-site_url: https://wolfgangwazzlestrauss.github.io/canvas
+site_url: https://scruffaluff.github.io/canvas
 theme:
   features:
     - tab
